@@ -1,29 +1,59 @@
 <%-- 
-    Document   : loginPage
-    Created on : Nov 5, 2014, 8:14:01 AM
+    Document   : LoginPage
+    Created on : Nov 17, 2014, 8:47:34 AM
     Author     : dentm_000
 --%>
 
-<%@ page language="java" contentType="text/html; charset=windows-1256" pageEncoding="windows-1256" 
-         %> 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Newsfoil Login</title>
 
-<html> 
-    <head> 
-        <meta http-equiv="Content-Type" content="text/html; charset=windows-1256"> 
-        <title>Login Page</title> 
-    </head> 
-    <body> 
-        
-        <form action="NFServlet" method = "post"> 
-          
-            <h1> login failed </h1> 
-            <input type="hidden" name="targetpage" value="Login">
-            <h1>  Please enter your username </h1>
-            <input type="text" name="username" value = ""/>
-            <br> <h1> Please enter your password</h1> 
-            <input type="password" name="password"/> 
-            <input type="submit" value="submit" name="Login"> 
-        </form> 
-    </body> 
-</html> 
+<link href="css/login.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+<div class="container">
+
+ 
+  
+<div class="header"><!-- end .header -->
+  
+  <div class="fltlft">
+  <img src="images/Voice.jpg" alt="Logo" width="192" height="144" border="1" />
+  </div>
+  
+  <div class="fltcent">
+  <img src="images/logo.jpg" alt="Logo" align="middle" />
+  </div>
+  
+  
+  
+  <div class="fltrt">
+   <form action="NFServlet" method = "post">             
+            
+             <input ID="tb1" type="username" name="username" placeholder="username"/>
+            <input  ID="tb1" type="password" name="password" placeholder="password"/>
+      <input ID="tb1" type="submit" value="Sign In">   
+            <input type="hidden" name="targetpage" value="Login"/>
+   </form>
+   
+    <a class="pwitem" href="NewAccount.html">&nbsp;New Account &nbsp;</a>
+        <a class="pwitem" href="ResetPassword.jsp">&nbsp; Forgot Password &nbsp;</a>
+      </div>
+       
+  
+  <div class="content">
+    
+    Login failed.  Please reenter your username and password.
+
+<div class="element"></div>
+    <!-- end .content --></div>
+    
+  <!-- end .container --></div>
+</body>
+</html>

@@ -1,4 +1,0 @@
-newsfoil
-========
-
-newswebsite

@@ -4,9 +4,25 @@
         <servlet-name>NFServlet</servlet-name>
         <servlet-class>ProgramFiles.NFServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>NAServlet</servlet-name>
+        <servlet-class>ProgramFiles.NAServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResetServlet</servlet-name>
+        <servlet-class>ProgramFiles.ResetServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NFServlet</servlet-name>
         <url-pattern>/NFServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NAServlet</servlet-name>
+        <url-pattern>/NAServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetServlet</servlet-name>
+        <url-pattern>/ResetServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
