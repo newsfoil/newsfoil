@@ -1,0 +1,82 @@
+@startuml
+class ProgramFiles.AddUser{
+       static Connection currentCon
+       Statement stmt
+       public static void login(String userName, String userPassword, String Email)
+}
+
+class ProgramFiles.ConnectionManager{
+    static Connection con
+    static String url
+    static String userName
+    static String password
+    public static Connection getConnection() 
+}
+ 
+class ProgramFiles.NFServlet{
+String targetPage;
+String userName;
+String userPassword;
+String userEmail;
+UserBean user;
+protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+}
+class ProgramFiles.SendEmail {
+String userEmail;
+    String userName;
+    String userMessage;
+    String userSubject;
+public void Send()
+}
+class ProgramFiles.UserBean{
+    private String User_Name;
+     private String User_Password; 
+     private String User_Email; 
+     private String User_ID; 
+     public boolean valid; 
+}
+class ProgramFiles.UserDAO{
+
+    static Connection currentCon
+     static ResultSet rs
+      public static UserBean login(UserBean bean)
+}
+class ProgramFiles.Article {
+    
+    UserBean user;
+    static Connection currentCon
+    static ResultSet rs
+    ConnectionManager currentCon   
+    statement stmt  
+    
+    public void getArticle()
+    public void addArticle(UserBean user)
+    public void deleteArticle(UserBean user)
+       
+}
+
+class ProgramFiles.NewsNetwork {
+    
+    UserBean user;
+    static Connection currentCon
+    static ResultSet rs
+    ConnectionManager currentCon   
+    statement stmt  
+
+    public void getNetwork()
+    public void addMember(UserBean user)
+    public void deleteMember(UserBean user)
+       
+}
+
+class ProgramFiles.NFServlet --> class ProgramFiles.UserBean
+class ProgramFiles.NFServlet --> class ProgramFiles.AddUser
+class ProgramFiles.NFServlet --> class ProgramFiles.Article
+class ProgramFiles.NFServlet --> class ProgramFiles.NewsNetwork
+class ProgramFiles.AddUser --> class ProgramFiles.SendEmail
+class ProgramFiles.AddUser --> class ProgramFiles.UserDAO
+class ProgramFiles.AddUser --> class ProgramFiles.ConnectionManager
+class ProgramFiles.UserBean --> class ProgramFiles.ConnectionManager
+class ProgramFiles.Article --> class ProgramFiles.ConnectionManager
+class ProgramFiles.NewsNetwork --> class ProgramFiles.ConnectionManager
+@enduml
