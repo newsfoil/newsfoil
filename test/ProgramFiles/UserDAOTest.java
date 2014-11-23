@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ProgramFiles;
 
 import org.junit.After;
@@ -14,10 +9,14 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author larry
+ * @author Larry Morales
+ * Integration tests for login functionality
  */
 public class UserDAOTest {
 
+    /**
+     * Test whether a valid user object can login
+     */
     @Test
     public void testLogin() {
         UserBean testUser = new UserBean();
@@ -27,6 +26,21 @@ public class UserDAOTest {
         
         UserBean resultUser = UserDAO.login(testUser);
         assertTrue(resultUser.isValid());
+        
+    }
+    
+    /**
+     * Test whether an invalid user can login (fail test)
+     */
+    @Test
+    public void testLoginFail() {
+        UserBean testUser = new UserBean();
+        testUser.setUser_Email("nobody@not-in-database.org");
+        testUser.setUser_Name("nobody");
+        testUser.setUser_Password("password");
+        
+        UserBean resultUser = UserDAO.login(testUser);
+        assertFalse(resultUser.isValid());
         
     }
 }
