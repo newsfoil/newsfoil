@@ -180,8 +180,7 @@ public class ArticlesDAO {
             statement.setDate(4, new java.sql.Date(article.getArticle_Date().getTime()));
             statement.setString(5, article.getArticle_Description());
             statement.setString(6, article.getArticle_Location());
-            statement.execute();
-            success = true;
+            success = statement.execute();
 
         } catch (Exception ex) {
             System.err.println("Query CREATE_ARTICLE failed: An Exception has occurred! " + ex);
@@ -209,8 +208,10 @@ public class ArticlesDAO {
             statement.setString(3, article.getArticle_Description());
             statement.setString(4, article.getArticle_Location());
             statement.setInt(5, article.getArticle_Id());
-            statement.executeUpdate();
-            success = true;
+            int rows = statement.executeUpdate();
+            if(rows > 0) {
+                success = true;
+            }
 
         } catch (Exception ex) {
             System.err.println("Query UPDATE_ARTICLE failed: An Exception has occurred! " + ex);
