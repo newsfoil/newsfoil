@@ -14,6 +14,7 @@ public class UserBean {
     
     private String User_ID;
     private String Profile_ID;
+    private String message;
     //login information
      private String User_Login;
      private String User_Name;
@@ -32,6 +33,16 @@ public class UserBean {
      private String User_Education;
      private String User_Tag_Line;
      private String User_Political_Party;
+
+    public String getMessage() {
+        if (message == null)
+            message ="";
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
     public String getProfile_ID() {
         return Profile_ID;

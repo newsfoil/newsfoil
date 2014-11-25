@@ -5,6 +5,12 @@
  */
 package Servlets;
 
+import ProgramFiles.NewAccount;
+import ProgramFiles.SendEmail;
+import ProgramFiles.TestNewAccount;
+import ProgramFiles.UpdatePassword;
+import ProgramFiles.UserBean;
+import ProgramFiles.login.AddUser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,12 +18,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author dentm_000
  */
 @WebServlet(name = "ResetPasswordServlet", urlPatterns = {"/ResetPasswordServlet"})
+
 public class ResetPasswordServlet extends HttpServlet {
 
     /**
@@ -29,21 +37,48 @@ public class ResetPasswordServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+         
+        String userCurrentPassword;
+        String userPassword;
+        String userEmail;
+  
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ResetPasswordServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ResetPasswordServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        
+        try {
+            
+            userCurrentPassword = request.getParameter("OldPassword");
+            userPassword = request.getParameter("NewPassword");
+            
+            
+            TestNewAccount newAccount = new TestNewAccount(); 
+            NewAccount account = new NewAccount();
+            
+            
+            HttpSession session = request.getSession();
+            UserBean user = (UserBean) session.getAttribute("currentSessionUser");
+            
+            System.out.println(user.getUser_Password()+"   " +userCurrentPassword);
+            
+            if (userCurrentPassword.equals(user.getUser_Password()))
+            {
+            user.setUser_Password(userPassword);
+            UpdatePassword.login(userPassword, user.getUser_Email());
+            user.setMessage("New password was set");
+            }     
+             
+            else{
+            user.setMessage("ERROR password was incorrect.");
+            }    
+             
+            
+              response.sendRedirect("AccountSettings.jsp");
+            
+        }catch (Throwable theException) {
+            System.out.println(theException);
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

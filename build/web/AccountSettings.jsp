@@ -2,7 +2,7 @@
          pageEncoding="windows-1256" 
          import="ProgramFiles.UserBean" %> 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/html1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
     <head>
@@ -108,25 +108,25 @@
                     
                     
                     <div id="CollapsiblePanel1" class="CollapsiblePanel">
-   <div class="CollapsiblePanelTab" tabindex="1"> &gt; &nbsp;; Change Password</div>
+   <div class="CollapsiblePanelTab" tabindex="1"> &gt; &nbsp; Change Password &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <jsp:getProperty name = "currentSessionUser" property="message" /> </div>
   <div class="CollapsiblePanelContent">
    <form id= "ResetPW" name="ResetPW" action="ResetPasswordServlet" method = "post">                    
   Old Password: <input type="password" name="OldPassword" value=""/>
   <br/><br/>
   New Password: <input type="password" name="NewPassword"/>
   <br/><br/>
-  Retype Password: <input type="password" name="NewPassword2"/>
-   
+  Retype New Password: <input type="password" name="NewPassword2"/>
+  
   <input type="button" value="Change Password" onClick="populateform()"/>
   <br/>
 <span class="emsg" id="errormsg"/>
-  <br/><br/>
+  <br/>
+   <jsp:getProperty name = "currentSessionUser" property="message" />
+  <br/>
    </form>
   </div>
 </div>
-                    
-                    
-
+   
                     <form id= "account" name="account" action="ResetServlet" method = "post"> 
                         <input type="hidden" name="password"/>
                         <input type="hidden" name="targetpage" value="NewAccount"/>
@@ -172,12 +172,8 @@
 
                         <span class="emsg" id="errormsg">
 
-
-
-
                         </span><br/><br/>
                         <input type="botton" value="Update Profile" onClick="populateform()"/>
-
 
                     </form> 
 
