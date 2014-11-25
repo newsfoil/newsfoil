@@ -5,8 +5,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
-
-
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Account Settings</title>
@@ -14,6 +12,73 @@
         <link href="css/login.css" rel="stylesheet" type="text/css" />
         <script src="js/CollapsiblePanel.js" type="text/javascript"></script>
         <link href="css/sprycss.css" rel="stylesheet" type="text/css" />
+        
+        
+        
+        
+        
+        
+        
+        <script type="text/javascript">
+
+        var temp='';
+
+            function populateform() {
+                var screenMsg = " ";
+               
+                if (validateFields() === "true")
+               document.forms["ResetPW"].submit();
+            }
+
+        </script>
+
+
+        <script language="JavaScript1.2">
+
+            function validateFields()
+            {
+                var testresults = "";
+                var screenMsg = "";
+                
+                if (!document.ResetPW.OldPassword.value)
+                    screenMsg = "Please enter a your current password. ";
+                
+                 else if (!document.ResetPW.NewPassword.value)
+                {
+                    screenMsg = "Passwords do not match, Please re-enter.";
+                }
+                
+                else if (document.ResetPW.NewPassword.value != document.ResetPW.NewPassword.value)
+                {
+                    screenMsg = "Passwords do not match, Please re-enter.";
+                }
+                else {
+                    testresults = "true";
+                }
+
+                document.getElementById("errormsg").innerHTML = screenMsg;
+                return testresults;
+            }
+        </script>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     </head>
 
     <body>
@@ -35,11 +100,7 @@
 
                 <div class="fltrt">
                 </div>
-
- 
-
-                
-                
+          
                 <div class="accountSettingText">
                     <jsp:useBean id="currentSessionUser" class = "ProgramFiles.UserBean" scope="session"/>
                     <jsp:setProperty name="currentSessionUser" property="*"/>
@@ -47,14 +108,18 @@
                     
                     
                     <div id="CollapsiblePanel1" class="CollapsiblePanel">
-  <div class="CollapsiblePanelTab" tabindex="1"> &gt; Change Password</div>
+   <div class="CollapsiblePanelTab" tabindex="1"> &gt; &nbsp;; Change Password</div>
   <div class="CollapsiblePanelContent">
-   <form id= "Reset" name="Reset" action="ResetPasswordServlet" method = "post">                    
-  Old Password: <input type="password" name="OldPassword"/>
+   <form id= "ResetPW" name="ResetPW" action="ResetPasswordServlet" method = "post">                    
+  Old Password: <input type="password" name="OldPassword" value=""/>
   <br/><br/>
   New Password: <input type="password" name="NewPassword"/>
   <br/><br/>
   Retype Password: <input type="password" name="NewPassword2"/>
+   
+  <input type="button" value="Change Password" onClick="populateform()"/>
+  <br/>
+<span class="emsg" id="errormsg"/>
   <br/><br/>
    </form>
   </div>
