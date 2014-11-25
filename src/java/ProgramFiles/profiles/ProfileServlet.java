@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ProgramFiles.profiles;
 
 import java.io.IOException;
@@ -13,13 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author larry
+ * A servlet for displaying ProfilePage.jsp
+ * @author Larry Morales
  */
 @WebServlet("/ProfilePage")
 public class ProfileServlet extends HttpServlet {
     
-        /**
+    /**
      * Returns ProfilePage.jsp with the information it needs to render.
      * @param request The browser request
      * @param response The browser response
