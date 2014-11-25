@@ -1,6 +1,7 @@
 package ProgramFiles.articles;
 
 import ProgramFiles.UserBean;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Date;
  * @author Larry Morales
  * Model class representing an article.
  */
-public class ArticleBean {
+public class ArticleBean implements Serializable {
 
     private Date Article_Date;
     private String Article_Description;
