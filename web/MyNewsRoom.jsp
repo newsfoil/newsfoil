@@ -1,4 +1,6 @@
- <%@ page language="java" contentType="text/html; charset=windows-1256" 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page language="java" contentType="text/html; charset=windows-1256" 
  pageEncoding="windows-1256" 
  import="ProgramFiles.UserBean" %> 
 
@@ -59,6 +61,19 @@
   
   <p>&nbsp;</p>
   
+  <ul class="article">
+      <c:forEach items="${articleList}" var="article">
+          <li>
+            <h1><a href="#">${article.getArticle_Title()}</a></h1>
+            <h4><fmt:formatDate pattern="MMMM dd, yyyy" value="${article.getArticle_Date()}" /> by ${article.getUser().getUser_Name()}</h4>
+            <h3>${article.getArticle_Description()}</h3>
+          </li>
+      </c:forEach>
+  </ul>
+
+  <!-- TODO: Remove if we like the above template -->
+  
+  <!--
    <ul class="article">
       <li>
         <a href="#"><span class="articletitle">Article 1</span></a>
@@ -82,6 +97,8 @@
       </li>
       
     </ul>
+    -->
+  
     <!-- end .content --></div>
   <div class="sidebar2">
     <ul class="nav">
