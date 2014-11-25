@@ -11,7 +11,7 @@ public class UpdatePassword {
       static Connection currentCon = null;
     
      
-     public static void login(String userName, String userPassword, String Email) { 
+     public static void login(String userPassword, String Email) { 
 //preparing some objects for connection 
          Statement stmt = null; 
        

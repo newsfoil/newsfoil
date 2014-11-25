@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ProgramFiles;
 
 
@@ -14,10 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author dentm_000
- */
 public class ResetServlet extends HttpServlet {
     
     /**
@@ -32,42 +24,39 @@ public class ResetServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          
-        String targetPage;
-        String userName;
+        //String userName;
         String userPassword;
         String userEmail;
         
   
         response.setContentType("text/html;charset=UTF-8");
-        targetPage = request.getParameter("targetpage");
               
         try {
             
-            userName = request.getParameter("username");
-            userPassword = request.getParameter("password");
-            userEmail = request.getParameter("email");
+           // userName = request.getParameter("username");
+           userPassword = request.getParameter("password");
+           userEmail = request.getParameter("email");
             
             
-            TestNewAccount newAccount = new TestNewAccount(); 
-            NewAccount account = new NewAccount();
-            newAccount.login(account, userName,userEmail);
+            TestNewAccount testNewAccount = new TestNewAccount(); 
+            NewAccount newAccount = new NewAccount();
+            testNewAccount.resetEmail(newAccount, userEmail);
             HttpSession session = request.getSession(true);
-            session.setAttribute("thisUser", account);
+            session.setAttribute("thisUser", newAccount);
             
             
-            if (!account.isEmail())
+            if (!newAccount.isEmail())
             {
-            account.setJspMessage("This email is not in our files. Please enter another email.");
+            newAccount.setJspMessage("This email is not in our files. Please enter another email.");
             response.sendRedirect("ResetPassword.jsp");
             } 
             else{
-           
-                
+            
                 SendEmail email = new SendEmail();
                 
-                UpdatePassword.login(userName, userPassword, userEmail);
+                UpdatePassword.login(userPassword, userEmail);
                
-                email.setUserName(userName);
+                email.setUserName(newAccount.getUsername());
                 email.setUserEmail(userEmail);
                 email.setUserSubject("Password");
                 email.setUserMessage("<!DOCTYPE html PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n" +
@@ -95,8 +84,8 @@ public class ResetServlet extends HttpServlet {
 "Welcome to Newsfoil! We are glad to have you as part of our community.<br/>\n" +
 "But you probably want to get started so here is your username and password:<br/>\n" +
 "<br/>\n" +
-"<span class=\"title\">   Username: &nbsp;&nbsp;</span><span class=\"items\">"+ userName + "</span><br/>\n" +
-"<span class=\"title\">   Password: &nbsp;&nbsp;</span><span class=\"itmes\">"+ userPassword +   "</span><br/>\n" +
+"<span class=\"title\">   Username: &nbsp;&nbsp;</span><span style=\"color:blue\">"+ newAccount.getUsername() + "</span><br/>\n" +
+"<span class=\"title\">   Password: &nbsp;&nbsp;</span><span style=\"color:blue\">"+ userPassword +   "</span><br/>\n" +
 "<br/>\n" +
 "Login here: &nbsp;<a href=\"http://newsfoil.com:8080/login/LoginPage.jsp\">newsfoil.com</a>\n" +
 "<br/><br/>\n" +

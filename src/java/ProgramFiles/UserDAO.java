@@ -13,13 +13,10 @@
      public static UserBean login(UserBean bean) { 
 //preparing some objects for connection 
          Statement stmt = null; 
-         String username = bean.getUser_Name();
+         String userLogin = bean.getUser_Login();
          String password = bean.getUser_Password(); 
-         String searchQuery = "select * from USERS where (User_Name='" + username + "' OR User_Email='" + username +"') AND User_Password='" + password + "'"; 
-// "System.out.println" prints in the console; Normally used to trace the process 
-         System.out.println("Your user name is " + username); 
-         System.out.println("Your password is " + password); 
-         System.out.println("Query: "+searchQuery); 
+         String searchQuery = "select * from USERS where (User_Name='" + userLogin + "' OR User_Email='" + userLogin +"') AND User_Password='" + password + "'"; 
+
          
          try { 
 //connect to DB 
@@ -28,18 +25,22 @@
              rs = stmt.executeQuery(searchQuery);
              boolean more = rs.next(); 
 // if user does not exist set the isValid variable to false 
-             if (!more) { System.out.println("Sorry, you are not a registered user! Please sign up first"); 
+             if (!more) {  
              bean.setValid(false);
              } 
              
 //if user exists set the isValid variable to true 
              else if (more) 
-             { 
-                 String email = rs.getString("User_Email");
+             {
+              
+              String email = rs.getString("User_Email");
               String userID = rs.getString("User_ID");
+              String username = rs.getString("User_name");
+              
               System.out.println("Welcome " + email); 
               
               bean.setUser_Email(email); 
+              bean.setUser_Name(username);
               bean.setUser_ID(userID); 
               bean.setValid(true);
              }

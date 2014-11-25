@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ProgramFiles;
 
+import ProgramFiles.login.AddUser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,10 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author dentm_000
- */
+
 public class NAServlet extends HttpServlet {
 
     /**
@@ -31,26 +25,20 @@ public class NAServlet extends HttpServlet {
      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          
-        String targetPage;
         String userName;
         String userPassword;
         String userEmail;
   
         response.setContentType("text/html;charset=UTF-8");
-        targetPage = request.getParameter("targetpage");
-              
+        
         try {
             
             userName = request.getParameter("username");
             userPassword = request.getParameter("password");
             userEmail = request.getParameter("email");
             
-            
             TestNewAccount newAccount = new TestNewAccount(); 
             NewAccount account = new NewAccount();
-            account.setJspMessage("I am setting the mesage");
-            
-            System.out.println("**********************this is the jsp msg:" + account.getJspMessage()); 
             
             newAccount.login(account, userName,userEmail);
             HttpSession session = request.getSession(true);
@@ -67,7 +55,6 @@ public class NAServlet extends HttpServlet {
             response.sendRedirect("NewAccount.jsp");
             }
             else{
-           
                 
                 SendEmail email = new SendEmail();
                 

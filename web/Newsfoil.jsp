@@ -1,7 +1,7 @@
 <%-- 
     Document   : loginPage
     Created on : Nov 5, 2014, 8:14:01 AM
-    Author     : dentm_000
+    Author     : dentm
 --%>
 
 <%@ page language="java" contentType="text/html; charset=windows-1256" pageEncoding="windows-1256" 
@@ -33,7 +33,7 @@
     
    		<div class="signin">
          <form action="NFServlet" method = "post">             
-            <input class="input" type="submit" value="Sign In">   
+            <input class="input" type="submit" value="Sign In"/>   
             <input type="hidden" name="targetpage" value="Login"/>
             <input class="input" type="password" name="password" placeholder="password"/>
              <input class="input" type="username" name="username" placeholder="username"/>

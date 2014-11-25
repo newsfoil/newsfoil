@@ -1,6 +1,6 @@
  <%@ page language="java" contentType="text/html; charset=windows-1256" 
  pageEncoding="windows-1256" 
- import="ProgramFiles.UserBean" %> 
+ %> 
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
@@ -24,12 +24,10 @@
         </div>
         <div class="fltrt">
             
-            <% 
-            try {    
-            UserBean currentUser = (UserBean) session.getAttribute("currentSessionUser");%> 
-             Welcome <% out.println(currentUser.getUser_Name());} catch (Exception ex){} 
-             %> 
-    
+            
+            <jsp:useBean id="currentSessionUser" class = "ProgramFiles.UserBean" scope="session"/>
+            <jsp:setProperty name="currentSessionUser" property="*"/>
+            <jsp:getProperty name = "currentSessionUser" property="user_Name" />
             
         </div>
      </div>

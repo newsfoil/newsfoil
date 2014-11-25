@@ -1,7 +1,8 @@
 
-package ProgramFiles;
+package ProgramFiles.login;
 
 
+import ProgramFiles.ConnectionManager;
  import java.sql.*; 
  
  public class AddUser { 

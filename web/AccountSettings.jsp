@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=windows-1256" 
  pageEncoding="windows-1256" 
- import="ProgramFiles.NewAccount"
  import="ProgramFiles.UserBean" %> 
-
-
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
+
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Account Settings</title>
@@ -34,24 +34,21 @@
   
   
   <div class="fltrt">
-  
-    <% try {    
-            UserBean currentUser = (UserBean) session.getAttribute("currentSessionUser");%> 
-             Welcome <% out.println(currentUser.getUser_Name());} catch (Exception ex){} 
-             %>   
-      
-      
+    
   </div>
        
   
   <div class="accountSettingText">
+      <jsp:useBean id="currentSessionUser" class = "ProgramFiles.UserBean" scope="session"/>
+            <jsp:setProperty name="currentSessionUser" property="*"/>
+            <jsp:getProperty name = "currentSessionUser" property="user_Name" />
     
       <form id= "account" name="account" action="ResetServlet" method = "post"> 
           <input type="hidden" name="password"/>
              <input type="hidden" name="targetpage" value="NewAccount"/>
             Photo: <input type="text" name="userName"/><input type="button" value="Download"/>
             <hr/><br/>
-            User Name:  <input type="text" name="userName"/> 
+            User Name:  <input type="text" name="userName" value="" /> 
             Password:   <input type="text" name="password"/> <input type="button" value="Change Password"/>
             <hr/><br/>
             First Name: <input type="text" name="firstName"/> 
@@ -62,7 +59,7 @@
             State: <input type="text" name="state"/>
             Zip: <input type="text" name="zip"/>
             <br/><br/>
-            Email address: <input type="text" name="email"/> 
+            Email address: <input type="text" name="email" value="" /> 
             <hr/><br/>
             Tag line: <input type="text" name="tag"/>
             <br/><br/> 
@@ -91,15 +88,7 @@
            
             <span class="emsg" id="errormsg">
            
- <% 
-    try {NewAccount currentUser = (NewAccount) session.getAttribute("thisUser");
-                    out.println(currentUser.getJspMessage());
-                    currentUser.setJspMessage("");
-    }
-             catch (Exception ex){
-             
-             }
-             %>  
+ 
 
                 
             </span><br/><br/>

@@ -5,8 +5,17 @@ package ProgramFiles;
 public class NewAccount {
     
     String jspMessage;
+    String username;
     boolean email;
     boolean userName;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public NewAccount() {
         this.jspMessage = "";

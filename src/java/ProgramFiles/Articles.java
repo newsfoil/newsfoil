@@ -5,7 +5,7 @@
  */
 package ProgramFiles;
 
-import static ProgramFiles.AddUser.currentCon;
+import static ProgramFiles.login.AddUser.*;
 import static ProgramFiles.Articles.currentCon;
 import static ProgramFiles.UserDAO.currentCon;
 import java.sql.Connection;

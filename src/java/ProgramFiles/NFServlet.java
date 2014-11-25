@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ProgramFiles;
 
+import ProgramFiles.login.AddUser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,10 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author dentm_000
- */
+
 public class NFServlet extends HttpServlet {
 
     /**
@@ -30,23 +24,14 @@ public class NFServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-     //   response.setContentType("text/html;charset=UTF-8");
-        
-        String targetPage;
-        String userName;
-        String userPassword;
-        String userEmail;
+     
     //   processRequest(request, response);
 
         try {
-
             UserBean user = new UserBean();
-            targetPage = request.getParameter("targetpage");
-
-            if (targetPage.contains("Login")) {
-                user.setUser_Name(request.getParameter("username"));
-                user.setUser_Password(request.getParameter("password"));
-                user = UserDAO.login(user);
+            user.setUser_Login(request.getParameter("username"));
+            user.setUser_Password(request.getParameter("password"));
+            user = UserDAO.login(user);
 
                 if (user.isValid()) {
                     HttpSession session = request.getSession(true);
@@ -56,37 +41,11 @@ public class NFServlet extends HttpServlet {
                 } else {
                     response.sendRedirect("LoginPageFail.jsp");
                 }
-            } else if (targetPage.contains("NewAccount")) {
-                userName = request.getParameter("username");
-                userPassword = request.getParameter("password");
-                userEmail = request.getParameter("email");
-                SendEmail email = new SendEmail();
-                
-                AddUser.login(userName, userPassword, userEmail);
-                
-                email.setUserName(userName);
-                email.setUserEmail(userEmail);
-                email.setUserSubject("Password");
-                email.setUserMessage("<!DOCTYPE html PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n" +
-"<HTML>\n" +
-"   <HEAD>\n" +
-"      <TITLE>\n" +
-"         Hello " + userName +"\n" +
-"      </TITLE>\n" +
-"   </HEAD>\n" +
-"<BODY>\n" +
-"   <H1>Hi</H1>\n" +
-"   <P> your Password is "+ userPassword +"</P>\n" +
-"</BODY>\n" +
-"</HTML>");
-                email.Send();
              
-              response.sendRedirect("loginPage.jsp");
-                
-            }
             //error page
         } catch (Throwable theException) {
-            System.out.println(theException);
+             response.sendRedirect("processPages\\Error.html");
+            
         }
 
        
