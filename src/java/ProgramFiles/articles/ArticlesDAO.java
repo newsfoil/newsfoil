@@ -9,9 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author Larry Morales
  * Class which handles article create/retrieve/update/delete database operations.
+ * @author Larry Morales
  */
 public class ArticlesDAO {
     
@@ -234,7 +233,7 @@ public class ArticlesDAO {
         try (Connection connection = ConnectionManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(DELETE_ARTICLE)) {
             statement.setInt(1, Article_Id);
-            statement.executeQuery();
+            statement.execute();
             success = true;
         } catch (Exception ex) {
             System.err.println("Query DELETE_ARTICLE failed: An Exception has occurred! " + ex);
