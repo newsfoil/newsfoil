@@ -9,6 +9,7 @@ import ProgramFiles.UserBean;
 public class ProfileBean {
     
     private UserBean user;
+    private int Profile_ID;
     private String User_First_Name;
     private String User_Middle_Name;
     private String User_Last_Name;
@@ -39,7 +40,22 @@ public class ProfileBean {
         this.User_Education = User_Education;
         this.User_Photo = User_Photo;
     }
-    
+
+    /**
+     * Retrieves the unique ID for this profile.
+     * @return Profile ID
+     */
+    public int getProfile_ID() {
+        return Profile_ID;
+    }
+
+    /**
+     * Sets the unique ID for this profile.
+     * @param Profile_ID Profile ID
+     */
+    public void setProfile_ID(int Profile_ID) {
+        this.Profile_ID = Profile_ID;
+    }
     
     /**
      * Retrieves the user associated with this profile.
