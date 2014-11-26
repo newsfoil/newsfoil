@@ -138,7 +138,7 @@
     <ul class="nav">
      <li><a href="#/account">Profile</a>&nbsp;</li>
      <li><a href="AccountSettings.jsp">Settings</a> &nbsp;</li>
-     <li><a href="about.jsp">About</a> &nbsp;</li>
+     <li><a href="About.html">About</a> &nbsp;</li>
     </ul>
       
     </div>
