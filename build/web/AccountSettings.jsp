@@ -10,8 +10,9 @@
         <title>Account Settings</title>
 
         <link href="css/login.css" rel="stylesheet" type="text/css" />
+         <link href="css/sprycss.css" rel="stylesheet" type="text/css" />
         <script src="js/CollapsiblePanel.js" type="text/javascript"></script>
-        <link href="css/sprycss.css" rel="stylesheet" type="text/css" />
+        
         
         
         
@@ -108,25 +109,25 @@
                     
                     
                     <div id="CollapsiblePanel1" class="CollapsiblePanel">
-   <div class="CollapsiblePanelTab" tabindex="1"> &gt; &nbsp; Change Password &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <jsp:getProperty name = "currentSessionUser" property="message" /> </div>
-  <div class="CollapsiblePanelContent">
-   <form id= "ResetPW" name="ResetPW" action="ResetPasswordServlet" method = "post">                    
-  Old Password: <input type="password" name="OldPassword" value=""/>
-  <br/><br/>
-  New Password: <input type="password" name="NewPassword"/>
-  <br/><br/>
-  Retype New Password: <input type="password" name="NewPassword2"/>
-  
-  <input type="button" value="Change Password" onClick="populateform()"/>
-  <br/>
-<span class="emsg" id="errormsg"/>
-  <br/>
-   <jsp:getProperty name = "currentSessionUser" property="message" />
-  <br/>
-   </form>
-  </div>
-</div>
-   
+                        <div class="CollapsiblePanelTab" tabindex="1"> &gt; &nbsp; Change Password &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <jsp:getProperty name = "currentSessionUser" property="message" /> </div>
+                        <div class="CollapsiblePanelContent">
+                            <form id= "ResetPW" name="ResetPW" action="ResetPasswordServlet" method = "post">                    
+                                Old Password: <input type="password" name="OldPassword" value=""/>
+                                <br/><br/>
+                                New Password: <input type="password" name="NewPassword"/>
+                                <br/><br/>
+                                Retype New Password: <input type="password" name="NewPassword2"/>
+
+                                <input type="button" value="Change Password" onClick="populateform()"/>
+                                <br/>
+                                <span class="emsg" id="errormsg"/>
+                                <br/>
+                                <jsp:getProperty name = "currentSessionUser" property="message" />
+                                <br/>
+                            </form>
+                        </div>
+                    </div>
+
                     <form id= "account" name="account" action="ResetServlet" method = "post"> 
                         <input type="hidden" name="password"/>
                         <input type="hidden" name="targetpage" value="NewAccount"/>

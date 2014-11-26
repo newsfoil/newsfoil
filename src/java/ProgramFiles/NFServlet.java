@@ -1,9 +1,12 @@
 
 package ProgramFiles;
 
+import ProgramFiles.articles.ArticleBean;
+import ProgramFiles.articles.ArticlesDAO;
 import ProgramFiles.login.AddUser;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +39,14 @@ public class NFServlet extends HttpServlet {
                 if (user.isValid()) {
                     HttpSession session = request.getSession(true);
                     session.setAttribute("currentSessionUser", user);
+                    
+                    List<ArticleBean> articleList = ArticlesDAO.getAllArticles();
+                    response.setContentType("text/html");
+                    request.setAttribute("articleList", articleList);
+                    request.getRequestDispatcher("MyNewsRoom.jsp").forward(request, response);
+                    
+                    
+              
                     response.sendRedirect("MyNewsRoom.jsp");
 //logged-in page 
                 } else {

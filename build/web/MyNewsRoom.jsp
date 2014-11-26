@@ -1,8 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=windows-1256" 
- pageEncoding="windows-1256" 
- %> 
+ pageEncoding="windows-1256"  %> 
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
@@ -12,6 +11,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>My News Room</title>
 <link href="css/main.css" rel="stylesheet" type="text/css" />
+ <link href="css/sprycss.css" rel="stylesheet" type="text/css" />
+ <script src="js/CollapsiblePanel.js" type="text/javascript"></script>
+        
 </head>
 
 <body>
@@ -40,16 +42,50 @@
           
   		</div>
     
-    
-    
-   		
+    		
     <div class="clearfloat"></div>
   <div class="sidebar1">
     
-   <a class="menuitem" href="#/">Home</a><br/>
-          <a class="menuitem" href="AccountSettings.jsp">Account Settings</a><br/>
-          <a class="menuitem" href="network.jsp">Network </a> <br/>
-          <a class="menuitem" href="about.jsp">About </a> <br/>
+   
+          
+          <div class = "influence">
+              Influence
+              <br/>
+              Current:  58%
+              <br/>
+              Variance: 46%
+              <br/>
+              Network Factor: 120%
+              
+          </div>     
+          <div id="CollapsiblePanel1" class="CollapsiblePanel">
+              <div class="CollapsiblePanelTab" tabindex="1"> &gt; &nbsp; Network Group </div>
+              <div class="CollapsiblePanelContent">
+                hello
+              </div>
+          </div>
+          
+          <div id="CollapsiblePanel2" class="CollapsiblePanel">
+              <div class="CollapsiblePanelTab" tabindex="2"> &gt; &nbsp; Network Requests </div>
+              <div class="CollapsiblePanelContent">
+            hello
+              </div>
+          </div>
+          
+           <div id="CollapsiblePanel3" class="CollapsiblePanel">
+              <div class="CollapsiblePanelTab" tabindex="3"> &gt; &nbsp; My Articles </div>
+              <div class="CollapsiblePanelContent">
+            hello
+              </div>
+          </div>
+          
+          <div id="CollapsiblePanel4" class="CollapsiblePanel">
+              <div class="CollapsiblePanelTab" tabindex="4"> &gt; &nbsp; Messages </div>
+              <div class="CollapsiblePanelContent">
+        hello
+              </div>
+          </div>
+          
   
   </div>
   <div class="content">
@@ -100,15 +136,24 @@
     <!-- end .content --></div>
   <div class="sidebar2">
     <ul class="nav">
-     <li><a href="#/account">Latest Article</a>&nbsp;</li>
-     <li><a href="#/network">Create Article </a> &nbsp;</li>
-     <li><a href="#/about">Your Network </a> &nbsp;</li>
-     <li><a href="#/about">Settings </a> &nbsp;</li>
+     <li><a href="#/account">Profile</a>&nbsp;</li>
+     <li><a href="AccountSettings.jsp">Settings</a> &nbsp;</li>
+     <li><a href="about.jsp">About</a> &nbsp;</li>
     </ul>
+      
     </div>
+    
   <div class="footer">
-    <p>This .footer contains the declaration position:relative; to give Internet Explorer 6 hasLayout for the .footer and cause it to clear correctly. If you're not required to support IE6, you may remove it.</p>
+    <p></p>
     <!-- end .footer --></div>
   <!-- end .container --></div>
-</body>
+
+
+            <script type="text/javascript">
+            var CollapsiblePanel1 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel1", {contentIsOpen:false});
+            var CollapsiblePanel2 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel2", {contentIsOpen:false});
+            var CollapsiblePanel3 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel3", {contentIsOpen:false});
+            var CollapsiblePanel4 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel4", {contentIsOpen:false});
+            </script>
+    </body>
 </html>
