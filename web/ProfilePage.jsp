@@ -54,19 +54,22 @@
   
   <h1>&nbsp;</h1>
   <h1>Newsfoil</h1>
-  
-  <p>&nbsp;</p>
-  
+  <div class="find">
+  <label for="search">Search Writers: </label><input type="text" name="search" id="search" value="username">&nbsp;<input type="button" value="Search" onClick="populateform()"/><br><br>
+  </div>
     <h1>%Username%&#39;s Profile</h1>
+	<div class="tagline">Tagline</div>
+	<p>&nbsp;</p>
+	<img class="imgfltlft" src="image/image" alt="userimage" width="248" height="248" />
 	<form target="_blank" onsubmit="return window.confirm(&quot;You are submitting information to an external page.\nAre you sure?&quot;);">
 		<fieldset>
 			<legend>Profile:</legend>
-			Name: David Yox<br>
-			E-Mail: <a href="mailto:daveyox@gmail.com" target="_blank">daveyox@gmail.com</a><br>
-			Member Since: October 20, 2014<br>
-			Articles Written: 3<br>
-			Articles Rated: 1<br>
-			Favorite Genre: Technology<br>
+			<label for="name">Name: </label><input type="text" name="name" id="name" value="David Yox"><br><br>
+			<label for="email">E-Mail: </label><input type="text" name="email" id="email" value="daveyox@gmail.com"><br><br>
+			<label for="date">Member Since: </label><input type="text" name="date" id="date" value="October 20, 2014"><br><br>
+			<label for="articles">Articles Written: </label><input type="text" name="articles" id="articles" value="3"><br><br>
+			<label for="rated">Articles Rated: </label><input type="text" name="rated" id="rated" value="2"><br><br>
+			<label for="favorite">Favorite Genre: </label><input type="text" name="favorite" id="favorite" value="Technology"><br>
 		</fieldset>
 	</form>
   
