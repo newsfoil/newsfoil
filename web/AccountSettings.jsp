@@ -13,13 +13,7 @@
          <link href="css/sprycss.css" rel="stylesheet" type="text/css" />
         <script src="js/CollapsiblePanel.js" type="text/javascript"></script>
         
-        
-        
-        
-        
-        
-        
-        
+       
         <script type="text/javascript">
 
         var temp='';
@@ -62,23 +56,7 @@
             }
         </script>
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+      
         
     </head>
 

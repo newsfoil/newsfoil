@@ -13,13 +13,7 @@
          <link href="css/sprycss.css" rel="stylesheet" type="text/css" />
         <script src="js/CollapsiblePanel.js" type="text/javascript"></script>
         
-        
-        
-        
-        
-        
-        
-        
+       
         <script type="text/javascript">
 
         var temp='';
@@ -62,23 +56,7 @@
             }
         </script>
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+      
         
     </head>
 
@@ -130,31 +108,32 @@
 
                     <form id= "account" name="account" action="ResetServlet" method = "post"> 
                         <input type="hidden" name="password"/>
-                        <input type="hidden" name="targetpage" value="NewAccount"/>
-                        Photo: <input type="text" name="userName"/><input type="button" value="Download"/>
-                        <hr/><br/>
-                        User Name:  <input type="text" name="userName" value="<%= currentSessionUser.getUser_Name()%>" /> 
-                        Password:   <input type="button" value="Change Password"/>
-                        <hr/><br/>
-                        First Name: <input type="text" name="firstName" value="<%= currentSessionUser.getUser_First_Name()  %>"/> 
-                        Middle Name: <input type="text" name="middleName" value="<%= currentSessionUser.getUser_Middle_Name()  %>"/> 
-                        Last Name: <input type="text" name="lastName" value="<%= currentSessionUser.getUser_Last_Name() %>"/> 
-                        <br/><br/>
-                        City: <input type="text" name="city" value="<%= currentSessionUser.getUser_City() %>"/>
-                        State: <input type="text" name="state" value="<%= currentSessionUser.getUser_State() %>"/>
-                        Zip: <input type="text" name="zip" value="<%= currentSessionUser.getUser_Zip() %>"/>
-                        <br/><br/>
-                        Email address: <input type="text" name="email" value="" value="<%= currentSessionUser.getUser_Email() %>" /> 
-                        <hr/><br/>
-                        Tag line: <input type="text" name="tag" value="<%= currentSessionUser.getUser_Tag_Line() %>"/>
-                        <br/><br/> 
-                        Political Party: <select name="Political Party" >
+                        <input type="hidden" name="targetpage" value="NewAccount"/><br>
+                        <label for="myPhoto">Photo: </label><input type="text" name="myPhoto" id="myPhoto"/><input type="button" value="Download"/>
+                        <br><br>
+                        <label for="myUsername">Username: </label><input type="text" name="myUsername" id="myUsername" value="<%= currentSessionUser.getUser_Name()%>" /><br><br>
+                        <label for="myPassword">Password: </label><input type="button" name="myPassword" id="myPassword" value="Change Password"/>
+                        <br><br>
+                        <label for="firstName">First Name: </label><input type="text" name="firstName" id="firstName" value="<%= currentSessionUser.getUser_First_Name()  %>"/><br><br>
+                        <label for="middleName">Middle Name: </label><input type="text" name="middleName" id="middleName" value="<%= currentSessionUser.getUser_Middle_Name()  %>"/><br><br>
+                        <label for="lastName">Last Name: </label><input type="text" name="lastName" id="lastName" value="<%= currentSessionUser.getUser_Last_Name() %>"/>
+                        <br><br>
+                        <label for="myCity">City: </label><input type="text" name="myCity" id="myCity" value="<%= currentSessionUser.getUser_City() %>"/><br><br>
+                        <label for="myState">State: </label><input type="text" name="myState" id="myState" value="<%= currentSessionUser.getUser_State() %>"/><br><br>
+                        <label for="myZip">Zip: </label><input type="text" name="myZip" id="myZip" value="<%= currentSessionUser.getUser_Zip() %>"/>
+                        <br><br>
+                        <label for="myEmail">Email address: </label><input type="text" name="myEmail" id="myEmail" value="" value="<%= currentSessionUser.getUser_Email() %>" /> 
+                        <br><br>
+                        <label for="myTagline">Tagline: </label><input type="text" name="myTagline" id="myTagline" value="<%= currentSessionUser.getUser_Tag_Line() %>"/>
+                        <br><br> 
+                        <label for="myParty">Political Party: </label><select name="myParty" id="myParty" >
                             <option value="volvo"><%= currentSessionUser.getUser_Political_Party() %></option>
                             <option value="volvo">I don't know</option>
                             <option value="saab">I don't care</option>
                             <option value="fiat">Republican</option>
                             <option value="audi">Democrat</option>
                             <option value="audi">Independent</option>
+                            <option value="audi">Libertarian</option>
                             <option value="audi">Progressive</option>
                             <option value="audi">Conservative</option>
                             <option value="audi">Green</option>
@@ -163,18 +142,16 @@
                             <option value="audi">Miss Piggy</option>
                             <option value="audi">Other</option>
                         </select>
-
-
-                        <br/><br/>
-                        Bio: <textarea rows="4" cols="50" name="bio" placeholder="<%= currentSessionUser.getUser_Bio() %>"></textarea>
-                        <br/><br/>
-                        Education: <textarea rows="4" cols="50" name="education" placeholder="<%= currentSessionUser.getUser_Education() %>"></textarea>
-                        <br/><br/>
+                        <br><br>
+                        <label for="myBio">Bio: </label><textarea name="myBio" id="myBio" rows="4" cols="50"></textarea>
+                        <br><br>
+                        <label for="myEducation">Education: </label><textarea name="myEducation" id="myEducation" rows="4" cols="50"></textarea>
+                        <br><br>
 
                         <span class="emsg" id="errormsg">
 
                         </span><br/><br/>
-                        <input type="botton" value="Update Profile" onClick="populateform()"/>
+                        <input type="button" value="Update Profile" onClick="populateform()"/>
 
                     </form> 
 

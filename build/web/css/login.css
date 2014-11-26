@@ -159,9 +159,15 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
 
     padding: 0px;
     margin: 0px;
-    float: right;  
-    
+    float: right;
 }
+
+label { float: left;
+	width: 120px;
+	display: block;
+	text-align: right;
+	padding-right: 10px; }
+
 .emsg{
 	background:#CCC;
         font-size: 80%;
