@@ -109,7 +109,7 @@
                     <form id= "account" name="account" action="ResetServlet" method = "post"> 
                         <input type="hidden" name="password"/>
                         <input type="hidden" name="targetpage" value="NewAccount"/><br>
-                        <label for="myPhoto">Photo: </label><input type="text" name="myPhoto" id="myPhoto"/><input type="button" value="Download"/>
+                        <label for="myPhoto">Photo: </label><input type="text" name="myPhoto" id="myPhoto"/>&nbsp;&nbsp;<input type="button" value="Download"/>
                         <br><br>
                         <label for="myUsername">Username: </label><input type="text" name="myUsername" id="myUsername" value="<%= currentSessionUser.getUser_Name()%>" /><br><br>
                         <label for="myPassword">Password: </label><input type="button" name="myPassword" id="myPassword" value="Change Password"/>
