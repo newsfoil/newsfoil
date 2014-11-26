@@ -11,7 +11,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
+<title>Newsfoil.com</title>
 <link href="main.css" rel="stylesheet" type="text/css" />
 </head>
 
