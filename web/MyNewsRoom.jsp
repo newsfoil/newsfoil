@@ -109,8 +109,6 @@
         
               </div>
           </div>
-          
-  
   </div>
   <div class="content">
   
@@ -160,7 +158,7 @@
     <!-- end .content --></div>
   <div class="sidebar2">
     <ul class="nav">
-     <li><a href="#/account">Profile</a>&nbsp;</li>
+     <li><a href="ProfilePage">Profile</a>&nbsp;</li>
      <li><a href="AccountSettings.jsp">Settings</a> &nbsp;</li>
      <li><a href="About.html">About</a> &nbsp;</li>
     </ul>
