@@ -6,11 +6,10 @@
 package Servlets;
 
 import ProgramFiles.NewAccount;
-import ProgramFiles.SendEmail;
 import ProgramFiles.TestNewAccount;
 import ProgramFiles.UpdatePassword;
 import ProgramFiles.UserBean;
-import ProgramFiles.login.AddUser;
+import ProgramFiles.updateAccount;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -24,9 +23,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author dentm_000
  */
-@WebServlet(name = "ResetPasswordServlet", urlPatterns = {"/ResetPasswordServlet"})
-
-public class ResetPasswordServlet extends HttpServlet {
+@WebServlet(name = "ProfileServlet", urlPatterns = {"/ProfileServlet"})
+public class ProfileServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,35 +46,30 @@ public class ResetPasswordServlet extends HttpServlet {
         
         try {
             
-            userCurrentPassword = request.getParameter("OldPassword");
-            userPassword = request.getParameter("NewPassword");
-            
-            
+               
             HttpSession session = request.getSession();
             UserBean user = (UserBean) session.getAttribute("currentSessionUser");
             
-           
+            user.setUser_First_Name(request.getParameter("firstName")); 
+            user.setUser_Middle_Name(request.getParameter("middleName"));
+            user.setUser_Last_Name(request.getParameter("lastName"));
+            user.setUser_City(request.getParameter("myCity"));
+            user.setUser_State(request.getParameter("myState"));
+            user.setUser_Zip(request.getParameter("myZip"));
+            user.setUser_Tag_Line(request.getParameter("myTagline"));
+            user.setUser_Political_Party(request.getParameter("myParty"));
+            user.setUser_Bio (request.getParameter("myBio"));
+            user.setUser_Education (request.getParameter("myEducation"));
+            user.setUser_Photo (request.getParameter("myPhoto"));
             
-            if (userCurrentPassword.equals(user.getUser_Password()))
-            {
-            user.setUser_Password(userPassword);
-            UpdatePassword.login(userPassword, user.getUser_Email());
-            user.setMessage("New password was set");
-            }     
-             
-            else{
-            user.setMessage("ERROR password was incorrect.");
-            }    
-             
+            updateAccount.accountInsert(user);
             
               response.sendRedirect("AccountSettings.jsp");
             
         }catch (Throwable theException) {
             System.out.println(theException);
         }
-
-    }
-
+   }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

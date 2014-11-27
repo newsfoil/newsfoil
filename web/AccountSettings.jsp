@@ -78,6 +78,8 @@
 
 
                 <div class="fltrt">
+                    
+                 
                 </div>
           
                 <div class="accountSettingText">
@@ -95,7 +97,6 @@
                                 New Password: <input type="password" name="NewPassword"/>
                                 <br/><br/>
                                 Retype New Password: <input type="password" name="NewPassword2"/>
-
                                 <input type="button" value="Change Password" onClick="populateform()"/>
                                 <br/>
                                 <span class="emsg" id="errormsg"/>
@@ -106,27 +107,62 @@
                         </div>
                     </div>
 
-                    <form id= "account" name="account" action="ResetServlet" method = "post"> 
+                    <form id= "account" name="account" action="ProfileServlet" method = "post"> 
                         <input type="hidden" name="password"/>
-                        <input type="hidden" name="targetpage" value="NewAccount"/><br>
-                        <label for="myPhoto">Photo: </label><input type="text" name="myPhoto" id="myPhoto"/>&nbsp;&nbsp;<input type="button" value="Download"/>
-                        <br><br>
-                        <label for="myUsername">Username: </label><input type="text" name="myUsername" id="myUsername" value="<%= currentSessionUser.getUser_Name()%>" /><br><br>
-                        <label for="myPassword">Password: </label><input type="button" name="myPassword" id="myPassword" value="Change Password"/>
-                        <br><br>
-                        <label for="firstName">First Name: </label><input type="text" name="firstName" id="firstName" value="<%= currentSessionUser.getUser_First_Name()  %>"/><br><br>
-                        <label for="middleName">Middle Name: </label><input type="text" name="middleName" id="middleName" value="<%= currentSessionUser.getUser_Middle_Name()  %>"/><br><br>
-                        <label for="lastName">Last Name: </label><input type="text" name="lastName" id="lastName" value="<%= currentSessionUser.getUser_Last_Name() %>"/>
-                        <br><br>
-                        <label for="myCity">City: </label><input type="text" name="myCity" id="myCity" value="<%= currentSessionUser.getUser_City() %>"/><br><br>
-                        <label for="myState">State: </label><input type="text" name="myState" id="myState" value="<%= currentSessionUser.getUser_State() %>"/><br><br>
-                        <label for="myZip">Zip: </label><input type="text" name="myZip" id="myZip" value="<%= currentSessionUser.getUser_Zip() %>"/>
-                        <br><br>
-                        <label for="myEmail">Email address: </label><input type="text" name="myEmail" id="myEmail" value="" value="<%= currentSessionUser.getUser_Email() %>" /> 
-                        <br><br>
-                        <label for="myTagline">Tagline: </label><input type="text" name="myTagline" id="myTagline" value="<%= currentSessionUser.getUser_Tag_Line() %>"/>
-                        <br><br> 
-                        <label for="myParty">Political Party: </label><select name="myParty" id="myParty" >
+                        
+                        <div class="accountInput">
+                        <label class ="lbl">Photo: <input type="button" value="Download"/>
+                        </label> 
+                        </div> 
+                        <div class="clearfloat"></div>
+                        <div class="accountInput">
+                        <label class ="lbl">Username: <input type="text" name="myUsername" id="accountSettingInput" value="<%= currentSessionUser.getUser_Name()%>" />
+                        </label>
+                        </div>
+                        <div class="clearfloat"></div>
+                        
+                        <div class="accountInput">
+                        <label class ="lbl">First Name: <input type="text" name="firstName" id="accountSettingInput" value="<%= currentSessionUser.getUser_First_Name()  %>"/>
+                        </label>
+                        </div>
+                        <div class="accountInput">
+                        <label class ="lbl">Middle Name: <input type="text" name="middleName" id="accountSettingInput" value="<%= currentSessionUser.getUser_Middle_Name()  %>"/>
+                        </label>
+                        </div>
+                        <div class="accountInput">
+                        <label class ="lbl">Last Name: <input type="text" name="lastName" id="accountSettingInput" value="<%= currentSessionUser.getUser_Last_Name() %>"/>
+                        </label>
+                        </div>
+                        <div class="clearfloat"></div>
+                        
+                        <div class="accountInput">        
+                        <label class ="lbl">City: <input type="text" name="myCity" id="accountSettingInput" value="<%= currentSessionUser.getUser_City() %>"/>
+                        </label>
+                        </div>
+                        <div class="accountInput">
+                        <label class ="lbl">State: <input type="text" name="myState" id="accountSettingInput" value="<%= currentSessionUser.getUser_State() %>"/>
+                        </label>
+                        </div>
+                        <div class="accountInput">
+                        <label class ="lbl">Zip: <input type="text" name="myZip" id="myZip" value="<%= currentSessionUser.getUser_Zip() %>"/>
+                        </label>
+                        </div>
+                        <div class="clearfloat"></div>
+                        
+                        <div class="accountInput">
+                        <label class ="lbl">Email address: <input type="text" name="myEmail" id="myEmail" value="" value="<%= currentSessionUser.getUser_Email() %>" /> 
+                        </label>
+                        </div>
+                        <div class="clearfloat"></div>
+                        
+                        <div class="accountInput">
+                        <label class ="lbl">Tagline: <input type="text" name="myTagline" id="myTagline" value="<%= currentSessionUser.getUser_Tag_Line() %>"/>
+                        </label>
+                        </div>
+                        <div class="clearfloat"></div>
+                        
+                        <div class="accountInput">
+                        <label class ="lbl">Political Party: <select name="myParty" id="myParty" >
                             <option value="volvo"><%= currentSessionUser.getUser_Political_Party() %></option>
                             <option value="volvo">I don't know</option>
                             <option value="saab">I don't care</option>
@@ -142,16 +178,24 @@
                             <option value="audi">Miss Piggy</option>
                             <option value="audi">Other</option>
                         </select>
-                        <br><br>
-                        <label for="myBio">Bio: </label><textarea name="myBio" id="myBio" rows="4" cols="50"></textarea>
-                        <br><br>
-                        <label for="myEducation">Education: </label><textarea name="myEducation" id="myEducation" rows="4" cols="50"></textarea>
-                        <br><br>
-
+                            </label>
+                        </div>
+                            
+                            <div class="clearfloat"></div>
+                        <div class="accountInput">    
+                        <label class ="lbl">Bio: <textarea name="myBio" id="myBio" rows="4" cols="50"></textarea>
+                        </label>
+                        </div>
+                        <div class="clearfloat"></div>
+                        <div class="accountInput">
+                        <label class ="lbl">Education: <textarea name="myEducation" id="myEducation" rows="4" cols="50"></textarea>
+                        </label>
+                        </div>
+                        <div class="clearfloat"></div>
                         <span class="emsg" id="errormsg">
-
-                        </span><br/><br/>
-                        <input type="button" value="Update Profile" onClick="populateform()"/>
+                        </span>
+                        <div class="clearfloat"></div>
+                        <input type="submit" value="Update Profile" />
 
                     </form> 
 

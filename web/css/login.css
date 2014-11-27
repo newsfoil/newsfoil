@@ -230,3 +230,26 @@ label { float: left;
     100% { opacity:1; }
 }
 
+
+.accountInput{
+    float: left;
+    padding: 10px;
+    margin: 5px;
+    text-align: left;
+}
+.accountInput #account input{
+    
+   padding-left: 1px;
+border-style: solid;
+border-color: black;
+border-width: 1px;
+font-family: helvetica, arial, sans serif;
+padding: 5px;  
+        
+}
+
+
+
+.lbl {
+text-align:left;
+}

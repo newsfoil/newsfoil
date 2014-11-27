@@ -44,9 +44,7 @@ public class NFServlet extends HttpServlet {
                     response.setContentType("text/html");
                     request.setAttribute("articleList", articleList);
                     request.getRequestDispatcher("MyNewsRoom.jsp").forward(request, response);
-                    
-                    
-              
+             
                     response.sendRedirect("MyNewsRoom.jsp");
 //logged-in page 
                 } else {

@@ -56,33 +56,57 @@
               Variance: 46%
               <br/>
               Network Factor: 120%
+              <br/><br/><br/>
+              
               
           </div>     
           <div id="CollapsiblePanel1" class="CollapsiblePanel">
               <div class="CollapsiblePanelTab" tabindex="1"> &gt; &nbsp; Network Group </div>
               <div class="CollapsiblePanelContent">
-                hello
+                <h4>Network Members: </h4>
+                This will contain a list of all members in network
               </div>
           </div>
           
           <div id="CollapsiblePanel2" class="CollapsiblePanel">
               <div class="CollapsiblePanelTab" tabindex="2"> &gt; &nbsp; Network Requests </div>
               <div class="CollapsiblePanelContent">
-            hello
+                  <h4>Send a request to join Network: </h4><br/>
+                  <form action="emailRequestServlet" id="lkup">
+                      <input type="text" id="accountSettingInput" name="lookupmember">
+                      <h4>enter email address</h4>
+                  <input type="button" name="userRequest" id="accountSettingInput" value="Send a Request"/>
+                  </form>
+                  <br/>
+                  <h3>Member Lookup</h3>
+                  <form action="lookupUserServlet" id="lkup">
+                  <input type="text" id="accountSettingInput" name="lookupmember">
+                   <br/><h4>enter last name </h4>
+                  <input type="button" name="userRequest" id="accountSettingInput" value="LookUp"/>
+                  </form>
               </div>
           </div>
           
            <div id="CollapsiblePanel3" class="CollapsiblePanel">
               <div class="CollapsiblePanelTab" tabindex="3"> &gt; &nbsp; My Articles </div>
               <div class="CollapsiblePanelContent">
-            hello
+            <form action="lookupArticleServlet" id="lkup">
+                  <input type="text" id="accountSettingInput" name="lookupmember">
+                  <h4>Search Your Articles</h4>
+                  <input type="button" name="userRequest" id="accountSettingInput" value="Search"/>
+                  </form>
               </div>
           </div>
           
           <div id="CollapsiblePanel4" class="CollapsiblePanel">
               <div class="CollapsiblePanelTab" tabindex="4"> &gt; &nbsp; Messages </div>
               <div class="CollapsiblePanelContent">
-        hello
+                  <form action="sendmessage" id="lkup">
+                  <input type="text" id="accountSettingInput" name="lookupmember">
+                  <h4>Send a Message</h4>
+                  <input type="button" name="userRequest" id="accountSettingInput" value="Message"/>
+                  </form>
+        
               </div>
           </div>
           

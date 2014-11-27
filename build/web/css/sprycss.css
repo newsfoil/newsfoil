@@ -34,15 +34,16 @@
  * CollapsiblePanel panel tab container.
  */
 .CollapsiblePanelTab {
-	background-color: #DDD;
-	border-bottom: solid 1px #CCC;
-	margin: 0px;
-	padding: 2px;
+	background-color: whitesmoke;
+        border-top: solid 1px #CCC;
+	border-bottom: solid 4px #CCC;
+	margin: 5px 0px 5px 0px;
+	padding-top: 5px;
+        padding-bottom: 5px;
 	cursor: pointer;
 	-moz-user-select: none;
 	-khtml-user-select: none;
-	font-family: "Times New Roman", Times, serif;
-	font-size: 1em;
+	font: 120%/1.4 "Times New Roman", Times, serif;
 	font-weight: bold;
 }
 
@@ -66,7 +67,7 @@
  * like non-anchor (normal) text.
  */
 .CollapsiblePanelTab a {
-	color: black;
+	color: white;
 	text-decoration: none;
 }
 
