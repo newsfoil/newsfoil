@@ -136,6 +136,23 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
     
 }
 
+.tagline { font-size: 1.3em;
+		font-style: italic;
+		padding-left: 10px;
+		}
+		
+.find { padding-left: 10px; }
+
+label { float: left;
+	width: 200px;
+	display: block;
+	text-align: Left;
+	padding-right: 20px;
+	font-size: 1.2em;
+	font-weight: bold; }
+	
+fieldset { margin-left: 250px; }
+
 /* article formats*/
 
 ul.article {
@@ -252,6 +269,10 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
+
+.imgfltlft { float: left;
+	padding: 10px; }
+
 .clearfloat { /* this class can be placed on a <br /> or empty div as the final element following the last floated div (within the #container) if the #footer is removed or taken out of the #container */
 	clear:both;
 	height:0;
