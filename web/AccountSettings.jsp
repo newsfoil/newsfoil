@@ -72,7 +72,7 @@
                 </div>
 
                 <div class="fltcent">
-                    <img src="images/logo.jpg" alt="Logo" align="middle" />
+                    <a href="MyNewsRoom.jsp"><img src="images/logo.jpg" alt="Logo" align="middle" /></a>
                 </div>
 
 
