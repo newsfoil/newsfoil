@@ -24,7 +24,7 @@
                 <img src="images/Voice.jpg" alt="Logo" width="192" height="144" border="1" />
             </div>
             <div class="fltcent">
-                <img src="images/logo.jpg" alt="Logo" align="middle" />
+                <a href="MyNewsRoom.jsp"><img src="images/logo.jpg" alt="Logo" align="middle" /></a>
             </div>
             <div class="fltrt">
 
