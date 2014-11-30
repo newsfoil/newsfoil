@@ -78,14 +78,14 @@
 
 
                 <div class="fltrt">
-                    
-                 
-                </div>
-          
-                <div class="accountSettingText">
                     <jsp:useBean id="currentSessionUser" class = "ProgramFiles.UserBean" scope="session"/>
                     <jsp:setProperty name="currentSessionUser" property="*"/>
                     <jsp:getProperty name = "currentSessionUser" property="user_Name" />
+                 
+                </div>
+                    <div class="clearfloat"></div>
+                <div class="accountSettingText">
+                    
                     
                     
                     <div id="CollapsiblePanel1" class="CollapsiblePanel">
@@ -198,8 +198,20 @@
                     </form> 
 
                     <div class="element"></div>
+                    
                     <!-- end .content --></div>
 
+        <div class="sidebar2">
+            <ul class="nav">
+                <li><a href="NFServlet">Home</a>&nbsp;</li>
+                <li><a href="CreateArticle">New Article</a>&nbsp;</li>
+                <li><a href="ProfilePage">Profile</a>&nbsp;</li>
+                <li><a href="AccountSettings.jsp">Settings</a> &nbsp;</li>
+                <li><a href="About.html">About</a> &nbsp;</li>
+            </ul>
+        </div>
+                        
+                        
                 <!-- end .container --></div>
         </div>
             <script type="text/javascript">

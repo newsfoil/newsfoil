@@ -38,10 +38,10 @@ public class ProfileDAOTest {
     @Test
     public void testCreateProfile() {
         ProfileBean profile = new ProfileBean();
-        String User_ID = "15";  // testUser
+        String User_ID = "45";  // testUser
         
         UserBean user = new UserBean();
-        user.setUser_ID(User_ID);
+        user.setUser_ID(9);
         profile.setUser(user);
         
         profile.setUser_First_Name("Thomas");
