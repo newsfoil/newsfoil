@@ -1,5 +1,6 @@
 package ProgramFiles.articles;
 
+import ProgramFiles.UserBean;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -7,12 +8,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * A servlet for displaying MyNewsRoom.jsp
  * @author Larry Morales
  */
-@WebServlet("/MyNewsRoom")
+@WebServlet("/Article")
 public class ArticleServlet extends HttpServlet {
 
     /**
@@ -27,9 +29,27 @@ public class ArticleServlet extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
 
-        List<ArticleBean> articleList = ArticlesDAO.getAllArticles();
-        response.setContentType("text/html");
-        request.setAttribute("articleList", articleList);
-        request.getRequestDispatcher("MyNewsRoom.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        UserBean user = (UserBean)session.getAttribute("currentSessionUser");
+        String articleId = request.getParameter("id");
+        if(user == null) {
+            response.sendRedirect("LoginPageFail.jsp");
+            return;
+        } else if(articleId == null) {
+            response.setContentType("text/html");
+            response.sendRedirect("NFServlet");
+        } else {
+            try {
+                ArticleBean article = ArticlesDAO.getArticle(Integer.parseInt(articleId));
+                response.setContentType("text/html");
+                request.setAttribute("article", article);
+                request.getRequestDispatcher("Articles/Article.jsp").forward(request, response);
+            } catch(NumberFormatException e) {
+                response.sendRedirect("NFServlet");
+            }
+           
+        }
+        
+        
     }
 }
