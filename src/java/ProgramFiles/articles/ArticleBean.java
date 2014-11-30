@@ -9,18 +9,19 @@ import java.util.Date;
  * @author Larry Morales
  * Model class representing an article.
  */
-public class ArticleBean implements Serializable {
+public class ArticleBean implements Serializable, Comparable {
 
     private Date Article_Date;
     private String Article_Description;
     private int Article_Id;
     private int Article_Rank;
     private String Article_Title;
+    private String Article_Content;
     private String Article_Location;
     private UserBean User;
 
     public ArticleBean() {
-        this(null, null, -1, -1, null, null, new UserBean());
+        this(null, null, -1, -1, null, null, null, new UserBean());
     }
 
     public ArticleBean(
@@ -30,6 +31,7 @@ public class ArticleBean implements Serializable {
             int Article_Rank,
             String Article_Title,
             String Article_Location,
+            String Article_Content,
             UserBean User
     ) {
         this.Article_Date = Article_Date;
@@ -38,6 +40,7 @@ public class ArticleBean implements Serializable {
         this.Article_Rank = Article_Rank;
         this.Article_Title = Article_Title;
         this.Article_Location = Article_Location;
+        this.Article_Content = Article_Content;
         this.User = User;
     }
 
@@ -136,6 +139,22 @@ public class ArticleBean implements Serializable {
     public void setArticle_Location(String Article_Location) {
         this.Article_Location = Article_Location;
     }
+    
+    /**
+     * Retrieves the content of the article.
+     * @return <code>String</code> content of article
+     */
+    public String getArticle_Content() {
+        return Article_Content;
+    }
+
+    /**
+     * Sets the content of the article.
+     * @param Article_Content <code>String</code> content of article
+     */
+    public void setArticle_Content(String Article_Content) {
+        this.Article_Content = Article_Content;
+    }
 
     /**
      * Retrieves the author/user associated with this article.
@@ -152,5 +171,13 @@ public class ArticleBean implements Serializable {
     public void setUser(UserBean User) {
         this.User = User;
     }
+
+    @Override
+    public int compareTo(Object o) {
+        ArticleBean otherArticle = (ArticleBean)o;
+        return this.Article_Date.compareTo(otherArticle.getArticle_Date());
+    }
+
+    
 
 }
