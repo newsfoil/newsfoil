@@ -26,7 +26,7 @@ public class ConnectionManager {
             try {
                 con = DriverManager.getConnection(url, userName, password);
 // assuming your SQL Server's username is "username" // and password is "password" 
-                 System.out.println("####### CONNECTION MADE #############################"); 
+                  
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }

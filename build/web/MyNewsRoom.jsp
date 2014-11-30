@@ -1,8 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=windows-1256" 
- pageEncoding="windows-1256"  %> 
-
+ pageEncoding="windows-1256" 
+import="ProgramFiles.articles.ArticleBean" 
+import="ProgramFiles.NetworkRequestBean" 
+import="java.util.List" 
+ %> 
+<% List<ArticleBean> articleList = (List<ArticleBean>)session.getAttribute("articleList"); %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
 
@@ -32,14 +36,14 @@
             <jsp:useBean id="currentSessionUser" class = "ProgramFiles.UserBean" scope="session"/>
             <jsp:setProperty name="currentSessionUser" property="*"/>
             <jsp:getProperty name = "currentSessionUser" property="user_Name" />
+     
+            
             
         </div>
      </div>
     
   		<div class="menubar">
 		  
-          
-          
   		</div>
     
     		
@@ -71,19 +75,44 @@
           <div id="CollapsiblePanel2" class="CollapsiblePanel">
               <div class="CollapsiblePanelTab" tabindex="2"> &gt; &nbsp; Network Requests </div>
               <div class="CollapsiblePanelContent">
-                  <h4>Send a request to join Network: </h4><br/>
-                  <form action="emailRequestServlet" id="lkup">
-                      <input type="text" id="accountSettingInput" name="lookupmember">
+                  <h3>Send a request to join Network: </h3>
+                  <form id="lkup" action="NewsNetworkRequestServlet" method="post" >
+                      <input type="text" id="accountSettingInput" name="TargetEmail">
                       <h4>enter email address</h4>
-                  <input type="button" name="userRequest" id="accountSettingInput" value="Send a Request"/>
+                      <input type="submit" id="accountSettingInput" value="Send a Request"/>
                   </form>
                   <br/>
                   <h3>Member Lookup</h3>
                   <form action="lookupUserServlet" id="lkup">
-                  <input type="text" id="accountSettingInput" name="lookupmember">
-                   <br/><h4>enter last name </h4>
-                  <input type="button" name="userRequest" id="accountSettingInput" value="LookUp"/>
+                      <input type="text" id="accountSettingInput" name="lookupmember">
+                      <br/><h4>enter last name </h4>
+                      <input type="button" name="userRequest" id="accountSettingInput" value="LookUp"/>
                   </form>
+
+                  <%
+
+                      try {
+                          List<NetworkRequestBean> all_Request = currentSessionUser.getNetworkRequests();
+
+                          for (int x = 0; x < all_Request.size(); x++) {
+                              NetworkRequestBean RequestItem = all_Request.get(x);
+                              out.println("<div class = \"requestdiv\">");
+                              out.println(RequestItem.getRequestor_Name());
+                              out.println("<form action=\"ProcessRequestServlet\" id=\"lkup\"<br/>"
+                                      + "<input type=\"button\" name=\"acceptRequest\" id=\"accountSettingInput\" value=\"Accept\"/>"
+                                      + "<input type=\"submit\" name=\"DeclineRequest\" id=\"accountSettingInput\" value=\"Decline\"/>"
+                                      + "</form>");
+                              out.println("</div>");
+                         
+                          }
+                      } catch (Exception ex) {
+                      }
+                     
+
+                  %>
+
+
+
               </div>
           </div>
           
@@ -129,8 +158,12 @@
 
   <!-- TODO: Remove if we like the above template -->
   
+  
+  
   <!--
-   <ul class="article">
+  
+  
+  <ul class="article">
       <li>
         <a href="#"><span class="articletitle">Article 1</span></a>
         <span class="articledate">November 1, 2014</span><span class="articleauthor"> by John Doe</span><br />

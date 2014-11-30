@@ -33,6 +33,8 @@ String query ="UPDATE `newsfoil`.`PROFILES` SET `User_First_Name` = '" + bean.ge
 "`User_Bio` = '" + bean.getUser_Bio()+"',\n" +
 "`User_Education` = '" + bean.getUser_Education()+"' WHERE `PROFILES`.`User_ID` ="+bean.getUser_ID();        
        
+System.out.println("Going to try " + query);
+
          try { 
 //connect to DB 
              currentCon = ConnectionManager.getConnection();   
@@ -43,7 +45,8 @@ String query ="UPDATE `newsfoil`.`PROFILES` SET `User_First_Name` = '" + bean.ge
          }
          catch (Exception ex) 
          { 
-             
+ System.out.println("didn't work except: " + ex);
+            
          }
          
          

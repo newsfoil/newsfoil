@@ -5,6 +5,8 @@
  */
 package ProgramFiles;
 
+import java.util.*;
+
 /**
  *
  * @author dentm_000
@@ -33,7 +35,25 @@ public class UserBean {
      private String User_Education;
      private String User_Tag_Line;
      private String User_Political_Party;
+     private final ArrayList<NetworkRequestBean> NetworkRequests = new ArrayList();
+     private final ArrayList<MessageBean> Messages = new ArrayList();
 
+    public List<MessageBean> getMessages() {
+        return Messages;
+    }
+
+    public void setMessages(MessageBean Messages) {
+        this.Messages.add(Messages);
+    }
+     
+    public List<NetworkRequestBean> getNetworkRequests() {
+        return NetworkRequests;
+    }
+
+    public void setNetworkRequests(NetworkRequestBean Request) {
+        this.NetworkRequests.add(Request);
+    }
+     
     public String getMessage() {
         if (message == null)
             message ="";

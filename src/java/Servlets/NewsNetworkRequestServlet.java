@@ -5,13 +5,10 @@
  */
 package Servlets;
 
-import ProgramFiles.NewAccount;
-import ProgramFiles.TestNewAccount;
-import ProgramFiles.UpdatePassword;
+import ProgramFiles.NetworkRequestDOA;
+import ProgramFiles.SendEmail;
 import ProgramFiles.UserBean;
-import ProgramFiles.updateAccount;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,8 +20,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author dentm_000
  */
-@WebServlet(name = "ProfileServlet", urlPatterns = {"/ProfileServlet"})
-public class ProfileServlet extends HttpServlet {
+@WebServlet(name = "requestNetworkServlet", urlPatterns = {"/requestNetworkServlet"})
+public class NewsNetworkRequestServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,38 +34,24 @@ public class ProfileServlet extends HttpServlet {
      */
    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         
-        
-  
+         //request.getParameter("TargetEmail")
         response.setContentType("text/html;charset=UTF-8");
         
+ 
         try {
             
-               
             HttpSession session = request.getSession();
             UserBean user = (UserBean) session.getAttribute("currentSessionUser");
             
-            user.setUser_First_Name(request.getParameter("firstName")); 
-            user.setUser_Middle_Name(request.getParameter("middleName"));
-            user.setUser_Last_Name(request.getParameter("lastName"));
-            user.setUser_City(request.getParameter("myCity"));
-            user.setUser_State(request.getParameter("myState"));
-            user.setUser_Zip(request.getParameter("myZip"));
-            user.setUser_Email(request.getParameter("myEmail"));
-            user.setUser_Tag_Line(request.getParameter("myTagline"));
-            user.setUser_Political_Party(request.getParameter("myParty"));
-            user.setUser_Bio (request.getParameter("myBio"));
-            user.setUser_Education (request.getParameter("myEducation"));
-            user.setUser_Photo (request.getParameter("myPhoto"));
-            
-            updateAccount.accountInsert(user);
-            
-            response.sendRedirect("AccountSettings.jsp");
-            
+            NetworkRequestDOA.login(request.getParameter("TargetEmail").trim(), user);
+                
         }catch (Throwable theException) {
             System.out.println(theException);
         }
-   }
+        response.sendRedirect("AccountSettings.jsp");
+
+    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

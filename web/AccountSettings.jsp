@@ -108,7 +108,6 @@
                     </div>
 
                     <form id= "account" name="account" action="ProfileServlet" method = "post"> 
-                        <input type="hidden" name="password"/>
                         
                         <div class="accountInput">
                         <label class ="lbl">Photo: <input type="button" value="Download"/>
@@ -163,32 +162,31 @@
                         
                         <div class="accountInput">
                         <label class ="lbl">Political Party: <select name="myParty" id="myParty" >
-                            <option value="volvo"><%= currentSessionUser.getUser_Political_Party() %></option>
-                            <option value="volvo">I don't know</option>
-                            <option value="saab">I don't care</option>
-                            <option value="fiat">Republican</option>
-                            <option value="audi">Democrat</option>
-                            <option value="audi">Independent</option>
-                            <option value="audi">Libertarian</option>
-                            <option value="audi">Progressive</option>
-                            <option value="audi">Conservative</option>
-                            <option value="audi">Green</option>
-                            <option value="audi">Not saying</option>
-                            <option value="audi">Mickey Mouse</option>
-                            <option value="audi">Miss Piggy</option>
-                            <option value="audi">Other</option>
+                            <option value="<%= currentSessionUser.getUser_Political_Party() %>"><%= currentSessionUser.getUser_Political_Party() %></option>
+                            <option value="I don't know">I don't know</option>
+                            <option value="I don't care">I don't care</option>
+                            <option value="Republican">Republican</option>
+                            <option value="Democrat">Democrat</option>
+                            <option value="Independent">Independent</option>
+                            <option value="Libertarian">Libertarian</option>
+                            <option value="Progressive">Progressive</option>
+                            <option value="Conservative">Conservative</option>
+                            <option value="Green">Green</option>
+                            <option value="Not saying">Not saying</option>
+                            <option value="Mickey Mouse">Mickey Mouse</option>
+                            <option value="Other">Other</option>
                         </select>
                             </label>
                         </div>
                             
                             <div class="clearfloat"></div>
                         <div class="accountInput">    
-                        <label class ="lbl">Bio: <textarea name="myBio" id="myBio" rows="4" cols="50"></textarea>
+                        <label class ="lbl">Bio: <textarea name="myBio" id="myBio" rows="4" cols="50"><%= currentSessionUser.getUser_Bio() %></textarea>
                         </label>
                         </div>
                         <div class="clearfloat"></div>
                         <div class="accountInput">
-                        <label class ="lbl">Education: <textarea name="myEducation" id="myEducation" rows="4" cols="50"></textarea>
+                        <label class ="lbl">Education: <textarea name="myEducation" id="myEducation" rows="4" cols="50" ><%= currentSessionUser.getUser_Education() %></textarea>
                         </label>
                         </div>
                         <div class="clearfloat"></div>
@@ -198,7 +196,6 @@
                         <input type="submit" value="Update Profile" />
 
                     </form> 
-
 
                     <div class="element"></div>
                     <!-- end .content --></div>

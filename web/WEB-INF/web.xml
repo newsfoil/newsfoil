@@ -5,6 +5,10 @@
         <servlet-class>ProgramFiles.NFServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>NewsNetworkRequestServlet</servlet-name>
+        <servlet-class>Servlets.NewsNetworkRequestServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>NAServlet</servlet-name>
         <servlet-class>ProgramFiles.NAServlet</servlet-class>
     </servlet>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>NFServlet</servlet-name>
         <url-pattern>/NFServlet</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>NewsNetworkRequestServlet</servlet-name>
+        <url-pattern>/NewsNetworkRequestServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>NAServlet</servlet-name>

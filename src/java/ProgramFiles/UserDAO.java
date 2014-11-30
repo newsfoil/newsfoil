@@ -1,15 +1,16 @@
 
  package ProgramFiles;
 
- import java.text.*; 
- import java.util.*; 
+import ProgramFiles.articles.ArticleBean;
  import java.sql.*; 
  
  public class UserDAO { 
      
      static Connection currentCon = null;
      static ResultSet rs = null; 
-     
+     private static final String GET_ALL_MESSAGES = "select * from MESSAGES where To_ID=?";
+     private static final String GET_ALL_REQUESTS = "select * from NNREQUESTS where Target_Email=?";
+     private static final String GET_USER = "SELECT * from USERS where (User_Name=? OR User_Email=?) AND User_Password=?";
      public static UserBean login(UserBean bean) { 
 //preparing some objects for connection 
          Statement stmt = null; 
@@ -17,7 +18,6 @@
          String password = bean.getUser_Password(); 
          String searchQuery = "select * from USERS where (User_Name='" + userLogin + "' OR User_Email='" + userLogin +"') AND User_Password='" + password + "'"; 
 
-         
          try { 
 //connect to DB 
              currentCon = ConnectionManager.getConnection();   
@@ -32,15 +32,15 @@
 //if user exists set the isValid variable to true 
              else if (more) 
              {            
-              String email = rs.getString("User_Email");
-              String userID = rs.getString("User_ID");
-              String username = rs.getString("User_name");
-                    
-              bean.setUser_Email(email); 
-              bean.setUser_Name(username);
-              bean.setUser_ID(userID); 
+              
+              bean.setUser_Email(rs.getString("User_Email")); 
+              bean.setUser_Name(rs.getString("User_name"));
+              bean.setUser_ID(rs.getString("User_ID")); 
               bean.setValid(true);
               profile(bean);
+              //currentCon.close();
+              NetworkRequest(bean);
+              Message(bean);
              }
          }
          catch (Exception ex) 
@@ -110,8 +110,82 @@ private static int profile(UserBean bean){
             currentCon.close();
       
              }
+             try { rs.close(); } 
+             catch (Exception e) {}
+             try { stmt.close(); } 
+                 catch (Exception e) {} 
                  
          }
+         catch (Exception ex) 
+         {   
+         }
+              
+// exception handling 
+         finally { 
+             
+             
+             }
+    
+return 1;
+    }
+
+private static int Message(UserBean bean) throws SQLException{
+   
+         
+          try (Connection connection = ConnectionManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(GET_ALL_MESSAGES)) {
+            
+           statement.setString(1, bean.getUser_ID());
+              
+            ResultSet resultSet = statement.executeQuery();
+            
+            
+            while (resultSet.next()) {
+                
+                MessageBean messageBean = new MessageBean();    
+                messageBean.setFrom_User_id(resultSet.getString("FROM_ID"));
+                messageBean.setUser_Subject(resultSet.getString("Subject"));
+                messageBean.setUser_Message(resultSet.getString("Message"));
+                
+                bean.setMessages(messageBean);
+            }
+            resultSet.close();
+          }
+         catch (Exception ex) 
+         {   
+         }
+              
+// exception handling 
+         finally { 
+              
+             } 
+            
+return 1;
+    }
+
+private static int NetworkRequest(UserBean bean) throws SQLException{
+    
+          
+          try (Connection connection = ConnectionManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(GET_ALL_REQUESTS)){
+              
+              
+              //String GET_ALL_REQUESTS = "select * from NNREQUESTS where Target_Email=?";
+              
+            statement.setString(1, bean.getUser_Email());  
+            ResultSet resultSet = statement.executeQuery();
+            System.out.println("***********Request is tried 4... = "+ bean.getUser_Email() );
+                
+            while (resultSet.next()) {
+                
+                
+               
+                NetworkRequestBean NRBean = new NetworkRequestBean();
+                NRBean.setSender_ID(resultSet.getString("Sender_ID"));
+                NRBean.setRequestor_Name(resultSet.getString("Requestor_Name"));
+                try {bean.setNetworkRequests(NRBean);} catch (Exception ex){System.out.println("***********this is the exception = " + ex);}   
+            }
+          }
          catch (Exception ex) 
          {   
          }
@@ -125,10 +199,7 @@ private static int profile(UserBean bean){
              rs = null; 
              } 
              
-             if (stmt != null) { 
-                 try { stmt.close(); } 
-                 catch (Exception e) {} 
-                 stmt = null; } 
+            
              
              if (currentCon != null) 
              { try 
@@ -139,4 +210,6 @@ private static int profile(UserBean bean){
     
 return 1;
     }
+
+
  }
