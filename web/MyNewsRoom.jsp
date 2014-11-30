@@ -67,21 +67,15 @@ import="java.util.List" %>
           <div id="CollapsiblePanel2" class="CollapsiblePanel">
               <div class="CollapsiblePanelTab" tabindex="2"> &gt; &nbsp; Network Requests </div>
               <div class="CollapsiblePanelContent">
-                  <h3>Send a request to join Network: </h3>
+                  <h3>Send a request so friends can join your News Network: </h3>
                   <form id="lkup" action="NewsNetworkRequestServlet" method="post" >
-                      <input type="text" id="accountSettingInput" name="TargetEmail">
-                      <h4>enter email address</h4>
+                      <input type="text" id="accountSettingInput" name="TargetEmail" placeholder="email">
+                      <input type="text" id="accountSettingInput" name="lookupmember"placeholder="or username">
                       <input type="submit" id="accountSettingInput" value="Send a Request"/>
                   </form>
                   <br/>
-                  <h3>Member Lookup</h3>
-                  <form action="lookupUserServlet" id="lkup">
-                      <input type="text" id="accountSettingInput" name="lookupmember">
-                      <br/><h4>enter last name </h4>
-                      <input type="button" name="userRequest" id="accountSettingInput" value="LookUp"/>
-                  </form>
-
-                  <%
+                  <h3>These friends want you to join their News Network: </h3>
+                                    <%
 
                       try {
                           List<NetworkRequestBean> all_Request = currentSessionUser.getNetworkRequests();
@@ -90,8 +84,10 @@ import="java.util.List" %>
                               NetworkRequestBean RequestItem = all_Request.get(x);
                               out.println("<div class = \"requestdiv\">");
                               out.println(RequestItem.getRequestor_Name());
+                              RequestItem.getSender_ID();
                               out.println("<form action=\"ProcessRequestServlet\" id=\"lkup\"<br/>"
-                                      + "<input type=\"button\" name=\"acceptRequest\" id=\"accountSettingInput\" value=\"Accept\"/>"
+                                      + "<input type=\"hidden\" name=\"Requestor\" value=\""+ RequestItem.getSender_ID() +"\"/>"
+                                      + "<input type=\"submit\" name=\"acceptRequest\" id=\"accountSettingInput\" value=\"Accept\"/>"
                                       + "<input type=\"submit\" name=\"DeclineRequest\" id=\"accountSettingInput\" value=\"Decline\"/>"
                                       + "</form>");
                               out.println("</div>");

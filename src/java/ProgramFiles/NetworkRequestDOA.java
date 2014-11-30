@@ -3,30 +3,59 @@ package ProgramFiles;
 
 import static ProgramFiles.UpdatePassword.currentCon;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class NetworkRequestDOA {
     
-     static Connection currentCon = null;
-     static ResultSet rs = null; 
+      
+     private static final String CREATE_REQUEST_EMAIL = 
+     "INSERT INTO NNREQUESTS (NNRequest_ID, Sender_ID, Target_Email,Requestor_Name) VALUES (NULL ,?, ?,?)";
+     private static final String GET_REQUEST_EMAIL = 
+     "select * from USERS WHERE User_Email=?";
+     private static final String CREATE_REQUEST_USERNAME = 
+     "INSERT INTO NNREQUESTS (NNRequest_ID, Sender_ID, Target_Email,Requestor_Name) VALUES (NULL ,?, ?,?)";
+     private static final String GET_REQUEST_USERNAME = 
+     "select * from USERS WHERE User_Name=?";
+       
      
-     public static boolean login(String targetEmail, UserBean user) { 
+     public static boolean reguestByEmail(String targetEmail, UserBean user) { 
 //preparing some objects for connection 
-         Statement stmt = null; 
-        
-         String searchQuery = "select * from USERS WHERE User_Email='" + targetEmail +"'"; 
-
-         
-         try { 
+      
+                
+         try (Connection connection = ConnectionManager.getConnection();
+              PreparedStatement statement = connection.prepareStatement(GET_REQUEST_EMAIL)) { 
 //connect to DB 
-             currentCon = ConnectionManager.getConnection();   
-             stmt=currentCon.createStatement();
-             rs = stmt.executeQuery(searchQuery);
-             boolean more = rs.next(); 
+             
+            statement.setString(1, targetEmail);
+            boolean more = statement.execute();
+             
 // if user does not exist set the isValid variable to false 
-             if (!more) { 
+             if (more){
+         
+           try (Connection connection2 = ConnectionManager.getConnection();
+              PreparedStatement statement2 = connection2.prepareStatement(CREATE_REQUEST_EMAIL)) {
+           
+            statement2.setInt(1, Integer.parseInt(user.getUser_ID()));
+            statement2.setString(2, targetEmail);
+            statement2.setString(3, user.getUser_First_Name() +" " + user.getUser_Last_Name());
+            boolean success = statement2.execute();
+            
+            if (success)
+            {}
+            else
+            {}
+                     }catch(Exception ex){
+                     
+                     
+                     }
                  
+          
+             
+             }
+             else { 
+              
                    SendEmail email = new SendEmail();
                 
                 email.setUserName(user.getUser_Name());
@@ -79,26 +108,6 @@ public class NetworkRequestDOA {
              } 
              
 //if user exists set the isValid variable to true 
-             else if (more) 
-             {            
-             
-             }    
-           
-             
-             String query2 =   "INSERT INTO `newsfoil`.`NNREQUESTS` (\n" +
-                "`NNRequest_ID` ,\n" +
-                "`User_ID` ,\n" +
-                "`Target_Email`\n" +
-                ")\n" +
-                "VALUES (\n" +
-                "NULL , '"+user.getUser_ID()+"', '"+ targetEmail +"'\n" +
-                ") ";
-           
-           Statement stmt2 = null;   
-           stmt2=currentCon.createStatement();
-           boolean T =stmt2.execute(query2);
-           
-            
              
          }
          catch (Exception ex) 
@@ -108,95 +117,60 @@ public class NetworkRequestDOA {
          
          
 // exception handling 
-         finally { 
-             if (rs != null) 
-             { try { rs.close(); } 
-             catch (Exception e) {} 
-             
-             rs = null; 
-             } 
-             
-             if (stmt != null) { 
-                 try { stmt.close(); } 
-                 catch (Exception e) {} 
-                 stmt = null; } 
-             
-             if (currentCon != null) 
-             { try 
-             { currentCon.close(); } 
-             catch (Exception e) { } 
-             
-             currentCon = null; } }
          
          return true; }
  
-  
-private static int profile(UserBean bean){
-    
- Statement stmt = null; 
-         String user_ID = bean.getUser_ID(); 
-         String searchQuery = "select * from PROFILES where User_id=" + user_ID; 
-
-         try { 
-//connect to DB  
-             stmt=currentCon.createStatement();
-             rs = stmt.executeQuery(searchQuery);
-             boolean more = rs.next(); 
-// if user does not exist set the isValid variable to false 
-             if (more) 
-             {
-              
-              bean.setUser_First_Name(rs.getString("User_First_Name")); 
-              bean.setUser_Middle_Name(rs.getString("User_Middle_Name"));
-              bean.setUser_Last_Name(rs.getString("User_Last_Name"));
-              bean.setUser_City(rs.getString("User_City"));
-              bean.setUser_State(rs.getString("User_State"));
-              bean.setUser_Zip(rs.getString("User_Zip"));
-              bean.setUser_Email(rs.getString("User_Email"));
-              bean.setUser_Tag_Line(rs.getString("User_Tag_Line"));
-              bean.setUser_Political_Party(rs.getString("User_Political_Party"));
-              bean.setUser_Bio (rs.getString("User_Bio"));
-              bean.setUser_Education (rs.getString("User_Education"));
-              bean.setUser_Photo (rs.getString("User_Photo"));
-              
-             } else if (!more)
-             {
-             String query ="INSERT INTO PROFILES (`Profile_ID`, `User_ID`) VALUES ( NULL,'" + user_ID +"')";
-        
-             currentCon = ConnectionManager.getConnection();   
-             stmt=currentCon.createStatement();
-             boolean T =stmt.execute(query);    
-            currentCon.close();
+  public static boolean reguestByUser(String lkupMember, UserBean user) { 
+//preparing some objects for connection 
       
-             }
-                 
-         }
-         catch (Exception ex) 
-         {   
-         }
-              
-// exception handling 
-         finally { 
-             if (rs != null) 
-             { try { rs.close(); } 
-             catch (Exception e) {} 
+                
+         try (Connection connection = ConnectionManager.getConnection();
+              PreparedStatement statement = connection.prepareStatement(GET_REQUEST_USERNAME)) { 
+//connect to DB 
              
-             rs = null; 
+            statement.setString(1, lkupMember);
+            boolean more = statement.execute();
+             
+// if user does not exist set the isValid variable to false 
+             if (more){
+         
+           try (Connection connection2 = ConnectionManager.getConnection();
+              PreparedStatement statement2 = connection2.prepareStatement(CREATE_REQUEST_USERNAME)) {
+           
+            statement2.setInt(1, Integer.parseInt(user.getUser_ID()));
+            statement2.setString(2, lkupMember);
+            statement2.setString(3, user.getUser_First_Name() +" " + user.getUser_Last_Name());
+            boolean success = statement2.execute();
+            
+            if (success)
+            {}
+            else
+            {}
+                     }catch(Exception ex){
+                     
+                     
+                     }
+                 
+          
+             
+             }
+             else { 
+              
+                  
              } 
              
-             if (stmt != null) { 
-                 try { stmt.close(); } 
-                 catch (Exception e) {} 
-                 stmt = null; } 
+//if user exists set the isValid variable to true 
              
-             if (currentCon != null) 
-             { try 
-             { currentCon.close(); } 
-             catch (Exception e) { } 
-             
-             currentCon = null; } }
-    
-return 1;
-    }
+         }
+         catch (Exception ex) 
+         { 
+             System.out.println("Log In failed: An Exception has occurred! " + ex);
+         }
+         
+         
+// exception handling 
+         
+         return true; }
+     
     
 }

@@ -6,7 +6,6 @@
 package Servlets;
 
 import ProgramFiles.NetworkRequestDOA;
-import ProgramFiles.SendEmail;
 import ProgramFiles.UserBean;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -38,17 +37,25 @@ public class NewsNetworkRequestServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
  
-        try {
-            
-            HttpSession session = request.getSession();
-            UserBean user = (UserBean) session.getAttribute("currentSessionUser");
-            
-            NetworkRequestDOA.login(request.getParameter("TargetEmail").trim(), user);
-                
-        }catch (Throwable theException) {
-            System.out.println(theException);
-        }
-        response.sendRedirect("AccountSettings.jsp");
+       try {
+
+           HttpSession session = request.getSession();
+           UserBean user = (UserBean) session.getAttribute("currentSessionUser");
+
+           String targetEmail = request.getParameter("TargetEmail").trim();
+           String lkupMember = request.getParameter("lookupmember").trim();
+
+           if (!targetEmail.equals("null")) {
+               NetworkRequestDOA.reguestByEmail(targetEmail, user);
+           } else
+           if (!lkupMember.equals("null")) {
+               NetworkRequestDOA.reguestByUser(lkupMember, user);
+           }
+
+       } catch (Throwable theException) {
+           System.out.println(theException);
+       }
+        response.sendRedirect("NFServlet");
 
     }
 

@@ -53,7 +53,6 @@ input:invalid {
 	font-size: 100%;
 	line-height: 1;
 	font-weight: bold;
-	background-color: #FFFFFF;
 	text-align: center;
 	vertical-align: middle;
 	width: 100%;
@@ -116,10 +115,6 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
 }
 
 
-
-
-
-
 /* ~~The footer ~~ */
 .footer {
 	padding: 10px 0;
@@ -133,19 +128,16 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
 	height: 200px;
 	margin-top: 30px;
 	margin-right: 0px;
-	margin-bottom: 10px;
+	margin-bottom: 0px;
 	margin-left: 0px;
 }
-
 
 
 .fltrt {  /* this class can be used to float an element right in your page. The floated element must precede the element it should be next to on the page. */
 	float: right;
 	width: 30%;
-	margin-top: 40px;
-	margin-bottom: 10px;
-
-	
+	margin-top: 50px;
+	margin-bottom: 0px;
 	
 }
 .fltcent{ /* this class can be used to float an element left in your page. The floated element must precede the element it should be next to on the page. */
@@ -153,18 +145,19 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
 	float: left;
 	width:49%;
 	margin-right: auto;
-	margin-top: 10px;
+	
 	margin-left: auto;
-	padding-left: 0px;
-        padding-bottom: 20px;
+        
+	
+        
 }
 
 
 .fltlft { /* this class can be used to float an element left in your page. The floated element must precede the element it should be next to on the page. */
 	width: 20%;
 	float: left;
-	margin-top: 10px;
-	margin-bottom: 10px;
+	margin-top: 20px;
+	margin-bottom: 0px;
 }
 .clearfloat { /* this class can be placed on a <br /> or empty div as the final element following the last floated div (within the #container) if the #footer is removed or taken out of the #container */
 	clear:both;

@@ -4,6 +4,7 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Reset Password Confirmation</title>
@@ -28,20 +29,17 @@
   <img src="images/logo.jpg" alt="Logo" align="middle" />
   </div>
   
-  
-  
-  <div class="fltrt">
-   <form name="login" action="NFServlet" method = "post">             
-            
-             <input ID="tb1" type="username" name="username" placeholder="username"/>
-            <input  ID="tb1" type="password" name="password" placeholder="password"/>
-      <input ID="tb1" type="submit" value="Sign In">   
+    <div class="fltrt">
+        <form name="login" action="NFServlet" method = "post">             
+            <input ID="tb1" type="username" name="username" placeholder="username/email" autocomplete="false"/>
+            <input  ID="tb1" type="password" name="password" placeholder="password" value="" autocomplete="off"/>
+            <input ID="tb1" type="submit" value="Sign In"/>   
             <input type="hidden" name="targetpage" value="Login"/>
-   </form>
-   
-    <a class="pwitem" href="NewAccount.html">&nbsp;New Account &nbsp;</a>
+        </form>
+
+        <a class="pwitem" href="NewAccount.html">&nbsp;New Account &nbsp;</a>
         <a class="pwitem" href="ResetPassword.jsp">&nbsp; Forgot Password &nbsp;</a>
-      </div>
+    </div>
        
   
   <div class="content">

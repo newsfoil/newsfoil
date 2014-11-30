@@ -41,7 +41,7 @@ public class ProfileDAOTest {
         String User_ID = "45";  // testUser
         
         UserBean user = new UserBean();
-        user.setUser_ID(9);
+        user.setUser_ID(User_ID);
         profile.setUser(user);
         
         profile.setUser_First_Name("Thomas");
