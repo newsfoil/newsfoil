@@ -138,6 +138,7 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
 	margin-top: 10px;
 	margin-bottom: 10px;
 	margin-left: auto;
+	padding-left: 130px;
 }
 
 
@@ -212,6 +213,15 @@ label { float: left;
     -webkit-animation: blink 0.5s infinite;
     -moz-animation: blink 0.5s infinite;
     animation: blink 0.5s infinite;
+}
+
+.about { 
+	text-align: left;
+	font-size: 75%;
+}
+
+.return {
+	font-size: 75%;
 }
 
 @keyframes blink{

@@ -31,25 +31,32 @@ public class NFServlet extends HttpServlet {
     //   processRequest(request, response);
 
         try {
-            UserBean user = new UserBean();
-            user.setUser_Login(request.getParameter("username"));
-            user.setUser_Password(request.getParameter("password"));
-            user = UserDAO.login(user);
+             // User may already be logged in
+            HttpSession session = request.getSession();
+            UserBean user = (UserBean)session.getAttribute("currentSessionUser");
+            
+            // If user is not in session, assume we're coming from login page
+            if(user == null) {
+                user = new UserBean();
+                user.setUser_Login(request.getParameter("username"));
+                user.setUser_Password(request.getParameter("password"));
+                user = UserDAO.login(user);
+            }
+           
+            if (user.isValid()) {
+                session = request.getSession(true);
+                session.setAttribute("currentSessionUser", user);
 
-                if (user.isValid()) {
-                    HttpSession session = request.getSession(true);
-                    session.setAttribute("currentSessionUser", user);
-                    
-                    List<ArticleBean> articleList = ArticlesDAO.getAllArticles();
-                    response.setContentType("text/html");
-                    request.setAttribute("articleList", articleList);
-                    request.getRequestDispatcher("MyNewsRoom.jsp").forward(request, response);
-             
-                    response.sendRedirect("MyNewsRoom.jsp");
+                List<ArticleBean> articleList = ArticlesDAO.getAllArticles();
+                response.setContentType("text/html");
+                request.setAttribute("articleList", articleList);
+                request.getRequestDispatcher("MyNewsRoom.jsp").forward(request, response);
+
+                response.sendRedirect("MyNewsRoom.jsp");
 //logged-in page 
-                } else {
-                    response.sendRedirect("LoginPageFail.jsp");
-                }
+            } else {
+                response.sendRedirect("LoginPageFail.jsp");
+            }
              
             //error page
         } catch (Throwable theException) {

@@ -1,3 +1,7 @@
+@charset "utf-8";
+/* CSS Document */
+
+
 body {
 	font: 100% Georgia, "Times New Roman", Times, serif;
 	background: white;
@@ -85,7 +89,7 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 	float: left;
 }
 .sidebar2 {
-	float: left;   
+	float: right;   
 	width: 20%;
 	padding-top: 100px; 
         padding-left: 10px;
@@ -286,4 +290,97 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
     margin: 5px;
     
     
+.accountInput{
+    float: left;
+    padding: 10px;
+    margin: 5px;
+    text-align: left;
+}
+.accountInput #account input{
+    padding-left: 1px;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    font-family: helvetica, arial, sans serif;
+    padding: 5px;  
+        
+}
+
+.articleFormHeading {
+    width:400px;
+    text-align:center;
+    margin:0 auto;
+}
+
+.article, .articleForm {
+    width: 50%;
+    text-align:center;
+    padding-top: 40px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+
+    font-family: Times,"Times New Roman", serif;
+    float: left;
+    font-size: 100%;
+    line-height: 1.4;
+    font-weight:bold;
+    text-align: left !important;
+}
+
+.articleForm input[type="text"], textarea {
+    width: 50%;
+    padding: 3px;
+}
+
+.articleForm label {
+    width: 200px;
+    display:table-cell;
+    vertical-align: middle;
+    text-align:right;
+    margin-right:10px;
+    font-size:16px;
+}
+
+.articleButtonSection {
+    text-align:center;
+}
+
+
+.article {
+    width: 50%;
+    text-align:center;
+    padding-top: 40px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+
+    font-family: Times,"Times New Roman", serif;
+    float: left;
+    line-height: 1.4;
+    text-align: left !important;
+}
+
+.article label {
+    width: 200px;
+    display:table-cell;
+    vertical-align: middle;
+    text-align:right;
+    margin-right:10px;
+    font-size:16px;
+}
+
+.article .articleAuthor {
+    text-align:center;
+}
+
+.article div.articleText {
+    font-weight:normal;
+    text-justify: inter-word;
+}
+
+.articleHeading {
+    width:400px;
+    text-align:center;
+    margin:0 auto;
 }

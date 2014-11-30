@@ -21,10 +21,10 @@
     <div class="container">
         <div class="header">
             <div class="fltlft">
-                <img src="images/Voice.jpg" alt="Logo" width="192" height="144" border="1" />
+                <img src="images/Voice.jpg" alt="Logo" width="192" height="144" border="1" /></a>
             </div>
             <div class="fltcent">
-                <img src="images/logo.jpg" alt="Logo" align="middle" />
+                <a href="NFServlet"><img src="images/logo.jpg" alt="Logo" align="middle" /></a>
             </div>
             <div class="fltrt">
 
@@ -134,13 +134,14 @@
 
 
             <!-- end .content --></div>
-        <div class="sidebar2">
+         <div class="sidebar2">
             <ul class="nav">
-                <li><a href="MyNewsRoom.jsp">Home</a>&nbsp;</li>
+                <li><a href="NFServlet">Home</a>&nbsp;</li>
+                <li><a href="CreateArticle">New Article</a>&nbsp;</li>
+                <li><a href="ProfilePage">Profile</a>&nbsp;</li>
                 <li><a href="AccountSettings.jsp">Settings</a> &nbsp;</li>
                 <li><a href="About.html">About</a> &nbsp;</li>
             </ul>
-
         </div>
 
         <div class="footer">
