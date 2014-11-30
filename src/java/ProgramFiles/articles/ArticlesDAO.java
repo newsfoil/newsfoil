@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -22,9 +23,9 @@ public class ArticlesDAO {
     private static final String GET_ARTICLE = 
             "select * from WORLD_ARTICLES, USERS where WORLD_ARTICLES.Article_Id=? and USERS.User_ID=WORLD_ARTICLES.User_ID";
     private static final String CREATE_ARTICLE = 
-            "insert into WORLD_ARTICLES (User_Id, Article_Rank, Article_Title, Article_Date, Article_Description, Article_Location) values(?,?,?,?,?,?)";
+            "insert into WORLD_ARTICLES (User_Id, Article_Rank, Article_Title, Article_Date, Article_Description, Article_Location, Article_Content) values(?,?,?,?,?,?,?)";
     private static final String UPDATE_ARTICLE = 
-            "update WORLD_ARTICLES set Article_Rank=?, Article_Title=?, Article_Description=?, Article_Location=? where Article_Id=?";
+            "update WORLD_ARTICLES set Article_Rank=?, Article_Title=?, Article_Description=?, Article_Location=?, Article_Content=? where Article_Id=?";
     private static final String DELETE_ARTICLE = 
             "delete from WORLD_ARTICLES where Article_Id=?";
 
@@ -56,6 +57,7 @@ public class ArticlesDAO {
                 article.setArticle_Rank(resultSet.getInt("Article_Rank"));
                 article.setArticle_Description(resultSet.getString("Article_Description"));
                 article.setArticle_Title(resultSet.getString("Article_Title"));
+                article.setArticle_Content(resultSet.getString("Article_Content"));
                 article.setArticle_Location(resultSet.getString("Article_Location"));
                 article.setArticle_Date(resultSet.getDate("Article_Date"));
 
@@ -67,6 +69,10 @@ public class ArticlesDAO {
         }
 
         // connection resources automatically closed in try-catch-resource syntax
+        
+        // TODO: make efficient
+        Collections.sort(articleList);
+        Collections.reverse(articleList);
         
         return articleList;
     }
@@ -103,6 +109,7 @@ public class ArticlesDAO {
                 article.setArticle_Rank(resultSet.getInt("Article_Rank"));
                 article.setArticle_Description(resultSet.getString("Article_Description"));
                 article.setArticle_Title(resultSet.getString("Article_Title"));
+                article.setArticle_Content(resultSet.getString("Article_Content"));
                 article.setArticle_Location(resultSet.getString("Article_Location"));
                 article.setArticle_Date(resultSet.getDate("Article_Date"));
                 articleList.add(article);
@@ -114,6 +121,10 @@ public class ArticlesDAO {
 
          // connection resources automatically closed in try-catch-resource syntax
         
+        // TODO: make efficient
+        Collections.sort(articleList);
+        Collections.reverse(articleList);
+  
         return articleList;
     }
 
@@ -149,6 +160,7 @@ public class ArticlesDAO {
                 article.setArticle_Rank(resultSet.getInt("Article_Rank"));
                 article.setArticle_Description(resultSet.getString("Article_Description"));
                 article.setArticle_Title(resultSet.getString("Article_Title"));
+                article.setArticle_Content(resultSet.getString("Article_Content"));
                 article.setArticle_Location(resultSet.getString("Article_Location"));
                 article.setArticle_Date(resultSet.getDate("Article_Date"));
             }
@@ -179,6 +191,7 @@ public class ArticlesDAO {
             statement.setDate(4, new java.sql.Date(article.getArticle_Date().getTime()));
             statement.setString(5, article.getArticle_Description());
             statement.setString(6, article.getArticle_Location());
+            statement.setString(7, article.getArticle_Content());
             success = statement.execute();
 
         } catch (Exception ex) {
@@ -206,7 +219,8 @@ public class ArticlesDAO {
             statement.setString(2, article.getArticle_Title());
             statement.setString(3, article.getArticle_Description());
             statement.setString(4, article.getArticle_Location());
-            statement.setInt(5, article.getArticle_Id());
+            statement.setString(5, article.getArticle_Content());
+            statement.setInt(6, article.getArticle_Id());
             int rows = statement.executeUpdate();
             if(rows > 0) {
                 success = true;
