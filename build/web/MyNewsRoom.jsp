@@ -24,7 +24,7 @@ import="java.util.List" %>
     <div class="container">
         <div class="header">
             <div class="fltlft">
-                 <img src="images/Voice.jpg" alt="Logo" width="192" height="144" border="1" />
+                 <img src="images/Voice.jpg" alt="Logo" align="right" width="192" height="144" border="1" />
             </div>
             <div class="fltcent">
                 <a href="NFServlet"><img src="images/logo.jpg" alt="Logo" align="middle" /></a>
@@ -36,10 +36,12 @@ import="java.util.List" %>
             </div>
         </div>
 
-        <div class="menubar">
-        </div>
+            
+            
+        
 
-
+            
+            
     
     <div class="clearfloat"></div>
   <div class="sidebar1">
@@ -149,7 +151,7 @@ import="java.util.List" %>
                 <li><a href="CreateArticle">New Article</a>&nbsp;</li>
                 <li><a href="ProfilePage">Profile</a>&nbsp;</li>
                 <li><a href="AccountSettings.jsp">Settings</a> &nbsp;</li>
-                <li><a href="About.html">About</a> &nbsp;</li>
+                <li><a href="About.jsp">About</a> &nbsp;</li>
             </ul>
         </div>
 

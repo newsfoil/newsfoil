@@ -5,14 +5,13 @@
 import="ProgramFiles.articles.ArticleBean" 
 import="ProgramFiles.NetworkRequestBean" 
 import="java.util.List" %> 
-<% List<ArticleBean> articleList = (List<ArticleBean>)session.getAttribute("articleList"); %>
 
            
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>My News Room</title>
+    <title>About</title>
     <link href="css/main.css" rel="stylesheet" type="text/css" />
     <link href="css/sprycss.css" rel="stylesheet" type="text/css" />
     <script src="js/CollapsiblePanel.js" type="text/javascript"></script>
@@ -129,139 +128,72 @@ import="java.util.List" %>
             </div>
         </div>
 
-       
+        <div class="content">
      
                 <!-- 
-            * <div class="content">
             *
             *
+            
             start content -->
-           <div class="accountSettingText2">
-                  
-               </br>
-                       <h2> Change Password: </h2> </br> 
-                            <form id= "ResetPW" name="ResetPW" action="ResetPasswordServlet" method = "post">                    
-                                Old Password: <input type="password" name="OldPassword" value="" autocomplete="off"/>
-                                <br/><br/>
-                                New Password: <input type="password" name="NewPassword" autocomplete="off"/>
-                                <br/><br/>
-                                Retype New Password: <input type="password" name="NewPassword2" autocomplete="off"/>
-                                <input type="button" value="Change Password" onClick="populateform()"/>
-                                <br/>
-                                <span class="emsg" id="errormsg"/>
-                                <br/>
-                                <jsp:getProperty name = "currentSessionUser" property="message" />
-                                <br/>
-                            </form>
-                       <hr>
-                       </br>
-                       <h2> Change Profile: </h2> </br>
-                    <form id= "account" name="account" action="ProfileServlet" method = "post"> 
-                        
-                        Email address: <%= currentSessionUser.getUser_Email() %> 
-                        
-                        <br/><br/>
-                        <p></p>
-                        
-                        <label class ="lbl">Photo: <input type="button" value="Download"/>
-                        </label> 
-                        (This element is not working yet)
-                        <br/><br/>
-                        
-                        
-                        <label class ="lbl">Username: <input type="text" name="myUsername" id="accountSettingInput" value="<%= currentSessionUser.getUser_Name()%>" />
-                        </label>
-                        <br/><br/>
-                        <p></p>
-                        
-                        
-                        <label class ="lbl">First Name: <input type="text" name="firstName" id="accountSettingInput" value="<%= currentSessionUser.getUser_First_Name()  %>"/>
-                        </label>
-                       
-                        <label class ="lbl">Middle Name: <input type="text" name="middleName" id="accountSettingInput" value="<%= currentSessionUser.getUser_Middle_Name()  %>"/>
-                        </label>
-                       
-                        <label class ="lbl">Last Name: <input type="text" name="lastName" id="accountSettingInput" value="<%= currentSessionUser.getUser_Last_Name() %>"/>
-                        </label>
-                        
-                        <br/><br/>
-                        <p></p>
-                        
-                        <label class ="lbl">City: <input type="text" name="myCity" id="accountSettingInput" value="<%= currentSessionUser.getUser_City() %>"/>
-                        </label>
-                        
-                        
-                        <label class ="lbl">State: <input type="text" name="myState" id="accountSettingInput" value="<%= currentSessionUser.getUser_State() %>"/>
-                        </label>
-                        
-                        <label class ="lbl">Zip: <input type="text" name="myZip" id="myZip" value="<%= currentSessionUser.getUser_Zip() %>"/>
-                        </label>
-                        
-                        
-                        <br/><br/>
-                        <p></p>
-                        
-                        <label class ="lbl">Tagline: <input type="text" name="myTagline" id="myTagline" value="<%= currentSessionUser.getUser_Tag_Line() %>"/>
-                        </label>
-                        
-                        <br/><br/>
-                        <p></p>
-                        
-                        <label class ="lbl">Political Party: <select name="myParty" id="myParty" >
-                            <option value="<%= currentSessionUser.getUser_Political_Party() %>"><%= currentSessionUser.getUser_Political_Party() %></option>
-                            <option value="I don't know">I don't know</option>
-                            <option value="I don't care">I don't care</option>
-                            <option value="Republican">Republican</option>
-                            <option value="Democrat">Democrat</option>
-                            <option value="Independent">Independent</option>
-                            <option value="Libertarian">Libertarian</option>
-                            <option value="Progressive">Progressive</option>
-                            <option value="Conservative">Conservative</option>
-                            <option value="Green">Green</option>
-                            <option value="Not saying">Not saying</option>
-                            <option value="Mickey Mouse">Mickey Mouse</option>
-                            <option value="Other">Other</option>
-                        </select>
-                            </label>
-                        
-                        <br/><br/>
-                        <p></p>    
-                       <div class ="articleText">
-                        <label>Bio: <textarea name="myBio" id="myBio" rows="4" cols="50"><%= currentSessionUser.getUser_Bio() %></textarea>
-                        </label>
-                        
-                        <br/><br/>
-                        <br/><br/>
-                        
-                        <br/><br/>
-                        <p></p>
-                       </div>
-                        
-                        <label class ="lbl">Education: <textarea name="myEducation" id="myEducation" rows="4" cols="50" ><%= currentSessionUser.getUser_Education() %></textarea>
-                        </label>
-                        
-                        <br/><br/>
-                        <br/><br/>
-                        <br/><br/>
-                        <p></p>
+        
+             <h1>About Newsfoil.com</h1>
+	
+		
+		<br>
+		<p>Newsfoil.com is an interactive website where users can read news articles and rank the 
+		articles.  Users are able to post their own articles. The ranking system for articles consists
+		of 3 components - the “weighted score”, ”Number of Rankings” and “Primacy”.  The weighted 
+		score and number of rankings come from the user rankings and are based on the “influence” of 
+		the users.  Users are able to create “news networks”. A news network consists of other users 
+		on the site.  A user can invite any user he/she wants to be part of their news network.  The 
+		user has their own page and will receive articles to their page.  The user will receive 5 
+		articles in each subject area they choose based on the rankings of the articles.  They will 
+		also receive one random “wildcard” article that is not at the top of their list, but has met 
+		some minimal requirements.  The user also receives all articles posted by members in their 
+		network, regardless of ranking, the most recent ones listed first. Below is a more detailed 
+		description of how rankings are calculated:</p>
+		
+                <h3>INFLUENCE:</h3>
+		<p>
+		Each user has “influence” which is a gauge of how much impact their rating will have.  Influence 
+		is based on how they rank articles.  Two-thirds of this score will be based on if they rank the 
+		articles higher or lower than their average ranking. Ranking articles lower than their average 
+		increases their influence but lowers their average ranking.  Ranking articles high reduces their 
+		influence but increases their average ranking.  The remaining one-third of the formula will be 
+		based on the distribution of their rankings.  If the user fully distributes their ratings (say 
+		for 10 articles they rate them 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 then they would have a perfect score, 
+		any deviation will reduce this score).</p>
+		
+                <h3> WEIGHTED SCORE:</h3><p>
+		The weighted score of an article is based on the ranking and influence of the individual.  If a 
+		person has 50% influence and rates an article a 10, the score will be 5/.5 so the articles score 
+		would be 10.00.  However if another user with 100% influence rates the same article a 0 his/her 
+		score would be added 0/1 so the new score would be 5/1.5 or 3.33.  This allows users with more 
+		influence to have a greater impact on the article.</p>
+		
+                <h3>NUMBER OF RANKINGS:</h3>
+		
+                <p>    This is simply the influence portion of the equation.  If two people rate the article, one having 
+		an influence of 50% and another with an influence of 100%, the number of rankings will be 1.5.  
+		This number always increases as the article is rated.  This number is then divided by the article 
+		with the highest number of rankings.  If the lead article number of rankings is 50, and another 
+		article has 25 rankings, the lead article will score 100% in this area and the other article will 
+		have 25/50 or 50%.</p>
+		
+		<h3>PRIMACY:</h3>
+		
+                <p>    This portion of the ranking is based on how recently an article was posted.  Articles start out 
+		with 100% and lose 1 percent every day until it reaches 0.</p>
+	
+        
 
-                        <span class="emsg" id="errormsg">
-                        </span>
-                        
-                        <input type="submit" value="Update Profile" />
-
-                    </form> 
-
-                    
-                   </div> 
-                    <!-- end .content -->
             <!-- 
             *
-            *</div>
+            *
             
             end content -->
         
-        
+        </div>
                     
         <div class="sidebar2">
             <ul class="nav">
