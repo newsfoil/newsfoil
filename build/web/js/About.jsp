@@ -11,7 +11,7 @@ import="java.util.List" %>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>My News Room</title>
+    <title>About</title>
     <link href="css/main.css" rel="stylesheet" type="text/css" />
     <link href="css/sprycss.css" rel="stylesheet" type="text/css" />
     <script src="js/CollapsiblePanel.js" type="text/javascript"></script>
@@ -128,15 +128,14 @@ import="java.util.List" %>
             </div>
         </div>
 
-       
+        <div class="content">
      
                 <!-- 
-            * <div class="content">
             *
             *
+            
             start content -->
-              <div class="content2">  
-                  
+        
              <h1>About Newsfoil.com</h1>
 	
 		
@@ -185,15 +184,16 @@ import="java.util.List" %>
 		
                 <p>    This portion of the ranking is based on how recently an article was posted.  Articles start out 
 		with 100% and lose 1 percent every day until it reaches 0.</p>
-	</div>
-          <!-- end .content -->
+	
+        
+
             <!-- 
             *
             *
             
             end content -->
         
-        
+        </div>
                     
         <div class="sidebar2">
             <ul class="nav">

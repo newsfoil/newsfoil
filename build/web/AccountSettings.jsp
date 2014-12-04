@@ -17,6 +17,40 @@ import="java.util.List" %>
     <link href="css/sprycss.css" rel="stylesheet" type="text/css" />
     <script src="js/CollapsiblePanel.js" type="text/javascript"></script>
 
+    <script type="text/javascript">
+        var temp='';
+        function populateform() {
+        var screenMsg = " ";
+            if (validateFields() === "true")
+        document.forms["ResetPW"].submit();
+    }
+    </script>
+    <script language="JavaScript1.2">
+    function validateFields()
+    {
+    var testresults = "";
+    var screenMsg = "";
+    if (!document.ResetPW.OldPassword.value)
+    screenMsg = "Please enter a your current password. ";
+    else if (!document.ResetPW.NewPassword.value)
+    {
+    screenMsg = "Passwords do not match, Please re-enter.";
+    }
+    else if (document.ResetPW.NewPassword.value != document.ResetPW.NewPassword.value)
+    {
+    screenMsg = "Passwords do not match, Please re-enter.";
+    }
+    else {
+    testresults = "true";
+    }
+    document.getElementById("errormsg").innerHTML = screenMsg;
+    return testresults;
+    }
+    </script>
+
+    
+    
+    
 </head>
 
 <body>
@@ -35,11 +69,6 @@ import="java.util.List" %>
                 <jsp:getProperty name = "currentSessionUser" property="user_Name" />
             </div>
         </div>
-
-
-
-
-
 
 
 
@@ -156,7 +185,8 @@ import="java.util.List" %>
                        <hr>
                        </br>
                        <h2> Change Profile: </h2> </br>
-                    <form id= "account" name="account" action="ProfileServlet" method = "post"> 
+                    <form id= "account" name="account" action="ProfileServlet" method = "post">
+                        <input type="submit" value="Update Profile" />
                         
                         Email address: <%= currentSessionUser.getUser_Email() %> 
                         

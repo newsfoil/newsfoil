@@ -223,29 +223,19 @@ label { float: left;
 }
 
 .about { 
-	text-align: left;
+    font-family: Times,"Times New Roman", serif;	
 	font-size: 75%;
+        text-align: left;
+        line-height: 1.4;
+	font-weight:normal;
+	
 }
 
 .return {
 	font-size: 75%;
 }
 
-@keyframes blink{
-    0% { opacity:1; }
-    50% { opacity:0; }
-    100% { opacity:1; }
-}
-@-webkit-keyframes blink{
-    0% { opacity:1; }
-    50% { opacity:0; }
-    100% { opacity:1; }
-}
-@-moz-keyframes blink{
-    0% { opacity:1; }
-    50% { opacity:0; }
-    100% { opacity:1; }
-}
+
 
 
 .accountInput{
@@ -266,7 +256,22 @@ padding: 5px;
 }
 
 
-
 .lbl {
 text-align:left;
+}
+
+@keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-webkit-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-moz-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
 }

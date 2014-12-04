@@ -85,7 +85,14 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 	padding: 10px;
 }
 .content {
+        width: 58%;
 	padding: 10px 0;	
+	float: left;
+}
+.content2 {
+        width: 58%;
+        
+	padding: 50px 0;	
 	float: left;
 }
 

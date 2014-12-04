@@ -140,7 +140,7 @@
                 <li><a href="CreateArticle">New Article</a>&nbsp;</li>
                 <li><a href="ProfilePage">Profile</a>&nbsp;</li>
                 <li><a href="AccountSettings.jsp">Settings</a> &nbsp;</li>
-                <li><a href="About.html">About</a> &nbsp;</li>
+                <li><a href="About.jsp">About</a> &nbsp;</li>
             </ul>
         </div>
 
