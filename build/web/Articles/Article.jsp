@@ -21,6 +21,8 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script src="<c:url value="js/CollapsiblePanel.js"/>" type="text/javascript"></script>
         <script src="<c:url value="js/jquery.validate.js"/>" type="text/javascript"></script>
+<script type="text/javascript" src="js/tinymce/tinymce.min.js"></script>
+
 
     </head>
 
@@ -123,6 +125,7 @@
                 <label>Content:</label> <div class="articleText">${article.getArticle_Content()}</div>
                 <br/><br/>
                 <br/><br/>
+              
             </div>
 
             <!-- end .content --></div>
