@@ -3,17 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/login/newsfoil/web/css/main.css</file>
-            <file>file:/C:/login/newsfoil/web/AccountSettings.jsp</file>
-            <file>file:/C:/login/newsfoil/web/About.html</file>
-            <file>file:/C:/login/newsfoil/web/About.jsp</file>
-            <file>file:/C:/login/newsfoil/web/css/login.css</file>
+            <file>file:/C:/login/newsfoil/web/NewAccountConfirmation.jsp</file>
+            <file>file:/C:/login/newsfoil/web/ResetPassword.jsp</file>
             <file>file:/C:/login/newsfoil/web/MyNewsRoom.jsp</file>
-            <file>file:/C:/login/newsfoil/web/Articles/Article.jsp</file>
-            <file>file:/C:/login/newsfoil/web/Articles/CreateArticle.jsp</file>
-            <file>file:/C:/login/newsfoil/web/index2.html</file>
-            <file>file:/C:/login/newsfoil/web/mainTemplate.jsp</file>
-            <file>file:/C:/login/newsfoil/web/ProfilePage.jsp</file>
+            <file>file:/C:/login/newsfoil/web/NewAccount.jsp</file>
+            <file>file:/C:/login/newsfoil/web/NewAccount.html</file>
+            <file>file:/C:/login/newsfoil/web/Newsfoil.jsp</file>
+            <file>file:/C:/login/newsfoil/web/ResetPasswordConfirmation.jsp</file>
+            <file>file:/C:/login/newsfoil/web/LoginPageFail.jsp</file>
         </group>
     </open-files>
 </project-private>

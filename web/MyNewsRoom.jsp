@@ -30,6 +30,11 @@ import="java.util.List" %>
                 <a href="NFServlet"><img src="images/logo.jpg" alt="Logo" align="middle" /></a>
             </div>
             <div class="fltrt">
+                
+                <form method="post" action="LogoutServlet2">
+                        <button type="submit">Logout</button>
+                </form>
+                
                 <jsp:useBean id="currentSessionUser" class = "ProgramFiles.UserBean" scope="session"/>
                 <jsp:setProperty name="currentSessionUser" property="*"/>
                 <jsp:getProperty name = "currentSessionUser" property="user_Name" />
@@ -78,19 +83,24 @@ import="java.util.List" %>
                   <br/>
                   <h3>These friends want you to join their News Network: </h3>
                                     <%
-
                       try {
                           List<NetworkRequestBean> all_Request = currentSessionUser.getNetworkRequests();
 
                           for (int x = 0; x < all_Request.size(); x++) {
                               NetworkRequestBean RequestItem = all_Request.get(x);
                               out.println("<div class = \"requestdiv\">");
-                              out.println(RequestItem.getRequestor_Name());
+                              
+                              
+                              out.println("<a href=\"http://newsfoil.com/profiles/" + currentSessionUser.getUser_ID()+ 
+   "profile.html\" target=\"_new\">" + RequestItem.getRequestor_Name() +" </a> ");
+                              
+        
                               RequestItem.getSender_ID();
-                              out.println("<form action=\"ProcessRequestServlet\" id=\"lkup\"<br/>"
-                                      + "<input type=\"hidden\" name=\"Requestor\" value=\""+ RequestItem.getSender_ID() +"\"/>"
-                                      + "<input type=\"submit\" name=\"acceptRequest\" id=\"accountSettingInput\" value=\"Accept\"/>"
-                                      + "<input type=\"submit\" name=\"DeclineRequest\" id=\"accountSettingInput\" value=\"Decline\"/>"
+                              out.println("<form action=\"addMemberServlet\" id=\"lkup\" method=\"post\"><br/>"
+                                      + "<input type=\"hidden\" name=\"requestor\" value=\""+ RequestItem.getSender_ID() +"\"/>"
+                                       + "<input type=\"hidden\" name=\"requestorName\" value=\""+ RequestItem.getRequestor_Name() +"\"/>"
+                                      + "<input type=\"submit\" name=\"requestType\" id=\"accountSettingInput\" value=\"Accept\"/>"
+                                      + "<input type=\"submit\" name=\"requestType\" id=\"accountSettingInput\" value=\"Decline\"/>"
                                       + "</form>");
                               out.println("</div>");
                          

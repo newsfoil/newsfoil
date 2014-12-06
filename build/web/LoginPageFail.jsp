@@ -34,7 +34,7 @@
   
   
   <div class="fltrt">
-   <form action="NFServlet" method = "post">             
+   <form action="NFLoginServlet" method = "post">             
             
              <input ID="tb1" type="username" name="username" placeholder="username"/>
             <input  ID="tb1" type="password" name="password" placeholder="password"/>

@@ -1,11 +1,8 @@
 
 package ProgramFiles;
 
-import static ProgramFiles.UpdatePassword.currentCon;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 public class NetworkRequestDOA {
     
@@ -18,7 +15,13 @@ public class NetworkRequestDOA {
      "INSERT INTO NNREQUESTS (NNRequest_ID, Sender_ID, Target_Email,Requestor_Name) VALUES (NULL ,?, ?,?)";
      private static final String GET_REQUEST_USERNAME = 
      "select * from USERS WHERE User_Name=?";
-       
+     private static final String CREATE_MEMBER_USERNAME = 
+     "INSERT INTO MYNEWSNETWORK (MyNewsNetrwork_ID, User_ID, Member_ID, Member_Name) VALUES (NULL ,?, ?,?)";
+      private static final String DELETE_MEMBER_USERNAME = 
+     "DELETE FROM NNREQUESTS WHERE Sender_ID = ?";  
+     
+     
+     
      
      public static boolean reguestByEmail(String targetEmail, UserBean user) { 
 //preparing some objects for connection 
@@ -170,7 +173,58 @@ public class NetworkRequestDOA {
          
 // exception handling 
          
-         return true; }
-     
-    
+         return true; }  
+ 
+  
+  public static boolean acceptReguest(String requestorID,String requestorName, UserBean user){
+  
+      
+                
+         try (Connection connection = ConnectionManager.getConnection();
+              PreparedStatement statement = connection.prepareStatement(GET_REQUEST_USERNAME)) { 
+//connect to DB      
+             statement.setInt(1, Integer.parseInt(user.getUser_ID()));
+              statement.setInt(2, Integer.parseInt(requestorID));
+           
+             statement.setString(3, requestorName);
+            boolean more = statement.execute();
+             
+// if user does not exist set the isValid variable to false 
+             if (more){
+             
+             declineReguest(requestorID,user);
+             
+             }   
+                     }catch(Exception ex){}
+          
+  return true;           
+                  
+  }
+             
+//if user exists set the isValid variable to true 
+             
+        
+   
+   public static boolean declineReguest(String requestorID, UserBean user){
+  
+        try (Connection connection = ConnectionManager.getConnection();
+              PreparedStatement statement = connection.prepareStatement(DELETE_MEMBER_USERNAME)) { 
+//connect to DB 
+             
+            
+             
+             statement.setInt(1, Integer.parseInt(requestorID));
+         
+            boolean more = statement.execute();
+             
+            
+            System.out.println("*************** ran delete.. permission probelemthis is the exception :");
+// if user does not exist set the isValid variable to false 
+            
+             
+                     }catch(Exception ex){ System.out.println("*********this is the exception : " +ex);}
+          
+  return true;
+  } 
+  
 }

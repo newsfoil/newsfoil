@@ -1,7 +1,6 @@
 
  package ProgramFiles;
 
-import ProgramFiles.articles.ArticleBean;
  import java.sql.*; 
  
  public class UserDAO { 
@@ -11,6 +10,7 @@ import ProgramFiles.articles.ArticleBean;
      private static final String GET_ALL_MESSAGES = "select * from MESSAGES where To_ID=?";
      private static final String GET_ALL_REQUESTS = "select * from NNREQUESTS where Target_Email=?";
      private static final String GET_USER = "SELECT * from USERS where (User_Name=? OR User_Email=?) AND User_Password=?";
+ 
      public static UserBean login(UserBean bean) { 
 //preparing some objects for connection 
          Statement stmt = null; 
@@ -38,7 +38,7 @@ import ProgramFiles.articles.ArticleBean;
               bean.setUser_ID(rs.getString("User_ID")); 
               bean.setValid(true);
               profile(bean);
-              //currentCon.close();
+              System.out.println("this is user email: " +bean.getUser_Email() + " and " + rs.getString("User_Email"));
               NetworkRequest(bean);
               Message(bean);
              }
@@ -163,7 +163,7 @@ private static int Message(UserBean bean) throws SQLException{
 return 1;
     }
 
-private static int NetworkRequest(UserBean bean) throws SQLException{
+public static int NetworkRequest(UserBean bean) throws SQLException{
     
           
           try (Connection connection = ConnectionManager.getConnection();
@@ -176,10 +176,7 @@ private static int NetworkRequest(UserBean bean) throws SQLException{
             ResultSet resultSet = statement.executeQuery();
             System.out.println("***********Request is tried 4... = "+ bean.getUser_Email() );
                 
-            while (resultSet.next()) {
-                
-                
-               
+            while (resultSet.next()) { 
                 NetworkRequestBean NRBean = new NetworkRequestBean();
                 NRBean.setSender_ID(resultSet.getString("Sender_ID"));
                 NRBean.setRequestor_Name(resultSet.getString("Requestor_Name"));

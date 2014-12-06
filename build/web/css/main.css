@@ -98,7 +98,7 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 
 .accountSettingText2{
         
-    
+        width: 55%;
         float: left;
 	padding-left: 40px;
 

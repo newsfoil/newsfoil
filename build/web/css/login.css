@@ -78,6 +78,28 @@ input:invalid {
 	padding-bottom: 10px;
 	padding-left: 0;
 }
+.profile {
+	width: 100%;
+	float: left;
+	font-family: Times,"Times New Roman", serif;
+	text-align: left;
+        border-top-width: medium;
+	border-top-style: solid;
+	border-top-color: #333;
+	padding-top: 100px;
+	padding-right: 0;
+	padding-bottom: 10px;
+	padding-left: 0;
+}
+
+.profileText{
+    
+    border-width:thin;
+    border-style:solid;
+    border-color:#CCC;
+    
+}
+
 .sidebar2 {
 	float: right;   
 	width: 20%;

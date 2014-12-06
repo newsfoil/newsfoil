@@ -17,10 +17,10 @@ import="java.util.List" %>
     <script src="js/CollapsiblePanel.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/tinymce/tinymce.min.js"></script>
     <script type="text/javascript">
-tinymce.init({
-    selector: "textarea"
- });
-</script>
+        tinymce.init({
+        selector: "textarea"
+        });
+    </script>
 
 </head>
 

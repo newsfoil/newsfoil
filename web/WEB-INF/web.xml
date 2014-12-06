@@ -4,6 +4,15 @@
         <servlet-name>NFServlet</servlet-name>
         <servlet-class>ProgramFiles.NFServlet</servlet-class>
     </servlet>
+   <servlet>
+        <servlet-name>addMemberServlet</servlet-name>
+        <servlet-class>ProgramFiles.addMemberServlet</servlet-class>
+    </servlet> 
+    <servlet>
+        <servlet-name>NFLoginServlet</servlet-name>
+        <servlet-class>ProgramFiles.NFLoginServlet</servlet-class>
+    </servlet>
+    
     <servlet>
         <servlet-name>NewsNetworkRequestServlet</servlet-name>
         <servlet-class>Servlets.NewsNetworkRequestServlet</servlet-class>
@@ -16,11 +25,19 @@
         <servlet-name>ResetServlet</servlet-name>
         <servlet-class>ProgramFiles.ResetServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LogoutServlet2</servlet-name>
+        <servlet-class>ProgramFiles.LogoutServlet2</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NFServlet</servlet-name>
         <url-pattern>/NFServlet</url-pattern>
     </servlet-mapping>
      <servlet-mapping>
+        <servlet-name>NFLoginServlet</servlet-name>
+        <url-pattern>/NFLoginServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>NewsNetworkRequestServlet</servlet-name>
         <url-pattern>/NewsNetworkRequestServlet</url-pattern>
     </servlet-mapping>
@@ -31,6 +48,14 @@
     <servlet-mapping>
         <servlet-name>ResetServlet</servlet-name>
         <url-pattern>/ResetServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet2</servlet-name>
+        <url-pattern>/LogoutServlet2</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>addMemberServlet</servlet-name>
+        <url-pattern>/addMemberServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

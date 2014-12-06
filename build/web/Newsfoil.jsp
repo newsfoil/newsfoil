@@ -32,7 +32,7 @@
   		</div>
     
    		<div class="signin">
-         <form action="NFServlet" method = "post">             
+         <form action="NFLoginServlet" method = "post">             
             <input class="input" type="submit" value="Sign In"/>   
             <input type="hidden" name="targetpage" value="Login"/>
             <input class="input" type="password" name="password" placeholder="password"/>

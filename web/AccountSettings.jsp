@@ -48,7 +48,12 @@ import="java.util.List" %>
     }
     </script>
 
-    
+  <script type="text/javascript" src="js/tinymce/tinymce.min.js"></script>
+    <script type="text/javascript">
+        tinymce.init({
+        selector: "textarea"
+        });
+    </script>  
     
     
 </head>
@@ -185,6 +190,9 @@ import="java.util.List" %>
                        <hr>
                        </br>
                        <h2> Change Profile: </h2> </br>
+                       <form method="get" action="http://newsfoil.com/profiles/<%=currentSessionUser.getUser_ID()%>profile.html" target="_Blank">
+                        <button type="submit">View Profile</button>
+                    </form>
                     <form id= "account" name="account" action="ProfileServlet" method = "post">
                         <input type="submit" value="Update Profile" />
                         
@@ -192,11 +200,15 @@ import="java.util.List" %>
                         
                         <br/><br/>
                         <p></p>
+
+                        
                         
                         <label class ="lbl">Photo: <input type="button" value="Download"/>
                         </label> 
                         (This element is not working yet)
                         <br/><br/>
+                        
+                         
                         
                         
                         <label class ="lbl">Username: <input type="text" name="myUsername" id="accountSettingInput" value="<%= currentSessionUser.getUser_Name()%>" />
@@ -256,23 +268,14 @@ import="java.util.List" %>
                         
                         <br/><br/>
                         <p></p>    
-                       <div class ="articleText">
-                        <label>Bio: <textarea name="myBio" id="myBio" rows="4" cols="50"><%= currentSessionUser.getUser_Bio() %></textarea>
-                        </label>
+                       
+                        Bio: 
                         
-                        <br/><br/>
-                        <br/><br/>
-                        
-                        <br/><br/>
+                        <textarea name="myBio" id="myBio" ><%= currentSessionUser.getUser_Bio() %></textarea>                         
                         <p></p>
-                       </div>
+                       
+                        Education: <textarea name="myEducation" id="myEducation"><%= currentSessionUser.getUser_Education() %></textarea>
                         
-                        <label class ="lbl">Education: <textarea name="myEducation" id="myEducation" rows="4" cols="50" ><%= currentSessionUser.getUser_Education() %></textarea>
-                        </label>
-                        
-                        <br/><br/>
-                        <br/><br/>
-                        <br/><br/>
                         <p></p>
 
                         <span class="emsg" id="errormsg">
