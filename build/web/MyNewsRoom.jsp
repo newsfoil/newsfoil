@@ -162,7 +162,7 @@ import="java.util.List" %>
                 <li><a href="ProfilePage">Profile</a>&nbsp;</li>
                 <li><a href="AccountSettings.jsp">Settings</a> &nbsp;</li>
                 <li><a href="About.jsp">About</a> &nbsp;</li>
-                <li><a href="ArticleSample.jsp">Sample Create Article</a> &nbsp;</li>
+                
             </ul>
         </div>
 

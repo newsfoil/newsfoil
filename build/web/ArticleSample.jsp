@@ -6,23 +6,26 @@ import="ProgramFiles.articles.ArticleBean"
 import="ProgramFiles.NetworkRequestBean" 
 import="java.util.List" %> 
 
-           
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>My News Room</title>
-    <link href="css/main.css" rel="stylesheet" type="text/css" />
-    <link href="css/sprycss.css" rel="stylesheet" type="text/css" />
-    <script src="js/CollapsiblePanel.js" type="text/javascript"></script>
-    <script type="text/javascript" src="js/tinymce/tinymce.min.js"></script>
-    <script type="text/javascript">
-        tinymce.init({
-        selector: "textarea"
-        });
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Create Article</title>
+        <link href="../css/main.css" rel="stylesheet" type="text/css" />
+        <link href= "../css/sprycss.css" rel="stylesheet" type="text/css" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+        <script src="../js/CollapsiblePanel.js" type="text/javascript"></script>
+        <script src="../js/jquery.validate.js" type="text/javascript"></script>
+        <script type="text/javascript" src="../js/tinymce/tinymce.min.js"></script>
+        <script type="text/javascript">
+              tinymce.init({
+          selector: "textarea"
+              });
     </script>
 
-</head>
+    </head>
 
 <body>
 
@@ -139,11 +142,41 @@ import="java.util.List" %>
                 <!-- 
             * <div class="content">
             *
-            *
+            *<div class="articleForm">
             start content -->
+                
+                 
+        <div class="content2">  
+                    
+                     <h1 class="articleFormHeading">Create New Article</h1>
+                <br>
+                    <form id= "articleSubmitForm" name="articleSubmitForm" action="CreateArticle" method = "post"> 
+                         <input type="submit" value="Create Article"/>
+                        <br/><br/>
+                        <h4>Article Title:</h4>
+                         <input type="text" style="width: 400px" name="articleTitle" required/> 
+                        <br/><br/>
+                        <h4>Article Description:</h4>
+                          <input type="text" style="width: 800px" name="articleDescription" required/> 
+                        <br/><br/>
+                        <h4>Article:</h4>
+                        <textarea rows="40"  name="articleContent" required></textarea>
+                        <br/><br/>
+                        <br/><br/>
+                        <div class="articleButtonSection">
+                           
+                        </div>
+                    </form> 
+            </div>        
+                
+                
+                
+                
+                
+              <!--   
+                
                 <div class="content2">  
-                  
-                <h1 class="articleFormHeading">Create New Article</h1>
+                 <h1 class="articleFormHeading">Create New Article</h1>
                 <br>
                     <form id= "articleSubmitForm" name="articleSubmitForm" action="CreateArticle" method = "post"> 
                          <input type="submit" value="Create Article"/>
@@ -162,9 +195,10 @@ import="java.util.List" %>
                            
                         </div>
                     </form> 
-            
+              
+               
 	</div>
-          <!-- end .content -->
+          end .content -->
             <!-- 
             *
             *
