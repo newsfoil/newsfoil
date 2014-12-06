@@ -1,5 +1,6 @@
 package ProgramFiles;
 
+import static ProgramFiles.UserDAO.NetworkRequest;
     import ProgramFiles.articles.ArticleBean;
     import ProgramFiles.articles.ArticlesDAO;
     import java.io.IOException;  
@@ -23,18 +24,16 @@ package ProgramFiles;
                
                 if (user.isValid()) {
                 
-                 HttpSession session=request.getSession(); 
                  
-                 if (session.isNew()){
-                 session = request.getSession(true);
-                 
-                 }else {
-                    session.setAttribute("currentSessionUser", null);
-                    session.setAttribute("articleList", null);  }  
                     
-                    
-                session = request.getSession(true);
+                HttpSession session = request.getSession(true);
+                
                 UserDAO.NetworkRequest(user);
+                UserDAO.profile(user);
+                UserDAO.NetworkRequest(user);
+                UserDAO.getNetworkUsers(user);
+                
+                
                 session.setAttribute("currentSessionUser", user);
                 List<ArticleBean> articleList = ArticlesDAO.getAllArticles();
                 response.setContentType("text/html");

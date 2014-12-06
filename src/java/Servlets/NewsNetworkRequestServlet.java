@@ -35,16 +35,16 @@ public class NewsNetworkRequestServlet extends HttpServlet {
             throws ServletException, IOException {
          //request.getParameter("TargetEmail")
         response.setContentType("text/html;charset=UTF-8");
-        
  
        try {
 
            HttpSession session = request.getSession();
            UserBean user = (UserBean) session.getAttribute("currentSessionUser");
-
            String targetEmail = request.getParameter("TargetEmail").trim();
            String lkupMember = request.getParameter("lookupmember").trim();
 
+           System.out.println("****** try user here..." +user.getUser_First_Name() +user.getUser_Email());
+           
            if (!targetEmail.equals("null")) {
                NetworkRequestDOA.reguestByEmail(targetEmail, user);
            } else

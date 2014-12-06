@@ -7,10 +7,7 @@ package ProgramFiles;
 
 import java.util.*;
 
-/**
- *
- * @author dentm_000
- */
+
 public class UserBean {
     
     
@@ -37,13 +34,23 @@ public class UserBean {
      private String User_Political_Party;
      private final ArrayList<NetworkRequestBean> NetworkRequests = new ArrayList();
      private final ArrayList<MessageBean> Messages = new ArrayList();
+     private final ArrayList<NetworkMemberBean> Members = new ArrayList();
 
+     public List<NetworkMemberBean> getMembers() {
+        return Members;
+    }
+
+    public void setMembers(NetworkMemberBean Member) {
+        this.Members.add(Member);
+    }
+     
+     
     public List<MessageBean> getMessages() {
         return Messages;
     }
 
-    public void setMessages(MessageBean Messages) {
-        this.Messages.add(Messages);
+    public void setMessages(MessageBean Message) {
+        this.Messages.add(Message);
     }
      
     public List<NetworkRequestBean> getNetworkRequests() {

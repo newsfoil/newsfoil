@@ -10,6 +10,9 @@ package ProgramFiles;
  * @author dentm_000
  */
 public class NetworkMemberBean {
+
+    public NetworkMemberBean() {
+    }
     
     
    int MyNewsNetrwork_ID;

@@ -11,6 +11,9 @@
      private static final String GET_ALL_REQUESTS = "select * from NNREQUESTS where Target_Email=?";
      private static final String GET_USER = "SELECT * from USERS where (User_Name=? OR User_Email=?) AND User_Password=?";
     private static final String GET_NETWORK_MEMBERS = "SELECT * from MYNEWSNETWORK where User_ID =?";
+    private static final String GET_PROFILE = "SELECT * from PROFILES where User_ID =?";
+    private static final String CREATE_PROFILE = "INSERT INTO PROFILES (Profile_ID, User_ID) Values (NULL, ?)";
+    
       
 public static UserBean login(UserBean bean) { 
          
@@ -36,9 +39,7 @@ public static UserBean login(UserBean bean) {
               bean.setUser_Name(resultSet.getString("User_name"));
               bean.setUser_ID(resultSet.getString("User_ID")); 
               bean.setValid(true);
-              profile(bean);
-              NetworkRequest(bean);
-              Message(bean);
+              
              }
          }
          catch (Exception ex) 
@@ -48,48 +49,92 @@ public static UserBean login(UserBean bean) {
          
       
          return bean; }
-   
-private static int profile(UserBean bean){
-    
- Statement stmt = null; 
-         String user_ID = bean.getUser_ID(); 
-         String searchQuery = "select * from PROFILES where User_id=" + user_ID; 
 
-         try { 
-//connect to DB  
-             stmt=currentCon.createStatement();
-             rs = stmt.executeQuery(searchQuery);
-             boolean more = rs.next(); 
-// if user does not exist set the isValid variable to false 
-             if (more) 
-             {
+public static int createProfile(int userID){
+
+     try (Connection connection = ConnectionManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(CREATE_PROFILE)) {
+            
+           statement.setInt(1, userID);
               
-              bean.setUser_First_Name(rs.getString("User_First_Name")); 
-              bean.setUser_Middle_Name(rs.getString("User_Middle_Name"));
-              bean.setUser_Last_Name(rs.getString("User_Last_Name"));
-              bean.setUser_City(rs.getString("User_City"));
-              bean.setUser_State(rs.getString("User_State"));
-              bean.setUser_Zip(rs.getString("User_Zip"));
-              bean.setUser_Tag_Line(rs.getString("User_Tag_Line"));
-              bean.setUser_Political_Party(rs.getString("User_Political_Party"));
-              bean.setUser_Bio (rs.getString("User_Bio"));
-              bean.setUser_Education (rs.getString("User_Education"));
-              bean.setUser_Photo (rs.getString("User_Photo"));
+            boolean more = statement.execute();
+            
+     }
+        catch (Exception ex) 
+         {   
+         }
+
+return 1;
+}
+
+public static int profile(UserBean bean){
+    
+        //Statement stmt = null; 
+        // String user_ID = bean.getUser_ID(); 
+        // String searchQuery = "select * from PROFILES where User_id=" + user_ID; 
+
+          try (Connection connection = ConnectionManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(GET_PROFILE)) {
+            
+           statement.setInt(1, Integer.parseInt(bean.getUser_ID()));
               
-             } else if (!more)
-             {
-             String query ="INSERT INTO PROFILES (`Profile_ID`, `User_ID`) VALUES ( NULL,'" + user_ID +"')";
+            ResultSet resultSet = statement.executeQuery();
+            
+         boolean more = resultSet.next(); 
         
-             currentCon = ConnectionManager.getConnection();   
-             stmt=currentCon.createStatement();
-             boolean T =stmt.execute(query);    
-            currentCon.close();
-      
+             if (!more) {  
+             
+             } 
+             
+//if user exists set the isValid variable to true 
+             else if (more) 
+             {  
+                 
+                 bean.setUser_First_Name(resultSet.getString("User_First_Name")); 
+              bean.setUser_Middle_Name(resultSet.getString("User_Middle_Name"));
+              bean.setUser_Last_Name(resultSet.getString("User_Last_Name"));
+              bean.setUser_City(resultSet.getString("User_City"));
+              bean.setUser_State(resultSet.getString("User_State"));
+              bean.setUser_Zip(resultSet.getString("User_Zip"));
+              bean.setUser_Tag_Line(resultSet.getString("User_Tag_Line"));
+              bean.setUser_Political_Party(resultSet.getString("User_Political_Party"));
+              bean.setUser_Bio (resultSet.getString("User_Bio"));
+              bean.setUser_Education (resultSet.getString("User_Education"));
+              bean.setUser_Photo (resultSet.getString("User_Photo"));
+         
+             } else if (!more) {
+             createProfile(Integer.parseInt(bean.getUser_ID()));
              }
-             try { rs.close(); } 
-             catch (Exception e) {}
-             try { stmt.close(); } 
-                 catch (Exception e) {} 
+         
+         
+         
+         
+         
+       //  try { 
+//connect to DB  
+          //   stmt=currentCon.createStatement();
+           //  rs = stmt.executeQuery(searchQuery);
+           //  boolean more = rs.next(); 
+// if user does not exist set the isValid variable to false 
+           //  if (more) 
+           //  {
+              
+              
+              
+           //  } else if (!more)
+           //  {
+           //  String query ="INSERT INTO PROFILES (`Profile_ID`, `User_ID`) VALUES ( NULL,'" + user_ID +"')";
+        
+           //  currentCon = ConnectionManager.getConnection();   
+           //  stmt=currentCon.createStatement();
+           //  boolean T =stmt.execute(query);    
+           // currentCon.close();
+      
+            // }
+           //  try { rs.close(); } 
+           //  catch (Exception e) {}
+           //  try { stmt.close(); } 
+           //      catch (Exception e) {} 
                  
          }
          catch (Exception ex) 
@@ -105,7 +150,7 @@ private static int profile(UserBean bean){
 return 1;
     }
 
-private static int Message(UserBean bean) throws SQLException{
+public static int Message(UserBean bean) throws SQLException{
    
          
           try (Connection connection = ConnectionManager.getConnection();
@@ -184,9 +229,8 @@ public static int NetworkRequest(UserBean bean) throws SQLException{
 return 1;
     }
 
-private static int getNetworkUserse(UserBean bean) throws SQLException{
+public static int getNetworkUsers(UserBean bean) throws SQLException{
    
-         
           try (Connection connection = ConnectionManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(GET_NETWORK_MEMBERS)) {
             
@@ -194,26 +238,22 @@ private static int getNetworkUserse(UserBean bean) throws SQLException{
             
             ResultSet resultSet = statement.executeQuery();
             
-            
             while (resultSet.next()) {
                 
-                MessageBean messageBean = new MessageBean();    
-                messageBean.setFrom_User_id(resultSet.getString("FROM_ID"));
-                messageBean.setUser_Subject(resultSet.getString("Subject"));
-                messageBean.setUser_Message(resultSet.getString("Message"));
-                
-                bean.setMessages(messageBean);
+                NetworkMemberBean memberBean = new NetworkMemberBean();    
+                memberBean.setMember_ID(resultSet.getInt("Member_ID"));
+                memberBean.setUser_ID(resultSet.getInt("User_ID"));
+                memberBean.setMember_Name(resultSet.getString("Member_Name"));
+                bean.setMembers(memberBean);
+               
             }
-            resultSet.close();
+            
           }
          catch (Exception ex) 
          {   
          }
-              
-// exception handling 
-         finally { 
-              
-             } 
+               
+        
             
 return 1;
     }

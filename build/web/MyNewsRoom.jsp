@@ -4,6 +4,7 @@
  pageEncoding="windows-1256" 
 import="ProgramFiles.articles.ArticleBean" 
 import="ProgramFiles.NetworkRequestBean" 
+import="ProgramFiles.NetworkMemberBean" 
 import="java.util.List" %> 
 <% List<ArticleBean> articleList = (List<ArticleBean>)session.getAttribute("articleList"); %>
 
@@ -67,6 +68,38 @@ import="java.util.List" %>
                 <div class="CollapsiblePanelContent">
                     <h4>Network Members: </h4>
                     This will contain a list of all members in network
+                    
+                   <%
+                      try {
+                          List<NetworkMemberBean> all_Request = currentSessionUser.getMembers();
+
+                          for (int x = 0; x < all_Request.size(); x++) {
+                              NetworkMemberBean RequestItem = all_Request.get(x);
+                              out.println("<div class = \"requestdiv\">");
+
+                              out.println("<a href=\"http://newsfoil.com/profiles/" + currentSessionUser.getUser_ID()
+                                      + "profile.html\" target=\"_new\">" + RequestItem.getMember_Name() + " </a> ");
+
+                              RequestItem.getMember_ID();
+                              out.println("<form action=\"addMemberServlet\" id=\"lkup\" method=\"post\"><br/>"
+                                      + "<input type=\"hidden\" name=\"requestor\" value=\"" + RequestItem.getMember_ID() + "\"/>"
+                                      + "<input type=\"hidden\" name=\"requestorName\" value=\"" + RequestItem.getMember_Name() + "\"/>"
+                                      + "<input type=\"submit\" name=\"requestType\" id=\"accountSettingInput\" value=\"Accept\"/>"
+                                      + "<input type=\"submit\" name=\"requestType\" id=\"accountSettingInput\" value=\"Decline\"/>"
+                                      + "</form>");
+                              out.println("</div>");
+
+                          }
+                      } catch (Exception ex) {
+                      }
+
+
+                  %> 
+                    
+                    
+                    
+                    
+                    
                 </div>
             </div>
 
@@ -82,32 +115,29 @@ import="java.util.List" %>
                   </form>
                   <br/>
                   <h3>These friends want you to join their News Network: </h3>
-                                    <%
+                  <%
                       try {
                           List<NetworkRequestBean> all_Request = currentSessionUser.getNetworkRequests();
 
                           for (int x = 0; x < all_Request.size(); x++) {
                               NetworkRequestBean RequestItem = all_Request.get(x);
                               out.println("<div class = \"requestdiv\">");
-                              
-                              
-                              out.println("<a href=\"http://newsfoil.com/profiles/" + currentSessionUser.getUser_ID()+ 
-   "profile.html\" target=\"_new\">" + RequestItem.getRequestor_Name() +" </a> ");
-                              
-        
+
+                              out.println("<a href=\"http://newsfoil.com/profiles/" + currentSessionUser.getUser_ID()
+                                      + "profile.html\" target=\"_new\">" + RequestItem.getRequestor_Name() + " </a> ");
+
                               RequestItem.getSender_ID();
                               out.println("<form action=\"addMemberServlet\" id=\"lkup\" method=\"post\"><br/>"
-                                      + "<input type=\"hidden\" name=\"requestor\" value=\""+ RequestItem.getSender_ID() +"\"/>"
-                                       + "<input type=\"hidden\" name=\"requestorName\" value=\""+ RequestItem.getRequestor_Name() +"\"/>"
-                                      + "<input type=\"submit\" name=\"requestType\" id=\"accountSettingInput\" value=\"Accept\"/>"
-                                      + "<input type=\"submit\" name=\"requestType\" id=\"accountSettingInput\" value=\"Decline\"/>"
+                                      + "<input type=\"hidden\" name=\"requestor\" value=\"" + RequestItem.getSender_ID() + "\"/>"
+                                      + "<input type=\"hidden\" name=\"requestorName\" value=\"" + RequestItem.getRequestor_Name() + "\"/>"
+                                      + "<input type=\"submit\" name=\"requestType\" id=\"accountSettingInput\" value=\"Send Message\"/>"
                                       + "</form>");
                               out.println("</div>");
-                         
+
                           }
                       } catch (Exception ex) {
                       }
-                     
+
 
                   %>
 
