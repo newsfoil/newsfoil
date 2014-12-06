@@ -23,7 +23,7 @@ public class NetworkRequestDOA {
      
      
      
-     public static boolean reguestByEmail(String targetEmail, UserBean user) { 
+    public static boolean reguestByEmail(String targetEmail, UserBean user) { 
 //preparing some objects for connection 
       
                 
@@ -123,7 +123,7 @@ public class NetworkRequestDOA {
          
          return true; }
  
-  public static boolean reguestByUser(String lkupMember, UserBean user) { 
+    public static boolean reguestByUser(String lkupMember, UserBean user) { 
 //preparing some objects for connection 
       
                 
@@ -176,7 +176,7 @@ public class NetworkRequestDOA {
          return true; }  
  
   
-  public static boolean acceptReguest(String requestorID,String requestorName, UserBean user){
+    public static boolean acceptReguest(String requestorID,String requestorName, UserBean user){
   
       
                 
@@ -204,21 +204,19 @@ public class NetworkRequestDOA {
 //if user exists set the isValid variable to true 
              
         
-   
    public static boolean declineReguest(String requestorID, UserBean user){
   
         try (Connection connection = ConnectionManager.getConnection();
               PreparedStatement statement = connection.prepareStatement(DELETE_MEMBER_USERNAME)) { 
 //connect to DB 
-             
-            
-             
              statement.setInt(1, Integer.parseInt(requestorID));
          
             boolean more = statement.execute();
-             
             
-            System.out.println("*************** ran delete.. permission probelemthis is the exception :");
+           if (more){
+           user.setNetworkRequests(requestorID);
+           
+           }
 // if user does not exist set the isValid variable to false 
             
              

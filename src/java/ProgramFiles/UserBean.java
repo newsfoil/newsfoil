@@ -53,7 +53,16 @@ public class UserBean {
     public void setNetworkRequests(NetworkRequestBean Request) {
         this.NetworkRequests.add(Request);
     }
-     
+    public void setNetworkRequests(String requestID) {
+        
+        for (int i = 0; i< NetworkRequests.size(); i++){
+            if (requestID.equals(NetworkRequests.get(i).getSender_ID()))
+                NetworkRequests.remove(i);
+    }
+       
+        
+    } 
+    
     public String getMessage() {
         if (message == null)
             message ="";
@@ -65,6 +74,8 @@ public class UserBean {
     }
 
     public String getProfile_ID() {
+         if (Profile_ID == null)
+            Profile_ID ="";
         return Profile_ID;
     }
 
@@ -73,6 +84,8 @@ public class UserBean {
     }
 
     public String getUser_Photo() {
+        if (User_Photo == null)
+            User_Photo ="";
         return User_Photo;
     }
 
@@ -81,6 +94,8 @@ public class UserBean {
     }
 
     public String getUser_First_Name() {
+        if (User_First_Name == null)
+            User_First_Name ="";
         return User_First_Name;
     }
 
@@ -89,6 +104,8 @@ public class UserBean {
     }
 
     public String getUser_Middle_Name() {
+        if (User_Middle_Name ==null)
+            User_Middle_Name ="";
         return User_Middle_Name;
     }
 
@@ -97,6 +114,8 @@ public class UserBean {
     }
 
     public String getUser_Last_Name() {
+        if (User_Last_Name ==null)
+            User_Last_Name ="";
         return User_Last_Name;
     }
 
@@ -105,6 +124,8 @@ public class UserBean {
     }
 
     public String getUser_City() {
+        if (User_City ==null)
+            User_City="";
         return User_City;
     }
 
@@ -113,6 +134,8 @@ public class UserBean {
     }
 
     public String getUser_State() {
+        if(User_State ==null)
+            User_State ="";
         return User_State;
     }
 
@@ -121,6 +144,8 @@ public class UserBean {
     }
 
     public String getUser_Zip() {
+        if(User_Zip ==null)
+            User_Zip ="";
         return User_Zip;
     }
 
@@ -129,6 +154,8 @@ public class UserBean {
     }
 
     public String getUser_Bio() {
+        if (User_Bio ==null)
+            User_Bio ="";
         return User_Bio;
     }
 
@@ -137,6 +164,8 @@ public class UserBean {
     }
 
     public String getUser_Education() {
+        if (User_Education == null)
+            User_Education ="";
         return User_Education;
     }
 
@@ -145,6 +174,8 @@ public class UserBean {
     }
 
     public String getUser_Tag_Line() {
+        if (User_Tag_Line==null)
+            User_Tag_Line ="";
         return User_Tag_Line;
     }
 
@@ -153,6 +184,8 @@ public class UserBean {
     }
 
     public String getUser_Political_Party() {
+        if(User_Political_Party == null)
+            User_Political_Party ="";
         return User_Political_Party;
     }
 
@@ -161,7 +194,6 @@ public class UserBean {
     }
         
     
-
     public String getUser_Login() {
         return User_Login;
     }
