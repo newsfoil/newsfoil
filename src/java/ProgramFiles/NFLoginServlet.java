@@ -28,7 +28,6 @@ import static ProgramFiles.UserDAO.NetworkRequest;
                     
                 HttpSession session = request.getSession(true);
                 
-                UserDAO.NetworkRequest(user);
                 UserDAO.profile(user);
                 UserDAO.NetworkRequest(user);
                 UserDAO.getNetworkUsers(user);

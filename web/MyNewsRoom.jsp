@@ -64,7 +64,8 @@ import="java.util.List" %>
 
             </div>     
             <div id="CollapsiblePanel1" class="CollapsiblePanel">
-                <div class="CollapsiblePanelTab" tabindex="1"> &gt; &nbsp; Network Group </div>
+                <div class="CollapsiblePanelTab" tabindex="1"> &gt; &nbsp; Network Group <span style="color:red; padding-left: 30px">
+                      <%out.println(currentSessionUser.getNumberOfMembers()); %></span> </div>
                 <div class="CollapsiblePanelContent">
                     <h4>Network Members: </h4>
                     This will contain a list of all members in network
@@ -84,8 +85,9 @@ import="java.util.List" %>
                               out.println("<form action=\"addMemberServlet\" id=\"lkup\" method=\"post\"><br/>"
                                       + "<input type=\"hidden\" name=\"requestor\" value=\"" + RequestItem.getMember_ID() + "\"/>"
                                       + "<input type=\"hidden\" name=\"requestorName\" value=\"" + RequestItem.getMember_Name() + "\"/>"
-                                      + "<input type=\"submit\" name=\"requestType\" id=\"accountSettingInput\" value=\"Accept\"/>"
-                                      + "<input type=\"submit\" name=\"requestType\" id=\"accountSettingInput\" value=\"Decline\"/>"
+                                      + "<input type=\"submit\" name=\"requestType\" id=\"accountSettingInput\" value=\"Send Message\"/>"
+                                      
+                                   
                                       + "</form>");
                               out.println("</div>");
 
@@ -105,7 +107,8 @@ import="java.util.List" %>
 
             
           <div id="CollapsiblePanel2" class="CollapsiblePanel">
-              <div class="CollapsiblePanelTab" tabindex="2"> &gt; &nbsp; Network Requests </div>
+              <div class="CollapsiblePanelTab" tabindex="2"> &gt; &nbsp; Network Requests  <span style="color:red; padding-left: 20px">
+                      <%out.println(currentSessionUser.getNumberOfRequest()); %></span>   </div>
               <div class="CollapsiblePanelContent">
                   <h3>Send a request so friends can join your News Network: </h3>
                   <form id="lkup" action="NewsNetworkRequestServlet" method="post" >
@@ -130,7 +133,8 @@ import="java.util.List" %>
                               out.println("<form action=\"addMemberServlet\" id=\"lkup\" method=\"post\"><br/>"
                                       + "<input type=\"hidden\" name=\"requestor\" value=\"" + RequestItem.getSender_ID() + "\"/>"
                                       + "<input type=\"hidden\" name=\"requestorName\" value=\"" + RequestItem.getRequestor_Name() + "\"/>"
-                                      + "<input type=\"submit\" name=\"requestType\" id=\"accountSettingInput\" value=\"Send Message\"/>"
+                                      + "<input type=\"submit\" name=\"requestType\" id=\"accountSettingInput\" value=\"Accept\"/>"
+                                      + "<input type=\"submit\" name=\"requestType\" id=\"accountSettingInput\" value=\"Decline\"/>"
                                       + "</form>");
                               out.println("</div>");
 
@@ -157,7 +161,8 @@ import="java.util.List" %>
             </div>
 
             <div id="CollapsiblePanel4" class="CollapsiblePanel">
-                <div class="CollapsiblePanelTab" tabindex="4"> &gt; &nbsp; Messages </div>
+                <div class="CollapsiblePanelTab" tabindex="4"> &gt; &nbsp; Messages <span style="color:red; padding-left: 40px">
+                      <%out.println(currentSessionUser.getNumberOfMessages()); %></span> </div>
                 <div class="CollapsiblePanelContent">
                     <form action="sendmessage" id="lkup">
                         <input type="text" id="accountSettingInput" name="lookupmember">

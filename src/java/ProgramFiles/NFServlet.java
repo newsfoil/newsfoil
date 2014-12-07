@@ -39,7 +39,10 @@ public class NFServlet extends HttpServlet {
             }
             if (user.isValid()) {
                 session = request.getSession(true);
+                user.setNetworkRequests("Delete");
                 UserDAO.NetworkRequest(user);
+                user.setMembers("Delete");
+                UserDAO.getNetworkUsers(user);
                 session.setAttribute("currentSessionUser", user);
                 List<ArticleBean> articleList = ArticlesDAO.getAllArticles();
                 response.setContentType("text/html");

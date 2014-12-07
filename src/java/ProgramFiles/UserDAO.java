@@ -12,7 +12,7 @@
      private static final String GET_USER = "SELECT * from USERS where (User_Name=? OR User_Email=?) AND User_Password=?";
     private static final String GET_NETWORK_MEMBERS = "SELECT * from MYNEWSNETWORK where User_ID =?";
     private static final String GET_PROFILE = "SELECT * from PROFILES where User_ID =?";
-    private static final String CREATE_PROFILE = "INSERT INTO PROFILES (Profile_ID, User_ID) Values (NULL, ?)";
+    private static final String CREATE_PROFILE = "INSERT INTO newsfoil.PROFILES (Profile_ID, User_ID, User_First_Name, User_Middle_Name, User_Last_Name, User_City, User_State, User_Zip, User_Tag_Line, User_Political_Party, User_Bio, User_Education, User_Photo) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     
       
 public static UserBean login(UserBean bean) { 
@@ -44,7 +44,7 @@ public static UserBean login(UserBean bean) {
          }
          catch (Exception ex) 
          { 
-             System.out.println("Log In failed: An Exception has occurred! " + ex);
+             
          }
          
       
@@ -56,12 +56,23 @@ public static int createProfile(int userID){
              PreparedStatement statement = connection.prepareStatement(CREATE_PROFILE)) {
             
            statement.setInt(1, userID);
+           statement.setString(2, " ");
+           statement.setString(3, " ");
+           statement.setString(4, " ");
+           statement.setString(5, " ");
+           statement.setString(6, " ");
+           statement.setString(7, " ");
+           statement.setString(8, " ");
+           statement.setString(9, " ");
+           statement.setString(10, " ");
+           statement.setString(11, " ");
+           statement.setString(12, " ");
               
             boolean more = statement.execute();
             
      }
         catch (Exception ex) 
-         {   
+         {  
          }
 
 return 1;
@@ -69,28 +80,24 @@ return 1;
 
 public static int profile(UserBean bean){
     
-        //Statement stmt = null; 
-        // String user_ID = bean.getUser_ID(); 
-        // String searchQuery = "select * from PROFILES where User_id=" + user_ID; 
-
+        
           try (Connection connection = ConnectionManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(GET_PROFILE)) {
             
            statement.setInt(1, Integer.parseInt(bean.getUser_ID()));
+          
+         
               
             ResultSet resultSet = statement.executeQuery();
             
          boolean more = resultSet.next(); 
         
-             if (!more) {  
-             
-             } 
-             
-//if user exists set the isValid variable to true 
-             else if (more) 
+             System.out.println("*************************** ran query... more is" + more);
+            
+             if (more) 
              {  
                  
-                 bean.setUser_First_Name(resultSet.getString("User_First_Name")); 
+              bean.setUser_First_Name(resultSet.getString("User_First_Name")); 
               bean.setUser_Middle_Name(resultSet.getString("User_Middle_Name"));
               bean.setUser_Last_Name(resultSet.getString("User_Last_Name"));
               bean.setUser_City(resultSet.getString("User_City"));
@@ -102,43 +109,15 @@ public static int profile(UserBean bean){
               bean.setUser_Education (resultSet.getString("User_Education"));
               bean.setUser_Photo (resultSet.getString("User_Photo"));
          
-             } else if (!more) {
+             } else {
              createProfile(Integer.parseInt(bean.getUser_ID()));
              }
-         
-         
-         
-         
-         
-       //  try { 
-//connect to DB  
-          //   stmt=currentCon.createStatement();
-           //  rs = stmt.executeQuery(searchQuery);
-           //  boolean more = rs.next(); 
-// if user does not exist set the isValid variable to false 
-           //  if (more) 
-           //  {
-              
-              
-              
-           //  } else if (!more)
-           //  {
-           //  String query ="INSERT INTO PROFILES (`Profile_ID`, `User_ID`) VALUES ( NULL,'" + user_ID +"')";
-        
-           //  currentCon = ConnectionManager.getConnection();   
-           //  stmt=currentCon.createStatement();
-           //  boolean T =stmt.execute(query);    
-           // currentCon.close();
       
-            // }
-           //  try { rs.close(); } 
-           //  catch (Exception e) {}
-           //  try { stmt.close(); } 
-           //      catch (Exception e) {} 
-                 
+    
          }
          catch (Exception ex) 
-         {   
+         {  
+             
          }
               
 // exception handling 

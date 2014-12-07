@@ -174,7 +174,7 @@ public class NetworkRequestDOA {
       
                 
          try (Connection connection = ConnectionManager.getConnection();
-              PreparedStatement statement = connection.prepareStatement(GET_REQUEST_USERNAME)) { 
+              PreparedStatement statement = connection.prepareStatement(CREATE_MEMBER_USERNAME)) { 
 //connect to DB      
              statement.setInt(1, Integer.parseInt(user.getUser_ID()));
              statement.setInt(2, Integer.parseInt(requestorID));
@@ -187,12 +187,12 @@ public class NetworkRequestDOA {
             more = statement.execute();
              
 // if user does not exist set the isValid variable to false 
-             if (more){
+             
              
              declineReguest(requestorID,user);
              
-             }   
-                     }catch(Exception ex){}
+                
+                     }catch(Exception ex){  System.out.println("************** we don't have sucess !!!!" + ex);}
           
   return true;           
                   

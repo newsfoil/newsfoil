@@ -35,6 +35,22 @@ public class UserBean {
      private final ArrayList<NetworkRequestBean> NetworkRequests = new ArrayList();
      private final ArrayList<MessageBean> Messages = new ArrayList();
      private final ArrayList<NetworkMemberBean> Members = new ArrayList();
+     int numberOfRequest;
+     int numberOfMessages;
+     int numberOfMembers;
+
+    public int getNumberOfRequest() {
+        return NetworkRequests.size();
+    }
+
+    public int getNumberOfMessages() {
+        return Messages.size();
+    }
+
+    public int getNumberOfMembers() {
+        return Members.size();
+    }
+     
 
      public List<NetworkMemberBean> getMembers() {
         return Members;
@@ -43,7 +59,11 @@ public class UserBean {
     public void setMembers(NetworkMemberBean Member) {
         this.Members.add(Member);
     }
-     
+    public void setMembers(String request) {
+        if (request.equals("Delete"))
+        this.Members.clear();
+    } 
+    
      
     public List<MessageBean> getMessages() {
         return Messages;
@@ -60,10 +80,14 @@ public class UserBean {
     public void setNetworkRequests(NetworkRequestBean Request) {
         this.NetworkRequests.add(Request);
     }
-    public void setNetworkRequests(String requestID) {
+    public void setNetworkRequests(String request) {
+        if (request.equals("Delete")) 
+        this.NetworkRequests.clear();
+    }
+    public void setNetworkRequests(int requestID) {
         
         for (int i = 0; i< NetworkRequests.size(); i++){
-            if (requestID.equals(NetworkRequests.get(i).getSender_ID()))
+            if (requestID  == Integer.parseInt(NetworkRequests.get(i).getSender_ID()))
                 NetworkRequests.remove(i);
     }
        
