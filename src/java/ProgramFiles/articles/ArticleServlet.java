@@ -30,12 +30,8 @@ public class ArticleServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        UserBean user = (UserBean)session.getAttribute("currentSessionUser");
         String articleId = request.getParameter("id");
-        if(user == null) {
-            response.sendRedirect("LoginPageFail.jsp");
-            return;
-        } else if(articleId == null) {
+        if(articleId == null) {
             response.setContentType("text/html");
             response.sendRedirect("NFServlet");
         } else {
