@@ -19,9 +19,30 @@ public class NetworkRequestDOA {
      "INSERT INTO MYNEWSNETWORK (MyNewsNetrwork_ID, User_ID, Member_ID, Member_Name) VALUES (NULL ,?, ?,?)";
       private static final String DELETE_MEMBER_USERNAME = 
      "DELETE FROM NNREQUESTS WHERE Sender_ID = ?";  
+     private static final String CREATE_MESSAGE = "INSERT INTO MESSAGE (Message_ID, To_ID, From_ID, Subject, Message) VALUES (NULL,?,?,?,?)";
      
-     
-     
+  public static boolean createMessage(UserBean user, SentMessageBean message ){
+    
+      
+      try (Connection connection = ConnectionManager.getConnection();
+               PreparedStatement statement = connection.prepareStatement(CREATE_MESSAGE)){
+      
+          statement.setInt(1, message.to_User_id);
+          statement.setInt(2, message.from_User_id);
+          statement.setString(3, message.user_Subject);
+          statement.setString(4, message.getUser_Message());
+          
+          statement.execute();
+          
+         return true; 
+      } catch (Exception ex) 
+         { 
+             System.out.println("Log In failed: An Exception has occurred! " + ex);
+             return false;
+         }
+      
+      
+  }   
      
     public static boolean reguestByEmail(String targetEmail, UserBean user) {
 //preparing some objects for connection 

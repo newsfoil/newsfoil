@@ -23,15 +23,12 @@ import static ProgramFiles.UserDAO.NetworkRequest;
                 user = UserDAO.login(user);
                
                 if (user.isValid()) {
-                
-                 
-                    
+                     
                 HttpSession session = request.getSession(true);
                 
                 UserDAO.profile(user);
                 UserDAO.NetworkRequest(user);
                 UserDAO.getNetworkUsers(user);
-                
                 
                 session.setAttribute("currentSessionUser", user);
                 List<ArticleBean> articleList = ArticlesDAO.getAllArticles();

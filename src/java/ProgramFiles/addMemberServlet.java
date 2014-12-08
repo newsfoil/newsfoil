@@ -18,18 +18,16 @@
             String requestorName = request.getParameter("requestorName").trim();
             String requestType = request.getParameter("requestType").trim();
                  
-       
-        
          
-         if (requestType.equals(null)){
+         if (requestType == null){
         requestType = "";
         }
          
-         if (requestorID.equals(null)){
+         if (requestorID == null){
         requestorID = "";
         }
          
-        if (requestorName.equals(null)){
+        if (requestorName == null){
         requestorName = "";
         }
         
@@ -37,19 +35,19 @@
             UserBean user = (UserBean) session.getAttribute("currentSessionUser");
            
             if (requestType.contains("Accept")){
-             System.out.println("***I'm in the ACCEPT");
             NetworkRequestDOA.acceptReguest(requestorID, requestorName, user);
             }
             if (requestType.contains("Decline")){
-             System.out.println("***I'm in the DECLINE");
             NetworkRequestDOA.declineReguest(requestorID, user);
             }
-            
-        System.out.println("**** accept::" + requestType+ ":: Decline  ::"+ requestType + "::requestor : " + requestorID + "req name " + requestorName);    
-            response.sendRedirect("NFServlet");
+            if (requestType.contains("Send Message")){
+            response.sendRedirect("CreateMessage.jsp");
+            }
+            else {
+            response.sendRedirect("NFServlet");}
             
         }catch (NullPointerException ex) {
-            System.out.println("this is the exception : " +ex);
+            System.out.println(ex);
         }
  
         }  

@@ -37,8 +37,6 @@ String query ="UPDATE `newsfoil`.`PROFILES` SET `User_First_Name` = '" + bean.ge
 "`User_Political_Party` = '" + bean.getUser_Political_Party()+"',\n" +
 "`User_Bio` = '" + bean.getUser_Bio()+"',\n" +
 "`User_Education` = '" + bean.getUser_Education()+"' WHERE `PROFILES`.`User_ID` ="+bean.getUser_ID();        
-       
-
 
          try { 
 //connect to DB 
@@ -49,9 +47,7 @@ String query ="UPDATE `newsfoil`.`PROFILES` SET `User_First_Name` = '" + bean.ge
             currentCon.close();
          }
          catch (Exception ex) 
-         { 
- System.out.println("didn't work except: " + ex);
-            
+         {             
          }
                
 // exception handling 
@@ -63,9 +59,15 @@ String query ="UPDATE `newsfoil`.`PROFILES` SET `User_First_Name` = '" + bean.ge
              catch (Exception e) { } 
              
              currentCon = null; } }
+        
+          }
+     
+     
+     public static void createProfilePage(UserBean bean) throws FileNotFoundException{
+   
          
-    PrintWriter writer;
         try {
+            PrintWriter writer;
             writer = new PrintWriter( "/var/www/html/profiles/" + bean.getUser_ID() + "profile.html", "UTF-8");
             writer.println("<!DOCTYPE html>\n" +
 "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n" +
@@ -156,14 +158,7 @@ String query ="UPDATE `newsfoil`.`PROFILES` SET `User_First_Name` = '" + bean.ge
             
         } catch (UnsupportedEncodingException ex) {
             Logger.getLogger(updateAccount.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-         
-          }
-     
-     
-     private static void createProfilePage(){
-     
+        } 
      
      }
  

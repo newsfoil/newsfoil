@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servlets;
+package ProgramFiles;
 
-import ProgramFiles.NetworkRequestDOA;
-import ProgramFiles.UserBean;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,8 +18,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author dentm_000
  */
-@WebServlet(name = "requestNetworkServlet", urlPatterns = {"/requestNetworkServlet"})
-public class NewsNetworkRequestServlet extends HttpServlet {
+@WebServlet(name = "MessageServlet", urlPatterns = {"/MessageServlet"})
+public class MessageServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,30 +30,34 @@ public class NewsNetworkRequestServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         //request.getParameter("TargetEmail")
         response.setContentType("text/html;charset=UTF-8");
- 
-       try {
-
-           HttpSession session = request.getSession();
-           UserBean user = (UserBean) session.getAttribute("currentSessionUser");
-           String targetEmail = request.getParameter("TargetEmail").trim();
-           String lkupMember = request.getParameter("lookupmember").trim();
-
-           if (!targetEmail.equals("null")) {
-               NetworkRequestDOA.reguestByEmail(targetEmail, user);
-           } else
-           if (!lkupMember.equals("null")) {
-               NetworkRequestDOA.reguestByUser(lkupMember, user);
-           }
-
-       } catch (Throwable theException) {
-           System.out.println(theException);
-       }
-        response.sendRedirect("NFServlet");
-
+        
+        try{
+            HttpSession session = request.getSession();
+            UserBean user = (UserBean)session.getAttribute("currentSessionUser");
+            
+            
+            if (request.getParameter("requestType").equals("Send Messgae"))
+            {
+            
+            response.sendRedirect("CreateMessage.jsp");
+            } else if (request.getParameter("send").equals("send")){
+             SentMessageBean message = new SentMessageBean();
+             message.setFrom_User_id(Integer.parseInt(user.getUser_ID()));
+             message.setTo_User_id(Integer.parseInt(request.getParameter("receipient")));
+             message.setUser_Subject(request.getParameter("subject"));
+             message.setUser_Message(request.getParameter("message"));
+             NetworkRequestDOA.createMessage(user, message);
+       
+             response.sendRedirect("MessageServlet");
+           
+             }
+       
+        }catch(Exception ex){}
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

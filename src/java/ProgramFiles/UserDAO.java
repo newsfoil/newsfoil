@@ -10,9 +10,9 @@
      private static final String GET_ALL_MESSAGES = "select * from MESSAGES where To_ID=?";
      private static final String GET_ALL_REQUESTS = "select * from NNREQUESTS where Target_Email=?";
      private static final String GET_USER = "SELECT * from USERS where (User_Name=? OR User_Email=?) AND User_Password=?";
-    private static final String GET_NETWORK_MEMBERS = "SELECT * from MYNEWSNETWORK where User_ID =?";
-    private static final String GET_PROFILE = "SELECT * from PROFILES where User_ID =?";
-    private static final String CREATE_PROFILE = "INSERT INTO newsfoil.PROFILES (Profile_ID, User_ID, User_First_Name, User_Middle_Name, User_Last_Name, User_City, User_State, User_Zip, User_Tag_Line, User_Political_Party, User_Bio, User_Education, User_Photo) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+     private static final String GET_NETWORK_MEMBERS = "SELECT * from MYNEWSNETWORK where User_ID =?";
+     private static final String GET_PROFILE = "SELECT * from PROFILES where User_ID =?";
+     private static final String CREATE_PROFILE = "INSERT INTO newsfoil.PROFILES (Profile_ID, User_ID, User_First_Name, User_Middle_Name, User_Last_Name, User_City, User_State, User_Zip, User_Tag_Line, User_Political_Party, User_Bio, User_Education, User_Photo) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     
       
 public static UserBean login(UserBean bean) { 
@@ -25,7 +25,7 @@ public static UserBean login(UserBean bean) {
            statement.setString(3, bean.getUser_Password());
            
            ResultSet resultSet = statement.executeQuery();
-            boolean more = resultSet.next(); 
+           boolean more = resultSet.next(); 
         
              if (!more) {  
              bean.setValid(false);
@@ -69,7 +69,7 @@ public static int createProfile(int userID){
            statement.setString(12, " ");
               
             boolean more = statement.execute();
-            
+          
      }
         catch (Exception ex) 
          {  
@@ -92,8 +92,7 @@ public static int profile(UserBean bean){
             
          boolean more = resultSet.next(); 
         
-             System.out.println("*************************** ran query... more is" + more);
-            
+             
              if (more) 
              {  
                  
@@ -111,6 +110,7 @@ public static int profile(UserBean bean){
          
              } else {
              createProfile(Integer.parseInt(bean.getUser_ID()));
+             updateAccount.createProfilePage(bean); 
              }
       
     

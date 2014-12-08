@@ -34,8 +34,6 @@ public class ProfileServlet extends HttpServlet {
    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          
-        
-  
         response.setContentType("text/html;charset=UTF-8");
         
         try {
@@ -57,6 +55,7 @@ public class ProfileServlet extends HttpServlet {
             user.setUser_Photo (request.getParameter("myPhoto"));
             
             updateAccount.accountInsert(user);
+            updateAccount.createProfilePage(user);
             
             response.sendRedirect("AccountSettings.jsp");
             
