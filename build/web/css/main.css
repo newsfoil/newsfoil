@@ -116,6 +116,16 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
         padding-left: 10px;
 }
 
+.messageText{
+    
+    min-height: 400px;
+    border-width:thin;
+    border-style:solid;
+    border-color:#CCC;
+    
+}
+
+
 .pwitem:link {
 	float: right;
 	color: white;
@@ -312,7 +322,7 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
     
     border: 1px solid #666;
     margin: 5px;
-    
+}    
     
 .accountInput{
     float: left;
@@ -337,7 +347,7 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
 }
 
 .article, .articleForm {
-    width: 50%;
+   // width: 50%;
     
     padding-top: 40px;
     padding-right: 20px;
@@ -371,9 +381,8 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
 }
 
 
-.article {
+.article-section {
     width: 50%;
-    text-align:center;
     padding-top: 40px;
     padding-right: 20px;
     padding-bottom: 10px;

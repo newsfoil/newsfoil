@@ -133,7 +133,7 @@ public class ArticlesDAO {
      * @param Article_Id The unique article ID
      * @return <code>ArticleBean</code> representing the article
      */
-    public static ArticleBean getArticle(int Article_Id) {
+    public static ArticleBean getArticle (int Article_Id) {
 
         ArticleBean article = null;
 

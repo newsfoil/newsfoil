@@ -29,7 +29,17 @@ import="java.util.List" %>
               tinymce.init({
           selector: "textarea"
               });
-    </script>
+        </script>
+
+        <script type="text/javascript">  
+          function getParameterByName(name) {
+      name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+      var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+          results = regex.exec(location.search);
+      return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+          }
+   
+        </script>    
 
     </head>
 
@@ -173,13 +183,18 @@ import="java.util.List" %>
                     
                      <h1 class="articleFormHeading">Create New Article</h1>
                 <br>
-                    <form id= "articleSubmitForm" name="MessageSubmitForm" action="MessageSerlet" method = "post"> 
-                         <input type="submit" value="Send"/>
+                    <form id= "articleSubmitForm" name="MessageSubmitForm" action="MessageServlet" method = "post"> 
+                         <input type="submit" name ="message" value="send"/>
                         <br/><br/>
                         <h4>To:</h4>
                           <select type="text" style="width: 400px" name="receipient" id="receipient">
-                            <option value="<%= currentSessionUser.getUser_Political_Party() %>"><%= currentSessionUser.getUser_Political_Party() %></option>
-                            <option value=""> </option>
+                              
+                             
+                            <script>
+                                var to_ID = getParameterByName('requestor');
+                                var toName = getParameterByName('requestorName');
+                                document.write("<option value=\"" + to_ID + "\">"+ toName + "</option>");
+                                </script>  
                   
                             <%
                         try {
@@ -204,7 +219,7 @@ import="java.util.List" %>
                           <input type="text" style="width: 800px" name="subject" required/> 
                         <br/><br/>
                         <h4>Message:</h4>
-                        <textarea rows="40"  name="message"></textarea>
+                        <textarea rows="40"  name="messageText"></textarea>
                         <br/><br/>
                         <br/><br/>
                         <div class="articleButtonSection">

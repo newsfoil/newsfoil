@@ -13,14 +13,23 @@ public class MessageBean {
     
     String user_Subject;
     String user_Message;
-    String from_User_id;
-    String to_User_id;
+    String from_Name;
+    int from_User_id;
+    int to_User_id;
 
-    public String getTo_User_id() {
+    public String getFrom_Name() {
+        return from_Name;
+    }
+
+    public void setFrom_Name(String from_Name) {
+        this.from_Name = from_Name;
+    }
+
+    public int getTo_User_id() {
         return to_User_id;
     }
 
-    public void setTo_User_id(String to_User_id) {
+    public void setTo_User_id(int to_User_id) {
         this.to_User_id = to_User_id;
     }
 
@@ -40,11 +49,11 @@ public class MessageBean {
         this.user_Message = user_Message;
     }
 
-    public String getFrom_User_id() {
+    public int getFrom_User_id() {
         return from_User_id;
     }
 
-    public void setFrom_User_id(String from_User_id) {
+    public void setFrom_User_id(int from_User_id) {
         this.from_User_id = from_User_id;
     }
     

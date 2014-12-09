@@ -47,6 +47,17 @@
 	font-weight: bold;
 }
 
+.CollapsiblePanelTab2 {
+	background-color: whitesmoke;
+        border-top: solid 1px #CCC;
+	border-bottom: solid 1px #CCC;
+	cursor: pointer;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	font: 120%/1.4 "Times New Roman", Times, serif;
+	font-weight: bold;
+}
+
 /* This is the selector for a CollapsiblePanel's Content area. It's important to note that
  * you should never put any padding on the content area element if you plan to
  * use the CollapsiblePanel's open/close animations. Placing a non-zero padding on the content

@@ -1,6 +1,9 @@
 {
     "elements": {},
     "attributes": {
+        "tabindex": {
+            "context": "div"
+        },
         "placeholder": {
             "context": "input"
         }

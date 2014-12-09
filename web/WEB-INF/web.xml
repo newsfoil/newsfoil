@@ -4,6 +4,12 @@
         <servlet-name>NFServlet</servlet-name>
         <servlet-class>ProgramFiles.NFServlet</servlet-class>
     </servlet>
+     <servlet>
+        <servlet-name>MessageServlet</servlet-name>
+        <servlet-class>ProgramFiles.MessageServlet</servlet-class>
+    </servlet>
+    
+    
    <servlet>
         <servlet-name>addMemberServlet</servlet-name>
         <servlet-class>ProgramFiles.addMemberServlet</servlet-class>
@@ -32,6 +38,10 @@
     <servlet-mapping>
         <servlet-name>NFServlet</servlet-name>
         <url-pattern>/NFServlet</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>MessageServlet</servlet-name>
+        <url-pattern>/MessageServlet</url-pattern>
     </servlet-mapping>
      <servlet-mapping>
         <servlet-name>NFLoginServlet</servlet-name>

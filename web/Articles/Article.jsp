@@ -29,11 +29,13 @@
     <body>
 
         <div class="container">
-
+            
+            
+            
             <div class="header"><!-- end .header -->
 
                 <div class="fltlft">
-                    <img src="<c:url value="images/Voice.jpg"/>" alt="Logo" width="192" height="144" border="1" />
+                    <img src="<c:url value="images/Voice.jpg"/>" alt="Logo" align="right"  width="192" height="144" border="1" />
                 </div>
 
                 <div class="fltcent">

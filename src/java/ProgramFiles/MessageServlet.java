@@ -6,7 +6,6 @@
 package ProgramFiles;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,23 +38,25 @@ public class MessageServlet extends HttpServlet {
             UserBean user = (UserBean)session.getAttribute("currentSessionUser");
             
             
-            if (request.getParameter("requestType").equals("Send Messgae"))
-            {
-            
-            response.sendRedirect("CreateMessage.jsp");
-            } else if (request.getParameter("send").equals("send")){
-             SentMessageBean message = new SentMessageBean();
-             message.setFrom_User_id(Integer.parseInt(user.getUser_ID()));
-             message.setTo_User_id(Integer.parseInt(request.getParameter("receipient")));
-             message.setUser_Subject(request.getParameter("subject"));
-             message.setUser_Message(request.getParameter("message"));
-             NetworkRequestDOA.createMessage(user, message);
+            switch (request.getParameter("message")) {
+                case "Send Message":
+                    response.sendRedirect("CreateMessage.jsp");
+                    break;
+                case "send":
+                   
+                    SentMessageBean message = new SentMessageBean();
+                    message.setFrom_User_id(Integer.parseInt(user.getUser_ID()));
+                    message.setTo_User_id(Integer.parseInt(request.getParameter("receipient")));
+                    message.setUser_Subject(request.getParameter("subject"));
+                    message.setUser_Message(request.getParameter("messageText"));
+                    NetworkRequestDOA.createMessage(user, message);
+                    
+                    
+                    response.sendRedirect("CreateMessage.jsp");
+                  
+            }
        
-             response.sendRedirect("MessageServlet");
-           
-             }
-       
-        }catch(Exception ex){}
+        }catch(IOException | NumberFormatException ex){}
         
         
     }

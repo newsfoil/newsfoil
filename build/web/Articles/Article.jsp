@@ -29,11 +29,13 @@
     <body>
 
         <div class="container">
-
+            
+            
+            
             <div class="header"><!-- end .header -->
 
                 <div class="fltlft">
-                    <img src="<c:url value="images/Voice.jpg"/>" alt="Logo" width="192" height="144" border="1" />
+                    <img src="<c:url value="images/Voice.jpg"/>" alt="Logo" align="right"  width="192" height="144" border="1" />
                 </div>
 
                 <div class="fltcent">
@@ -115,7 +117,7 @@
                 </div>
             </div>
 
-            <div class="article">
+            <div class="article-section">
                 <h1 class="articleHeading">${article.getArticle_Title()}</h1>
                 <br/>
                 <div class="articleText articleAuthor">by <strong>${article.getUser().getUser_Name()}</strong>, on <fmt:formatDate pattern="MMMM dd, yyyy" value="${article.getArticle_Date()}"/> </div>
@@ -128,20 +130,20 @@
               
             </div>
 
-            <!-- end .content --></div>
 
+            <div class="sidebar2">
+                <ul class="nav">
+                    <li><a href="NFServlet">Home</a>&nbsp;</li>
+                    <li><a href="CreateArticle">New Article</a>&nbsp;</li>
+                    <li><a href="ProfilePage">Profile</a>&nbsp;</li>
+                    <li><a href="AccountSettings.jsp">Settings</a> &nbsp;</li>
+                    <li><a href="About.jsp">About</a> &nbsp;</li>
+                </ul>
+            </div>
+                
         <!-- end .container --></div>
-        </div>
 
-        <div class="sidebar2">
-            <ul class="nav">
-                <li><a href="NFServlet">Home</a>&nbsp;</li>
-                <li><a href="CreateArticle">New Article</a>&nbsp;</li>
-                <li><a href="ProfilePage">Profile</a>&nbsp;</li>
-                <li><a href="AccountSettings.jsp">Settings</a> &nbsp;</li>
-                <li><a href="About.jsp">About</a> &nbsp;</li>
-            </ul>
-        </div>
+      
 
         <script>
             $(function () {

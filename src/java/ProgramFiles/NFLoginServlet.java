@@ -1,6 +1,5 @@
 package ProgramFiles;
 
-import static ProgramFiles.UserDAO.NetworkRequest;
     import ProgramFiles.articles.ArticleBean;
     import ProgramFiles.articles.ArticlesDAO;
     import java.io.IOException;  
@@ -14,6 +13,9 @@ import static ProgramFiles.UserDAO.NetworkRequest;
         @Override
         protected void doPost(HttpServletRequest request, HttpServletResponse response)  
                         throws ServletException, IOException { 
+            
+             System.out.println("********** Login ....where are the messages");
+                
             
             try {
             
@@ -29,6 +31,9 @@ import static ProgramFiles.UserDAO.NetworkRequest;
                 UserDAO.profile(user);
                 UserDAO.NetworkRequest(user);
                 UserDAO.getNetworkUsers(user);
+                System.out.println("********** where are the messages");
+                
+                UserDAO.getMessages(user);
                 
                 session.setAttribute("currentSessionUser", user);
                 List<ArticleBean> articleList = ArticlesDAO.getAllArticles();

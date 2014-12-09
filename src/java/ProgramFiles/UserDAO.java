@@ -7,13 +7,50 @@
      
      static Connection currentCon = null;
      static ResultSet rs = null; 
-     private static final String GET_ALL_MESSAGES = "select * from MESSAGES where To_ID=?";
+     private static final String GET_ALL_MESSAGES = "select * from Messages right join PROFILES on Messages.From_ID = PROFILES.User_ID where To_ID=?";
      private static final String GET_ALL_REQUESTS = "select * from NNREQUESTS where Target_Email=?";
      private static final String GET_USER = "SELECT * from USERS where (User_Name=? OR User_Email=?) AND User_Password=?";
      private static final String GET_NETWORK_MEMBERS = "SELECT * from MYNEWSNETWORK where User_ID =?";
      private static final String GET_PROFILE = "SELECT * from PROFILES where User_ID =?";
      private static final String CREATE_PROFILE = "INSERT INTO newsfoil.PROFILES (Profile_ID, User_ID, User_First_Name, User_Middle_Name, User_Last_Name, User_City, User_State, User_Zip, User_Tag_Line, User_Political_Party, User_Bio, User_Education, User_Photo) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+     private static final String UPDATE_PROFILE = "UPDATE newsfoil.PROFILES SET User_First_Name = ?, User_Middle_Name = ?, User_Last_Name = ?," +
+        "User_City = ?, User_State = ?, User_Zip = ?, User_Tag_Line = ?, User_Political_Party = ?, User_Bio = ?, User_Education = ? WHERE PROFILES.User_ID = ?";
+  
+     
+public static int updateProfile(UserBean bean){
+
+   
+  
+    try (Connection connection = ConnectionManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(UPDATE_PROFILE)) {
+            
+           statement.setString(1, bean.getUser_First_Name());
+           statement.setString(2, bean.getUser_Middle_Name());
+           statement.setString(3, bean.getUser_Last_Name() );
+           statement.setString(4, bean.getUser_City());
+           statement.setString(5, bean.getUser_State());
+           statement.setString(6, bean.getUser_Zip());
+           statement.setString(7, bean.getUser_Tag_Line());
+           statement.setString(8, bean.getUser_Political_Party());
+           statement.setString(9, bean.getUser_Bio());
+           statement.setString(10, bean.getUser_Education());
+           statement.setString(11, bean.getUser_ID());
+          
+            boolean more = statement.execute();
+          
+     }
+        catch (Exception ex) 
+         {  
+             
+             System.out.println("****There is an exception: " + ex);
+         }
+
     
+
+    
+    
+return 1;
+}
       
 public static UserBean login(UserBean bean) { 
          
@@ -110,7 +147,7 @@ public static int profile(UserBean bean){
          
              } else {
              createProfile(Integer.parseInt(bean.getUser_ID()));
-             updateAccount.createProfilePage(bean); 
+             HTMLWritter.createProfilePage(bean); 
              }
       
     
@@ -129,36 +166,37 @@ public static int profile(UserBean bean){
 return 1;
     }
 
-public static int Message(UserBean bean) throws SQLException{
+public static int getMessages(UserBean bean) throws SQLException{
    
          
           try (Connection connection = ConnectionManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(GET_ALL_MESSAGES)) {
             
+              System.out.println("***I am running query for messages");
            statement.setInt(1, Integer.parseInt(bean.getUser_ID()));
               
-            ResultSet resultSet = statement.executeQuery();
-            
-            
-            while (resultSet.next()) {
-                
-                MessageBean messageBean = new MessageBean();    
-                messageBean.setFrom_User_id(resultSet.getString("FROM_ID"));
-                messageBean.setUser_Subject(resultSet.getString("Subject"));
-                messageBean.setUser_Message(resultSet.getString("Message"));
-                
-                bean.setMessages(messageBean);
-            }
-            resultSet.close();
+              try (ResultSet resultSet = statement.executeQuery()) {
+                  while (resultSet.next()) {
+                       System.out.println("***There are messages");
+                      MessageBean messageBean = new MessageBean();
+                      
+                      
+                      
+                      
+                      
+                      messageBean.setFrom_User_id(Integer.parseInt(resultSet.getString("FROM_ID")));
+                      messageBean.setFrom_Name(resultSet.getString("User_First_Name") + resultSet.getString("User_Last_Name") );
+                      messageBean.setUser_Subject(resultSet.getString("Subject"));
+                      messageBean.setUser_Message(resultSet.getString("Message"));
+                      
+                      bean.setMessages(messageBean);
+                  } }
           }
          catch (Exception ex) 
          {   
+             System.out.println("***Exception" + ex);
          }
-              
-// exception handling 
-         finally { 
-              
-             } 
+         
             
 return 1;
     }

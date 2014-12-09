@@ -2,9 +2,7 @@ package ProgramFiles;
 
 import ProgramFiles.articles.ArticleBean;
 import ProgramFiles.articles.ArticlesDAO;
-import ProgramFiles.login.AddUser;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

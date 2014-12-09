@@ -6,7 +6,8 @@
 package Servlets;
 
 import ProgramFiles.UserBean;
-import ProgramFiles.updateAccount;
+import ProgramFiles.UserDAO;
+import ProgramFiles.HTMLWritter;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -54,8 +55,8 @@ public class ProfileServlet extends HttpServlet {
             user.setUser_Education (request.getParameter("myEducation"));
             user.setUser_Photo (request.getParameter("myPhoto"));
             
-            updateAccount.accountInsert(user);
-            updateAccount.createProfilePage(user);
+            UserDAO.updateProfile(user);
+            HTMLWritter.createProfilePage(user);
             
             response.sendRedirect("AccountSettings.jsp");
             
