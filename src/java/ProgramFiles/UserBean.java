@@ -32,12 +32,21 @@ public class UserBean {
      private String User_Education;
      private String User_Tag_Line;
      private String User_Political_Party;
+     private Influence influence;
      private final ArrayList<NetworkRequestBean> NetworkRequests = new ArrayList();
      private final ArrayList<MessageBean> Messages = new ArrayList();
      private final ArrayList<NetworkMemberBean> Members = new ArrayList();
      int numberOfRequest;
      int numberOfMessages;
      int numberOfMembers;
+
+    public Influence getInfluence() {
+        return influence;
+    }
+
+    public void setInfluence(Influence influence) {
+        this.influence = influence;
+    }
 
     public int getNumberOfRequest() {
         return NetworkRequests.size();

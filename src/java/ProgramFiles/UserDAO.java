@@ -16,7 +16,7 @@
      private static final String UPDATE_PROFILE = "UPDATE newsfoil.PROFILES SET User_First_Name = ?, User_Middle_Name = ?, User_Last_Name = ?," +
         "User_City = ?, User_State = ?, User_Zip = ?, User_Tag_Line = ?, User_Political_Party = ?, User_Bio = ?, User_Education = ? WHERE PROFILES.User_ID = ?";
      private static final String VERIFY_USER_ACCOUNT = "SELECT * FROM USERS WHERE User_name = ? OR User_Email = ?";
-     private static final String CREATE_USER ="INSERT INTO USERS VALUES (NULL,?,?,?)";
+     private static final String CREATE_USER ="INSERT INTO USERS VALUES (NULL,?,?,?,?)";
 
 public static int getUserID(NewAccount account) { 
          
@@ -55,8 +55,9 @@ public static int getUserID(NewAccount account) {
            statement.setString(1, account.getUsername());
            statement.setString(2, account.getUserPassword());
            statement.setString(3, account.getUseremail());
-          
-            boolean more = statement.execute();
+           statement.setString(4, "0055555555555555555555");
+    
+           boolean more = statement.execute();
         return more;
             
      }
@@ -160,7 +161,9 @@ public static UserBean login(UserBean bean) {
               
               bean.setUser_Email(resultSet.getString("User_Email")); 
               bean.setUser_Name(resultSet.getString("User_name"));
-              bean.setUser_ID(resultSet.getString("User_ID")); 
+              bean.setUser_ID(resultSet.getString("User_ID"));
+              Influence influence = new Influence(resultSet.getString("Influence"));
+              bean.setInfluence(influence);
               bean.setValid(true);
               
              }

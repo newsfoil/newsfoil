@@ -6,6 +6,7 @@ import="ProgramFiles.articles.ArticleBean"
 import="ProgramFiles.NetworkRequestBean" 
 import="ProgramFiles.NetworkMemberBean" 
 import="ProgramFiles.MessageBean" 
+import="ProgramFiles.Influence"
 import="java.util.List" %> 
 <% List<ArticleBean> articleList = (List<ArticleBean>)session.getAttribute("articleList"); %>           
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
@@ -54,9 +55,9 @@ import="java.util.List" %>
             <div class = "influence">
                 Influence
                 <br/>
-                Current:  58%
+                Distribution:  <%out.println(currentSessionUser.getInfluence().getDistribution()); %>%
                 <br/>
-                Variance: 46%
+                Variance: <%out.println(currentSessionUser.getInfluence().getVariance()); %>%
                 <br/>
                 Network Factor: 120%
                 <br/><br/><br/>
