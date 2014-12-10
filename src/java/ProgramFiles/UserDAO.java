@@ -15,12 +15,98 @@
      private static final String CREATE_PROFILE = "INSERT INTO newsfoil.PROFILES (Profile_ID, User_ID, User_First_Name, User_Middle_Name, User_Last_Name, User_City, User_State, User_Zip, User_Tag_Line, User_Political_Party, User_Bio, User_Education, User_Photo) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
      private static final String UPDATE_PROFILE = "UPDATE newsfoil.PROFILES SET User_First_Name = ?, User_Middle_Name = ?, User_Last_Name = ?," +
         "User_City = ?, User_State = ?, User_Zip = ?, User_Tag_Line = ?, User_Political_Party = ?, User_Bio = ?, User_Education = ? WHERE PROFILES.User_ID = ?";
+     private static final String VERIFY_USER_ACCOUNT = "SELECT * FROM USERS WHERE User_name = ? OR User_Email = ?";
+     private static final String CREATE_USER ="INSERT INTO USERS VALUES (NULL,?,?,?)";
+
+public static int getUserID(NewAccount account) { 
+         
+         try (Connection connection = ConnectionManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(GET_USER)) {
+            
+           statement.setString(1, account.getUsername());
+           statement.setString(2, account.getUsername());
+           statement.setString(3, account.getUserPassword());
+           
+           ResultSet resultSet = statement.executeQuery();
+           boolean more = resultSet.next(); 
+        
+             if (!more) {  
+             return 0;
+             } 
+             
+//if user exists set the isValid variable to true 
+             else 
+             {            
+              return Integer.parseInt(resultSet.getString("User_ID")); 
+             }
+         }
+         catch (Exception ex) 
+         { 
+           return 0;  
+         }
+      
+          }
+       
+ public static boolean createUser(NewAccount account){
+
+    try (Connection connection = ConnectionManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(CREATE_USER)) {
+            
+           statement.setString(1, account.getUsername());
+           statement.setString(2, account.getUserPassword());
+           statement.setString(3, account.getUseremail());
+          
+            boolean more = statement.execute();
+        return more;
+            
+     }
+        catch (Exception ex) 
+         {  
+             System.out.println("****There is an exception: " + ex);
+             return false;
+             
+         }
   
+
+}
+          
+public static boolean verifyUserAccount(NewAccount account) throws SQLException{
+   
+          try (Connection connection = ConnectionManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(VERIFY_USER_ACCOUNT)) {
+            
+           statement.setString(1, account.getUsername());
+           statement.setString(2, account.getUseremail()); 
+           
+            ResultSet resultSet = statement.executeQuery();
+            boolean more = resultSet.next();
+            if (more) {
+               
+                if (resultSet.getString("User_Email").equals(account.getUseremail()))
+                        {
+                        account.setJspMessage("Um, this email is registered, you may already have an account...");
+                        account.setEmail(false);
+                        
+                        }
+                else if (resultSet.getString("User_Name").equals(account.getUsername())){
+                    account.setJspMessage("Sorry, this username is taken, you'll have to use another one.");
+                
+                }
+             return false;   
+            }else
+            return true;
+          }
+         catch (Exception ex) 
+         {   
+             System.out.println("****exception " + ex);
+             return false;
+         }
+               
+       
+    }
      
 public static int updateProfile(UserBean bean){
 
-   
-  
     try (Connection connection = ConnectionManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_PROFILE)) {
             
@@ -96,6 +182,34 @@ public static int createProfile(int userID){
            statement.setString(2, " ");
            statement.setString(3, " ");
            statement.setString(4, " ");
+           statement.setString(5, " ");
+           statement.setString(6, " ");
+           statement.setString(7, " ");
+           statement.setString(8, " ");
+           statement.setString(9, " ");
+           statement.setString(10, " ");
+           statement.setString(11, " ");
+           statement.setString(12, " ");
+              
+            boolean more = statement.execute();
+          
+     }
+        catch (Exception ex) 
+         {  
+         }
+
+return 1;
+}
+
+public static int createProfile(NewAccount account){
+
+     try (Connection connection = ConnectionManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(CREATE_PROFILE)) {
+            
+           statement.setInt(1, account.getUserID());
+           statement.setString(2, account.getUserFristName());
+           statement.setString(3, account.getUserMiddleName());
+           statement.setString(4, account.getUserLastName());
            statement.setString(5, " ");
            statement.setString(6, " ");
            statement.setString(7, " ");
@@ -274,4 +388,5 @@ public static int getNetworkUsers(UserBean bean) throws SQLException{
             
 return 1;
     }
+ 
  }

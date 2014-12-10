@@ -190,15 +190,8 @@ import="java.util.List" %>
                       } catch (Exception ex) {
                       }
 
-
                   %>
-             
-                        
-                        
-                        
-                        
-                        
-                        
+                      
                 </div>
             </div>
    </div> <!-- end of sidebar1 -->
@@ -247,7 +240,7 @@ import="java.util.List" %>
                 <li><a href=http://newsfoil.com/profiles/<%=currentSessionUser.getUser_ID()%>profile.html>Profile</a>&nbsp;</li>
                 <li><a href="AccountSettings.jsp">Settings</a> &nbsp;</li>
                 <li><a href="About.jsp">About</a> &nbsp;</li>
-                
+                <li><a href="CreateArticleRevised.jsp">test</a> &nbsp;</li>
             </ul>
         </div>
 

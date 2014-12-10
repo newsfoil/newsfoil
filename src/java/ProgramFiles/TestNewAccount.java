@@ -15,6 +15,7 @@ public class TestNewAccount {
      static Connection currentCon = null;
      static ResultSet rs = null; 
      static ResultSet rs2 = null; 
+     
      public static NewAccount login(NewAccount account, String username, String email) { 
 //preparing some objects for connection 
         Statement stmt = null; 

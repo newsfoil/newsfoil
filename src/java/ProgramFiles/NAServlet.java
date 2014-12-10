@@ -4,6 +4,7 @@ package ProgramFiles;
 import ProgramFiles.login.AddUser;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,85 +26,37 @@ public class NAServlet extends HttpServlet {
      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          
-        String userName;
-        String userPassword;
-        String userEmail;
-  
+       
         response.setContentType("text/html;charset=UTF-8");
         
         try {
             
-            userName = request.getParameter("username");
-            userPassword = request.getParameter("password");
-            userEmail = request.getParameter("email");
-            
-            TestNewAccount newAccount = new TestNewAccount(); 
+       
             NewAccount account = new NewAccount();
             
-            newAccount.login(account, userName,userEmail);
-            HttpSession session = request.getSession(true);
-            session.setAttribute("thisUser", account);
+            account.setUseremail(request.getParameter("email"));
+            account.setUserPassword(request.getParameter("password"));
+            account.setUsername(request.getParameter("username"));
+            account.setUserFristName(request.getParameter("firstName"));
+            account.setUserMiddleName(request.getParameter("middleName"));
+            account.setUserLastName(request.getParameter("lastName"));
             
+            boolean verify = UserDAO.verifyUserAccount(account);
             
-            if (account.isEmail())
-            {
-            account.setJspMessage("There is already an account for this email");
-            System.out.println("**********************this is the jsp msg:" + account.getJspMessage()); 
-            response.sendRedirect("NewAccount.jsp");
-            } else if (account.isUserName()){
-            account.setJspMessage("This username is already taken");
-            response.sendRedirect("NewAccount.jsp");
+            if (verify){
+            UserDAO.createUser(account);
+            account.setUserID(UserDAO.getUserID(account));
+            UserDAO.createProfile(account);
+            CreateEmail.newAccount(account);
+            
+            response.sendRedirect("NewAccountConfirmation.jsp");
+            }else{
+            
+                response.sendRedirect("NewAccount.html?msg="+account.getJspMessage());
             }
-            else{
-                
-                SendEmail email = new SendEmail();
-                
-                AddUser.login(userName, userPassword, userEmail);
-                
-                email.setUserName(userName);
-                email.setUserEmail(userEmail);
-                email.setUserSubject("Password");
-                email.setUserMessage("<!DOCTYPE html PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n" +
-"<html xmlns=\"http://www.w3.org/1999/xhtml\">\n" +
-"<head>\n" +
-"<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n" +
-"<title>Login</title>\n" +
-"<style type=\"text/css\">\n" +
-".title {\n" +
-"	font-size: 16px;\n" +
-"	font-weight: bold;\n" +
-"}\n" +
-".items {\n" +
-"	font-size: 16px;\n" +                        
-"	font-weight: bold;\n" +
-"	color: #00F;\n" +
-"}\n" +
-"</style>\n" +
-"</head>\n" +
-"\n" +
-"<body>\n" +
-"<div>\n" +
-"<a href=\"http://newsfoil.com:8080/login/LoginPage.jsp\"><img src=\"http://newsfoil.com:8080/login/logo.jpg\" alt=\"newfoil\" name=\"Logo\" width=\"480\" height=\"144\" /></a>\n" +
-"<br/>\n" +
-"Welcome to Newsfoil! We are glad to have you as part of our community.<br/>\n" +
-"But you probably want to get started so here is your username and password:<br/>\n" +
-"<br/>\n" +
-"<span class=\"title\">   Username: &nbsp;&nbsp;</span><span class=\"items\">"+ userName + "</span><br/>\n" +
-"<span class=\"title\">   Password: &nbsp;&nbsp;</span><span class=\"itmes\">"+ userPassword +   "</span><br/>\n" +
-"<br/>\n" +
-"Login here: &nbsp;<a href=\"http://newsfoil.com:8080/login/LoginPage.jsp\">newsfoil.com</a>\n" +
-"<br/><br/>\n" +
-"Use your password to login.  You can change your password when you login by selecting \"Setting.\"\n" +
-"<br/>\n" +
-"You have a voice. Be heard.\n" +
-"</div>\n" +
-"</body>\n" +
-"</HTML>");
-                email.Send();
-             
-              response.sendRedirect("NewAccountConfirmation.jsp");
-            } 
-        }catch (Throwable theException) {
+            
+         
+        }catch (SQLException | IOException theException) {
             System.out.println(theException);
         }
 

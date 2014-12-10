@@ -38,7 +38,6 @@ import="java.util.List" %>
           results = regex.exec(location.search);
       return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
           }
-   
         </script>    
 
     </head>

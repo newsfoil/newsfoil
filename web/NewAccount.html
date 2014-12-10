@@ -2,19 +2,20 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Newsfoil Login</title>
 
         <link href="css/login.css" rel="stylesheet" type="text/css" />
-
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+        <script src="js/jquery.validate.js" type="text/javascript"></script>
         <script type="text/javascript">
+            var keylist = "abcdefghijklmnopqrstuvwxyz123456789";
+            var temp = '';
 
-        var keylist="abcdefghijklmnopqrstuvwxyz123456789";
-        var temp='';
-
-        function generatepass(){
-        temp='';
+            function generatepass() {
+                temp = '';
                 for (i = 0; i < 7; i++)
                     temp += keylist.charAt(Math.floor(Math.random() * keylist.length));
                 return temp;
@@ -32,7 +33,6 @@
 
         </script>
 
-
         <script language="JavaScript1.2">
 
             function validateFields()
@@ -43,6 +43,14 @@
                 var screenMsg = "";
                 if (!document.account.username.value)
                     screenMsg = "Please enter a username ";
+                 else if (!document.account.firstName.value)
+                {
+                    screenMsg = "You must enter a first name";
+                }
+                 else if (!document.account.lastName.value)
+                {
+                    screenMsg = "You must enter a last name";
+                }
                 else if (!document.account.email.value)
                 {
                     if (screenMsg == "")
@@ -54,6 +62,8 @@
                 {
                     screenMsg = "Emails do not match";
                 }
+                
+                
                 else {
                     if (filter.test(str))
                         testresults = "true";
@@ -65,6 +75,14 @@
                 return testresults;
             }
         </script>
+        <script type="text/javascript">
+            function getParameterByName(name) {
+                name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                        results = regex.exec(location.search);
+                return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+        </script>  
 
     </head>
 
@@ -81,52 +99,102 @@
                 <div class="fltcent">
                     <img src="images/logo.jpg" alt="Logo" align="middle" />
                 </div>
-
-
-
                 <div class="fltrt">
-                    <form name="login" action="NFLoginServlet" method = "post">             
-
-                        <input ID="tb1" type="username" name="username" placeholder="username/ email" autocomplete="false"/>
+                    <form action="http://newsfoil.com:8080/login/NFLoginServlet" method = "post">             
+                        <input ID="tb1" type="text" name="username" placeholder="username/ email" autocomplete="false"/>
                         <input  ID="tb1" type="password" name="password" placeholder="password" value="" autocomplete="off"/>
-                        <input ID="tb1" type="submit" value="Sign In">   
-                            <input type="hidden" name="targetpage" value="Login"/>
+                        <input  type="submit" value="Sign In"/>
                     </form>
 
-                    <a class="pwitem" href="NewAccount.html">&nbsp;New Account &nbsp;</a>
-                    <a class="pwitem" href="ForgottenPassword.jsp">&nbsp; Forgot Password &nbsp;</a>
+                    <a class="pwitem" href="http://newsfoil.com:8080/login/NewAccount.html"> &nbsp; New Account &nbsp;</a>
+                    <a class="pwitem" href="http://newsfoil.com:8080/login/ResetPassword.jsp">&nbsp; Forgot Password &nbsp;</a>
+                    <br/><br/>
+                    <a href="http://newsfoil.com:8080/login/About.html"> About Us</a>
+
                 </div>
+            </div>
+
+            <div class="content2">
+
+                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+                <script src="typed.js" type="text/javascript"></script>
 
 
-                <div class="content">
 
-                    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-                    <script src="typed.js" type="text/javascript"></script>
+                <form name="account" action="NAServlet" method = "post"> 
+                    <input type="hidden" name="password">
+                        <input type="hidden" name="targetpage" value="NewAccount">
+                            <h2>Account Sign Up</h2>
+                            <span style="font-size: 120%; line-height: 1.4;color: #3A3A3A">To sign up we need a little information to help set up the account. Don't worry, you only have 
+                                27 more pages of information to fill out where we ask for your Aunt Margaret's maiden name and every type of car you've purchased.  No not really,
+                                all the information you need to fill out is on this page.  We're too lazy to ask any more questions.<p></p>
+                                To make you feel at ease we have a privacy policy which you can 
+                                read <a href="http://newsfoil.com:8080/login/PrivacyPolicy.html"> here.</a> Now that you have not
+                                read our policy (no one ever reads those things) what you need to know it we won't sell any of your information
+                                or put you on email list that ask you to buy Viagra.  We will only use you information to improve our site.  
+                                How do we do this? we don't know yet, we're three college students making our first web site.  Oh, we may send you 
+                                emails from time to time letting you know what's going on with your account, like if some friend wants you to join 
+                                their network.  Don't worry, we won't be as annoying as Facebook who send emails for everything.  "For reals" as my 11-year-old
+                                niece says, we won't send you emails telling you Uncle Charlie post posted his toenail clipping schedule.  I'll even pinky swear to that.  But here is what we need:</span>
+                            </br></br> 
+                            <script>
+            var message = getParameterByName('msg');
+            document.write("<span style=\"color: #a00;font-size: 140%;text-align: center; font-weight: bold\">" + message + "</span>");
+                            </script> 
+
+                            </br></br> 
+                            <h3>Your name (We have to know what to call you)</h3>  
+                            <hr>
+
+                                <label class ="lbl">First Name: <input type="text" name="firstName" id="accountSettingInput" value="" required/>
+                                </label>
+
+                                <label class ="lbl">Middle Name: <input type="text" name="middleName" id="accountSettingInput" value=""/>
+                                </label>
+
+                                <label class ="lbl">Last Name: <input type="text" name="lastName" id="accountSettingInput" value="" required/>
+                                </label>
+
+                                <br/><br/>        
+                                <br/><br/>
+                                <p></p>
+                                <h3>A Username for you (so you can login)</h3>
+                                <hr>
+                                    <label class ="lbl">Username: <input type="text" name="username" id="accountSettingInput" value="" required/>
+                                    </label>        
+
+                                    <br/><br/>        
+                                    <br/><br/>
+                                    <p></p>
+                                    <h3> And yes, we need your email for when you forget your password.</h3> 
+                                    <hr>
+                                        <label class ="lbl">Email: <input type="text" name="email" id="accountSettingInput" value="" required/>
+                                        </label>   
+
+                                        <br/><br/>    
+                                        <br/><br/>
+                                        <p></p>
+                                        <h3>Your email one more time, we never get things right the first time...</h3> 
+                                        <hr>
+                                            <label class ="lbl">Confirm Email: <input type="text" name="email2" id="accountSettingInput" value="" required/>
+                                            </label> 
+                                            <br/><br/>
+
+                                            <p></p>
+
+                                            <span class="emsg" id="errormsg">
+                                            </span><br/><br/>
+                                            <input type="button" value="Sign Up" onClick="populateform()">
 
 
-
-                    <form id= "account" name="account" action="NAServlet" method = "post"> 
-                        <input type="hidden" name="password">
-                            <input type="hidden" name="targetpage" value="NewAccount">
-                                <span class="contentText">  Please enter a username :</span>
-                                <input type="text" name="username"/><br/><br/>
-                                <span class="contentText">  Please enter your email address</span>
-                                <input type="text" name="email"/> <br/><br/>
-                                <span class="contentText">  Please re-enter your email address:</span>
-                                <input type="text" name="email2"/> <br/><br/>
-                                <span class="emsg" id="errormsg">
-                                </span><br/><br/>
-                                <input type="button" value="Sign Up" onClick="populateform()">
+                                                </form> 
 
 
-                                    </form> 
+                                                <div class="element"></div>
+                                                <!-- end .content --></div>
 
-
-                                    <div class="element"></div>
-                                    <!-- end .content --></div>
-
-                                    <!-- end .container --></div>
-                                    </body>
-                                    </html>
+                                                <!-- end .container --></div>
+                                                </body>
+                                                </html>
 
 

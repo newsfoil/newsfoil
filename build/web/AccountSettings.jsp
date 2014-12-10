@@ -299,21 +299,20 @@ import="java.util.List" %>
                         <br/><br/>
                         <p></p>
                         
-                        <label class ="lbl">City: <input type="text" name="myCity" id="accountSettingInput" value="<%= currentSessionUser.getUser_City() %>"/>
+                        <label class ="lbl">City: &nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="myCity" id="accountSettingInput" value="<%= currentSessionUser.getUser_City() %>"/>
                         </label>
                         
-                        
-                        <label class ="lbl">State: <input type="text" name="myState" id="accountSettingInput" value="<%= currentSessionUser.getUser_State() %>"/>
+                        <label class ="lbl">State: &nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="myState" id="accountSettingInput" value="<%= currentSessionUser.getUser_State() %>"/>
                         </label>
                         
-                        <label class ="lbl">Zip: <input type="text" name="myZip" id="myZip" value="<%= currentSessionUser.getUser_Zip() %>"/>
+                        <label class ="lbl">Zip: &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="myZip" id="accountSettingInput" value="<%= currentSessionUser.getUser_Zip() %>"/>
                         </label>
                         
                         
                         <br/><br/>
                         <p></p>
                         
-                        <label class ="lbl">Tagline: <input type="text" name="myTagline" id="myTagline" value="<%= currentSessionUser.getUser_Tag_Line() %>"/>
+                        <label class ="lbl">Tagline: <input type="text" name="myTagline" id="accountSettingInput" value="<%= currentSessionUser.getUser_Tag_Line() %>"/>
                         </label>
                         
                         <br/><br/>

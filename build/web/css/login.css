@@ -62,7 +62,31 @@ input:invalid {
 	margin: 0 auto; 
 	}
 
+.content2 {
+        
+	padding: 50px 0;	
+	float: left;
+        text-align: left;
+        font-weight: normal;
+}
 
+.content2 label {
+    width: 200px;
+    display:table-cell;
+    vertical-align: middle;
+    text-align: left;
+    margin-right:10px;
+    font-size:14px;
+}
+
+label { float: left;
+	width: 200px;
+	display: block;
+	text-align: Left;
+	padding-right: 20px;
+	font-size: 1.2em;
+	font-weight: bold; }
+	
 
 .content {
 	width: 100%;
