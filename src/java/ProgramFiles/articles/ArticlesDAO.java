@@ -195,7 +195,7 @@ public class ArticlesDAO {
             success = statement.execute();
 
         } catch (Exception ex) {
-            System.err.println("Query CREATE_ARTICLE failed: An Exception has occurred! " + ex);
+            System.err.println("*****Query CREATE_ARTICLE failed: An Exception has occurred! " + ex);
         }
         
          // connection resources automatically closed in try-catch-resource syntax

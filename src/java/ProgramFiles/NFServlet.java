@@ -3,6 +3,7 @@ package ProgramFiles;
 import ProgramFiles.articles.ArticleBean;
 import ProgramFiles.articles.ArticlesDAO;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -52,7 +53,7 @@ public class NFServlet extends HttpServlet {
                 response.sendRedirect("LoginPageFail.jsp");
             }
 //error page
-        } catch (Throwable theException) {
+        } catch (SQLException | ServletException | IOException theException) {
             response.sendRedirect("processPages\\Error.html");
         }
     }

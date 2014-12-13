@@ -81,6 +81,10 @@ public class UserBean {
     public void setMessages(MessageBean Message) {
         this.Messages.add(Message);
     }
+    public void setMessages(MessageBean Message, String inst) {
+        if (inst.equals("delete"))
+        Messages.remove(Message);
+    }
      
     public List<NetworkRequestBean> getNetworkRequests() {
         return NetworkRequests;

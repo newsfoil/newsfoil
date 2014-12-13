@@ -33,7 +33,7 @@
   <div class="fltrt">
    <form name="login" action="NFLoginServlet" method = "post">             
             
-             <input ID="tb1" type="username" name="username" placeholder="username"/>
+             <input ID="tb1" type="text" name="username" placeholder="username"/>
             <input  ID="tb1" type="password" name="password" placeholder="password"/>
       <input ID="tb1" type="submit" value="Sign In">   
             <input type="hidden" name="targetpage" value="Login"/>

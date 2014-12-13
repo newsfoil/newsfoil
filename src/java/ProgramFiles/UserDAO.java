@@ -162,7 +162,8 @@ public static UserBean login(UserBean bean) {
               bean.setUser_Email(resultSet.getString("User_Email")); 
               bean.setUser_Name(resultSet.getString("User_name"));
               bean.setUser_ID(resultSet.getString("User_ID"));
-              Influence influence = new Influence(resultSet.getString("Influence"));
+              Influence influence = new Influence();
+              influence.setRatingNumber(resultSet.getString("Influence"));
               bean.setInfluence(influence);
               bean.setValid(true);
               
@@ -289,22 +290,19 @@ public static int getMessages(UserBean bean) throws SQLException{
           try (Connection connection = ConnectionManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(GET_ALL_MESSAGES)) {
             
-              System.out.println("***I am running query for messages");
+        
            statement.setInt(1, Integer.parseInt(bean.getUser_ID()));
               
               try (ResultSet resultSet = statement.executeQuery()) {
                   while (resultSet.next()) {
-                       System.out.println("***There are messages");
+                       
                       MessageBean messageBean = new MessageBean();
-                      
-                      
-                      
-                      
                       
                       messageBean.setFrom_User_id(Integer.parseInt(resultSet.getString("FROM_ID")));
                       messageBean.setFrom_Name(resultSet.getString("User_First_Name") + resultSet.getString("User_Last_Name") );
                       messageBean.setUser_Subject(resultSet.getString("Subject"));
                       messageBean.setUser_Message(resultSet.getString("Message"));
+                      messageBean.setMessage_ID(resultSet.getInt("Message_ID"));
                       
                       bean.setMessages(messageBean);
                   } }
@@ -367,8 +365,9 @@ public static int getNetworkUsers(UserBean bean) throws SQLException{
    
           try (Connection connection = ConnectionManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(GET_NETWORK_MEMBERS)) {
-            
-           statement.setInt(1, Integer.parseInt(bean.getUser_ID()));
+            int count =0;
+           
+              statement.setInt(1, Integer.parseInt(bean.getUser_ID()));
             
             ResultSet resultSet = statement.executeQuery();
             
@@ -379,16 +378,17 @@ public static int getNetworkUsers(UserBean bean) throws SQLException{
                 memberBean.setUser_ID(resultSet.getInt("User_ID"));
                 memberBean.setMember_Name(resultSet.getString("Member_Name"));
                 bean.setMembers(memberBean);
-               
+               count++;
             }
-            
+            bean.getInfluence().setRatingNumber(count); 
+         
           }
          catch (Exception ex) 
          {   
          }
                
-        
-            
+         
+    // System.out.println("Here are the members: " + bean.getNumberOfMembers());
 return 1;
     }
  

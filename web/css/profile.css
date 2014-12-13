@@ -62,42 +62,17 @@ input:invalid {
 	margin: 0 auto; 
 	}
 
-.content2 {
-        
-	padding: 50px 0;	
-	float: left;
-        text-align: left;
-        font-weight: normal;
-}
 
-.content2 label {
-    width: 200px;
-    display:table-cell;
-    vertical-align: middle;
-    text-align: left;
-    margin-right:10px;
-    font-size:14px;
-}
-
-label { float: left;
-	width: 200px;
-	display: block;
-	text-align: Left;
-	padding-right: 20px;
-	font-size: 1.2em;
-	font-weight: bold; }
-	
 
 .content {
 	width: 100%;
 	height:200px;
 	float: left;
-	font-size:28px;
 	font-family: Times,"Times New Roman", serif;
 	border-top-width: medium;
 	border-top-style: solid;
 	border-top-color: #333;
-	padding-top: 100px;
+	padding-top: 10px;
 	padding-right: 0;
 	padding-bottom: 10px;
 	padding-left: 0;
@@ -110,17 +85,17 @@ label { float: left;
         border-top-width: medium;
 	border-top-style: solid;
 	border-top-color: #333;
-	padding-top: 100px;
+	padding-top: 10px;
 	padding-right: 0;
 	padding-bottom: 10px;
 	padding-left: 0;
 }
 
 .profileText{
-    
-    border-width:thin;
-    border-style:solid;
-    border-color:#CCC;
+   
+    border-top-width:medium;
+    border-top-style:solid;
+    border-top-color:#4E5869;
     
 }
 

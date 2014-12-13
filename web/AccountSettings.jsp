@@ -26,7 +26,30 @@ import="java.util.List" %>
             if (validateFields() === "true")
         document.forms["ResetPW"].submit();
     }
+    
     </script>
+    
+    <script type="text/javascript">
+function getSize()
+{
+    var myFSO = new ActiveXObject("Scripting.FileSystemObject");
+    var filepath = document.upload.file.value;
+    var thefile = myFSO.getFile(filepath);
+    var size = thefile.size;
+ 
+    if(size < 1048576)
+    {
+        alert("FIle upload");
+        }
+        else {
+            alert("file must be select < 1 MB");
+        }
+        
+}
+</script>
+    
+    
+    
     <script language="JavaScript1.2">
     function validateFields()
     {
@@ -273,12 +296,16 @@ import="java.util.List" %>
 
                         
                         
-                        <label class ="lbl">Photo: <input type="button" value="Download"/>
-                        </label> 
-                        (This element is not working yet)
-                        <br/><br/>
+                       
                         
-                         
+                        Photo:
+                        <form name="upload">
+                            <input type="file" name="file">
+                            <input type="button" value="upload" onClick="getSize();">
+                        </form>
+                        
+                         (This element is not working yet)
+                        <br/><br/>
                         
                         
                         <label class ="lbl">Username: <input type="text" name="myUsername" id="accountSettingInput" value="<%= currentSessionUser.getUser_Name()%>" />

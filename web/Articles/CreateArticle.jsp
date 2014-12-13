@@ -164,13 +164,13 @@ import="java.util.List" %>
                          <input type="submit" value="Create Article"/>
                         <br/><br/>
                         <h4>Article Title:</h4>
-                         <input type="text" style="width: 400px" name="articleTitle" required/> 
+                         <input type="text" style="width: 400px" name="articleTitle" maxlength="128" required/> 
                         <br/><br/>
                         <h4>Article Description:</h4>
-                          <input type="text" style="width: 800px" name="articleDescription" required/> 
+                          <input type="text" style="width: 800px" name="articleDescription" maxlength="2048" required/> 
                         <br/><br/>
                         <h4>Article:</h4>
-                        <textarea rows="40"  name="articleContent" required></textarea>
+                        <textarea rows="40"  name="articleContent"></textarea>
                         <br/><br/>
                         <br/><br/>
                         <div class="articleButtonSection">

@@ -3,6 +3,7 @@ package ProgramFiles;
     import ProgramFiles.articles.ArticleBean;
     import ProgramFiles.articles.ArticlesDAO;
     import java.io.IOException;  
+import java.sql.SQLException;
     import java.util.List;
     import javax.servlet.ServletException;  
     import javax.servlet.http.HttpServlet;  
@@ -14,8 +15,6 @@ package ProgramFiles;
         protected void doPost(HttpServletRequest request, HttpServletResponse response)  
                         throws ServletException, IOException { 
             
-             System.out.println("********** Login ....where are the messages");
-                
             
             try {
             
@@ -30,9 +29,7 @@ package ProgramFiles;
                 
                 UserDAO.profile(user);
                 UserDAO.NetworkRequest(user);
-                UserDAO.getNetworkUsers(user);
-                System.out.println("********** where are the messages");
-                
+                UserDAO.getNetworkUsers(user);             
                 UserDAO.getMessages(user);
                 
                 session.setAttribute("currentSessionUser", user);
@@ -41,17 +38,19 @@ package ProgramFiles;
                 request.setAttribute("articleList", articleList);
                 request.getRequestDispatcher("MyNewsRoom.jsp").forward(request, response);
                 response.sendRedirect("MyNewsRoom.jsp");
+                return;
 //logged-in page 
             } else {
                 response.sendRedirect("LoginPageFail.jsp");
+                return;
             }
            
            
              
             //error page
-        } catch (Throwable theException) {
+        } catch (SQLException | ServletException | IOException theException) {
              response.sendRedirect("processPages\\Error.html");
-            
+            return;
         }
  
         }  

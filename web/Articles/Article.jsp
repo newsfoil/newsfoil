@@ -7,7 +7,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=windows-1256" 
          pageEncoding="windows-1256" 
-         import="ProgramFiles.articles.ArticleBean" %> 
+         import="ProgramFiles.articles.ArticleBean" 
+import="ProgramFiles.NetworkRequestBean" 
+import="ProgramFiles.NetworkMemberBean" 
+import="ProgramFiles.MessageBean" 
+import="ProgramFiles.Influence"
+import="java.util.List" %> 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -51,80 +56,164 @@
 
             <div class="menubar"></div>
             <div class="clearfloat"></div>
+    
+<!-- Sidebar1 --> 
+  <div class="sidebar1">
+    
+            <div class = "influence">
+                Influence
+                <br/>
+                Distribution:  <%out.println(currentSessionUser.getInfluence().getDistribution()); %>%
+                <br/>
+                Variance: <%out.println(currentSessionUser.getInfluence().getVariance()); %>%
+                <br/>
+                Network Factor: 120%
+                <br/><br/><br/>
+            </div>  
+      
+<!--CollapisablePanel1  -->       
+            <div id="CollapsiblePanel1" class="CollapsiblePanel">
+                <div class="CollapsiblePanelTab" tabindex="1"> &gt; &nbsp; Network Group <span style="color:red; padding-left: 30px">
+                      <% out.println(currentSessionUser.getNumberOfMembers()); %></span> </div>
+                <div class="CollapsiblePanelContent">
+                    <h4>Network Members: </h4>
+                   
+                   <%
+                    
+                      try {
+                          List<NetworkMemberBean> all_Request = currentSessionUser.getMembers();
 
-            <div class="sidebar1">
+                          for (int x = 0; x < all_Request.size(); x++) {
+                              NetworkMemberBean RequestItem = all_Request.get(x);
+                              out.println("<div class = \"requestdiv\">");
 
-                <div class = "influence">
-                    Influence
-                    <br/>
-                    Current:  58%
-                    <br/>
-                    Variance: 46%
-                    <br/>
-                    Network Factor: 120%
-                    <br/><br/><br/>
+                              out.println("<a href=\"http://newsfoil.com/profiles/" + RequestItem.getMember_ID()
+                                      + "profile.html\" target=\"_new\">" + RequestItem.getMember_Name() + " </a> ");
 
-
-                </div>     
-                <div id="CollapsiblePanel1" class="CollapsiblePanel">
-                    <div class="CollapsiblePanelTab" tabindex="1"> &gt; &nbsp; Network Group </div>
-                    <div class="CollapsiblePanelContent">
-                        <h4>Network Members: </h4>
-                        This will contain a list of all members in network
-                    </div>
+                             // RequestItem.getMember_ID();
+                              out.println("<form action=\"CreateMessage.jsp\" id=\"lkup\" method=\"get\"><br/>"
+                                      + "<input type=\"hidden\" name=\"requestor\" value=\"" + RequestItem.getMember_ID() + "\"/>"
+                                      + "<input type=\"hidden\" name=\"requestorName\" value=\"" + RequestItem.getMember_Name() + "\"/>"
+                                      + "<input type=\"submit\" name=\"message\" id=\"accountSettingInput\" value=\"Send Message\"/>"
+                                      + "</form>");
+                              out.println("</div>");
+                          }
+                      } catch (Exception ex) {
+                      }
+                  %> 
+            
                 </div>
+            </div> <!--end of CollapisablePanel1  --> 
 
-                <div id="CollapsiblePanel2" class="CollapsiblePanel">
-                    <div class="CollapsiblePanelTab" tabindex="2"> &gt; &nbsp; Network Requests </div>
-                    <div class="CollapsiblePanelContent">
-                        <h4>Send a request to join Network: </h4><br/>
-                        <form action="emailRequestServlet" id="lkup">
-                            <input type="text" id="accountSettingInput" name="lookupmember">
-                                <h4>enter email address</h4>
-                                <input type="button" name="userRequest" id="accountSettingInput" value="Send a Request"/>
-                        </form>
-                        <br/>
-                        <h3>Member Lookup</h3>
-                        <form action="lookupUserServlet" id="lkup">
-                            <input type="text" id="accountSettingInput" name="lookupmember">
-                                <br/><h4>enter last name </h4>
-                                <input type="button" name="userRequest" id="accountSettingInput" value="LookUp"/>
-                        </form>
-                    </div>
+<!--CollapisablePanel2  -->             
+          <div id="CollapsiblePanel2" class="CollapsiblePanel">
+              <div class="CollapsiblePanelTab" tabindex="2"> &gt; &nbsp; Network Requests  <span style="color:red; padding-left: 20px">
+                      <%out.println(currentSessionUser.getNumberOfRequest()); %></span>   </div>
+              <div class="CollapsiblePanelContent">
+                  <h3>Send a request so friends can join your News Network: </h3>
+                  <form id="lkup" action="NewsNetworkRequestServlet" method="post" >
+                      <input type="text" id="accountSettingInput" name="TargetEmail" placeholder="email">
+                      <input type="text" id="accountSettingInput" name="lookupmember"placeholder="or username">
+                      <input type="submit" id="accountSettingInput" value="Send a Request"/>
+                  </form>
+                  <br/>
+                  <h3>These friends want you to join their News Network: </h3>
+                  <%
+                      try {
+                          List<NetworkRequestBean> all_Request = currentSessionUser.getNetworkRequests();
+
+                          for (int x = 0; x < all_Request.size(); x++) {
+                              NetworkRequestBean RequestItem = all_Request.get(x);
+                              out.println("<div class = \"requestdiv\">");
+
+                              out.println("<a href=\"http://newsfoil.com/profiles/" + RequestItem.getSender_ID()
+                                      + "profile.html\" target=\"_new\">" + RequestItem.getRequestor_Name() + " </a> ");
+
+                              RequestItem.getSender_ID();
+                              out.println("<form action=\"addMemberServlet\" id=\"lkup\" method=\"post\"><br/>"
+                                      + "<input type=\"hidden\" name=\"requestor\" value=\"" + RequestItem.getSender_ID() + "\"/>"
+                                      + "<input type=\"hidden\" name=\"requestorName\" value=\"" + RequestItem.getRequestor_Name() + "\"/>"
+                                      + "<input type=\"submit\" name=\"requestType\" id=\"accountSettingInput\" value=\"Accept\"/>"
+                                      + "<input type=\"submit\" name=\"requestType\" id=\"accountSettingInput\" value=\"Decline\"/>"
+                                      + "</form>");
+                              out.println("</div>");
+
+                          }
+                      } catch (Exception ex) {
+                      }
+
+
+                  %>
+              </div>
+          </div> <!--end of CollapisablePanel2  -->
+          
+<!--CollapisablePanel3  -->   
+       
+            <div id="CollapsiblePanel3" class="CollapsiblePanel">
+                <div class="CollapsiblePanelTab" tabindex="3"> &gt; &nbsp; My Articles </div>
+                <div class="CollapsiblePanelContent">
+                    <form action="lookupArticleServlet" id="lkup">
+                        <input type="text" id="accountSettingInput" name="lookupmember">
+                        <h4>Search Your Articles</h4>
+                        <input type="button" name="userRequest" id="accountSettingInput" value="Search"/>
+                    </form>
                 </div>
+            </div><!--end of CollapisablePanel3  -->
 
-                <div id="CollapsiblePanel3" class="CollapsiblePanel">
-                    <div class="CollapsiblePanelTab" tabindex="3"> &gt; &nbsp; My Articles </div>
-                    <div class="CollapsiblePanelContent">
-                        <form action="lookupArticleServlet" id="lkup">
-                            <input type="text" id="accountSettingInput" name="lookupmember">
-                                <h4>Search Your Articles</h4>
-                                <input type="button" name="userRequest" id="accountSettingInput" value="Search"/>
+<!--CollapisablePanel4  --> 
+            <div id="CollapsiblePanel4" class="CollapsiblePanel">
+                <div class="CollapsiblePanelTab" tabindex="4"> &gt; &nbsp; Messages <span style="color:red; padding-left: 40px">
+                      <%out.println(currentSessionUser.getNumberOfMessages()); %></span> </div>
+                <div class="CollapsiblePanelContent">
+                    
+                        <h4>Send a Message</h4>
+                        <form method="post" action="CreateMessage.jsp">
+                        <button type="submit">Send Message</button>
                         </form>
-                    </div>
-                </div>
+  
+            <%
+                      try {
+                          
+                           
+                          List<MessageBean> all_Messages = currentSessionUser.getMessages();
 
-                <div id="CollapsiblePanel4" class="CollapsiblePanel">
-                    <div class="CollapsiblePanelTab" tabindex="4"> &gt; &nbsp; Messages </div>
-                    <div class="CollapsiblePanelContent">
-                        <form action="sendmessage" id="lkup">
-                            <input type="text" id="accountSettingInput" name="lookupmember">
-                                <h4>Send a Message</h4>
-                                <input type="button" name="userRequest" id="accountSettingInput" value="Message"/>
-                        </form>
+                          for (int x = 0; x < all_Messages.size(); x++) {
+                              MessageBean RequestMessage = all_Messages.get(x);
+                              out.println("<div class = \"requestdiv\">");
 
-                    </div>
+                              out.println("<a href=\"http://newsfoil.com/profiles/" + RequestMessage.getFrom_User_id()
+                                      + "profile.html\" target=\"_new\">" +  RequestMessage.getFrom_Name() + " </a> ");
+
+                              RequestMessage.getFrom_Name();
+                              out.println("<form method=\"get\" action=\"ViewMessage.jsp\">"
+                                      + "<input type=\"hidden\" name=\"messageNo\" value=\"" + x + "\"/>"
+                                      + "<button type=\"submit\">View</button>"
+                                      + "</form>"
+                                      );
+                              
+                              
+                              
+                              out.println("</div>");
+
+                          }
+                      } catch (Exception ex) {
+                      }
+
+                  %>
+                      
                 </div>
             </div>
-
+   </div> <!-- end of sidebar1 -->
+       
             <div class="article-section">
                 <h1 class="articleHeading">${article.getArticle_Title()}</h1>
                 <br/>
-                <div class="articleText articleAuthor">by <strong>${article.getUser().getUser_Name()}</strong>, on <fmt:formatDate pattern="MMMM dd, yyyy" value="${article.getArticle_Date()}"/> </div>
+                
+                <div class="articleText articleAuthor">Posted by <strong> <a href=http://newsfoil.com/profiles/${article.getUser().getUser_ID()}profile.html>${article.getUser().getUser_Name()}</a>   </strong>, on <fmt:formatDate pattern="MMMM dd, yyyy" value="${article.getArticle_Date()}"/> </div>
                 <br/><br/>
                 <label>Description:</label> <div class="articleText">${article.getArticle_Description()}</div>
-                <br/><br/>
-                <label>Content:</label> <div class="articleText">${article.getArticle_Content()}</div>
+                <br/><br/><hr>
+                <div class="articleText"></br>${article.getArticle_Content()}</div>
                 <br/><br/>
                 <br/><br/>
               

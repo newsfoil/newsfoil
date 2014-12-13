@@ -45,21 +45,20 @@ import="java.util.List" %>
                 <%out.println(currentSessionUser.getUser_Name()); %>
                 </div>
         </div>
-   
-    
+
     <div class="clearfloat"></div>
     
 <!-- Sidebar1 --> 
   <div class="sidebar1">
     
             <div class = "influence">
-                Influence
+                <span style="color: #039; font-weight: bold; font-size: 120%"> Influence: <%out.println(currentSessionUser.getInfluence().getInfluenceTotal()); %>% </span>
                 <br/>
-                Distribution:  <%out.println(currentSessionUser.getInfluence().getDistribution()); %>%
+               <span style="color: #003; font-weight: bold"> Distribution:  <%out.println(currentSessionUser.getInfluence().getDistribution()); %>%
                 <br/>
                 Variance: <%out.println(currentSessionUser.getInfluence().getVariance()); %>%
                 <br/>
-                Network Factor: 120%
+                Network Factor: <%out.println(currentSessionUser.getInfluence().getNetworkFactor()); %>%</span>
                 <br/><br/><br/>
             </div>  
       
@@ -105,7 +104,7 @@ import="java.util.List" %>
                   <h3>Send a request so friends can join your News Network: </h3>
                   <form id="lkup" action="NewsNetworkRequestServlet" method="post" >
                       <input type="text" id="accountSettingInput" name="TargetEmail" placeholder="email">
-                      <input type="text" id="accountSettingInput" name="lookupmember"placeholder="or username">
+                      <!--<input type="text" id="accountSettingInput" name="lookupmember"placeholder="This does not work yet"> -->
                       <input type="submit" id="accountSettingInput" value="Send a Request"/>
                   </form>
                   <br/>
@@ -177,12 +176,14 @@ import="java.util.List" %>
                                       + "profile.html\" target=\"_new\">" +  RequestMessage.getFrom_Name() + " </a> ");
 
                               RequestMessage.getFrom_Name();
-                              out.println("<form method=\"get\" action=\"ViewMessage.jsp\">"
-                                      + "<input type=\"hidden\" name=\"messageNo\" value=\"" + x + "\"/>"
-                                      + "<button type=\"submit\">View</button>"
+                              out.println("<form method=\"post\" action=\"addMemberServlet\">"
+                                      + "<input type=\"hidden\" name=\"requestor\" value=\"" + x +"\"/>"
+                                      + "<input type=\"hidden\" name=\"requestorName\" value=\"  \"/>"
+                                      + "<button type=\"submit\" name =\"requestType\" value =\"viewMessage\">View</button>"
+                                      + "<button type=\"submit\" name =\"requestType\" value =\"deleteMessage\">Delete</button>"
                                       + "</form>"
+                                      
                                       );
-                              
                               
                               
                               out.println("</div>");
@@ -241,7 +242,7 @@ import="java.util.List" %>
                 <li><a href=http://newsfoil.com/profiles/<%=currentSessionUser.getUser_ID()%>profile.html>Profile</a>&nbsp;</li>
                 <li><a href="AccountSettings.jsp">Settings</a> &nbsp;</li>
                 <li><a href="About.jsp">About</a> &nbsp;</li>
-                <li><a href="CreateArticleRevised.jsp">test</a> &nbsp;</li>
+                <!-- <li><a href="CreateArticleRevised.jsp">test</a> &nbsp;</li> -->
             </ul>
         </div>
 

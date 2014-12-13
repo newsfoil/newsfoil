@@ -1,9 +1,7 @@
 
 package ProgramFiles;
 
-import ProgramFiles.login.AddUser;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +29,6 @@ public class NAServlet extends HttpServlet {
         
         try {
             
-       
             NewAccount account = new NewAccount();
             
             account.setUseremail(request.getParameter("email"));
@@ -48,6 +45,7 @@ public class NAServlet extends HttpServlet {
             account.setUserID(UserDAO.getUserID(account));
             UserDAO.createProfile(account);
             CreateEmail.newAccount(account);
+           
             
             response.sendRedirect("NewAccountConfirmation.jsp");
             }else{

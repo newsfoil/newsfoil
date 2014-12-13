@@ -14,8 +14,17 @@ public class MessageBean {
     String user_Subject;
     String user_Message;
     String from_Name;
+    int message_ID;
     int from_User_id;
     int to_User_id;
+
+    public int getMessage_ID() {
+        return message_ID;
+    }
+
+    public void setMessage_ID(int message_ID) {
+        this.message_ID = message_ID;
+    }
 
     public String getFrom_Name() {
         return from_Name;

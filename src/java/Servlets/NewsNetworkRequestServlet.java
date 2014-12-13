@@ -41,18 +41,20 @@ public class NewsNetworkRequestServlet extends HttpServlet {
            HttpSession session = request.getSession();
            UserBean user = (UserBean) session.getAttribute("currentSessionUser");
            String targetEmail = request.getParameter("TargetEmail").trim();
-           String lkupMember = request.getParameter("lookupmember").trim();
-
+           //String lkupMember = request.getParameter("lookupmember").trim();
+           
            if (!targetEmail.equals("null")) {
+           
                NetworkRequestDOA.reguestByEmail(targetEmail, user);
-           } else
-           if (!lkupMember.equals("null")) {
-               NetworkRequestDOA.reguestByUser(lkupMember, user);
-           }
+           } //else
+         //  if (!lkupMember.equals("null")) {
+         //      NetworkRequestDOA.reguestByUser(lkupMember, user);
+         //  }
 
        } catch (Throwable theException) {
            System.out.println(theException);
        }
+       
         response.sendRedirect("NFServlet");
 
     }

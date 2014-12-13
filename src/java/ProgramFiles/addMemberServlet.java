@@ -36,18 +36,34 @@
            
             if (requestType.contains("Accept")){
             NetworkRequestDOA.acceptReguest(requestorID, requestorName, user);
+            return;
             }
             if (requestType.contains("Decline")){
             NetworkRequestDOA.declineReguest(requestorID, user);
+            return;
             }
             if (requestType.contains("Send Message")){
             response.sendRedirect("CreateMessage.jsp");
+            return;
+            }
+            if (requestType.contains("deleteMessage")){
+                
+            MessageBean this_message = user.getMessages().get(Integer.parseInt(requestorID));
+            NetworkRequestDOA.deleteMessage(this_message);
+            user.setMessages(this_message, "delete");
+            
+            response.sendRedirect("NFServlet");
+            return;
+            }
+            if (requestType.contains("viewMessage")){
+            response.sendRedirect("ViewMessage.jsp?messageNo="+requestorID);
+            return;
             }
             else {
             response.sendRedirect("NFServlet");}
             
         }catch (NullPointerException ex) {
-            System.out.println(ex);
+            System.out.println("*** here is the exception"+ex);
         }
  
         }  
